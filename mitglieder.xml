@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install type="component" version="1.5.0">
+	<name>Mitglieder</name>
+	<author>Florian Paetz</author>
+	<creationDate>Juni 2010</creationDate>
+	<copyright>(C) Florian Paetz</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>florian (at) paetz.de</authorEmail>
+	<authorUrl>www.fw-rethen.de</authorUrl>
+	<version>0.9</version>
+	<description>Die Komponente dient dem Verwalten von Mitgliederlisten</description>
+	<files folder="components">
+		<filename>index.html</filename>
+		<filename>controller.php</filename>
+		<filename>mitglieder.php</filename>
+		<folder>lib</folder>
+		<folder>models</folder>
+		<folder>views</folder></files>
+	<!-- Site Main Language File Copy Section -->
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+    	<queries>
+    	</queries>
+	</uninstall>
+	<installfile>install.php</installfile>
+	<uninstallfile>uninstall.php</uninstallfile>
+
+	<administration>
+		<menu>Mitglieder</menu>
+		<submenu>
+			<menu link="option=com_mitglieder&amp;controller=abteilungen">Abteilungen</menu>
+			<menu link="option=com_mitglieder&amp;controller=felder">Felder</menu>
+			<menu link="option=com_mitglieder&amp;controller=listen">Listen</menu>
+			<menu link="option=com_mitglieder&amp;controller=mitglieder">Mitglieder</menu>
+		</submenu>
+		<files>
+			<filename>mitglieder.xml</filename>
+			<filename>install.sql</filename>
+		</files>
+		<files folder="admin">
+			<filename>admin.mitglieder.php</filename>
+			<folder>controllers</folder>
+			<folder>lib</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<filename>index.html</filename>
+		</files>
+		<!-- Administration Language File Copy Section -->
+		<languages>
+		</languages>
+	</administration>
+
+</install>

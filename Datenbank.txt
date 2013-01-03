@@ -1,0 +1,18 @@
+Abteilungen
+-----------
+id:int
+name:varchar(20)
+
+Mitglieder
+-----------
+id:int
+name:varchar(30)
+vorname:varchar(30)
+picture:varchar(255)
+
+Mitglied_in_Abteilung
+---------------------
+abteilung:int foreign key Abteilungen.id
+mitglied:int foreign key Abteilungen.id
+
+

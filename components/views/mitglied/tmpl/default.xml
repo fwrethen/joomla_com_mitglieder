@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Mitgliedsprofil">
+		<message>
+			<![CDATA[Mitglied mit Bild]]>
+		</message>
+	</layout>
+	<state>
+		<name>Mitgliederprofil Einstellungen</name>
+		<description>Optionen zur Anzeige eine Mitglieds</description>
+		<params>
+	 		<param name="mitgliederid" type="text" default="" label="Mitlieder ID" description="ID des anzuzeigenden Mitglieds" size="3" />
+	 	</params>
+	</state>
+</metadata>

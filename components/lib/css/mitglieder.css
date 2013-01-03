@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+
+div.Thumb {
+ float:left;
+  padding: 1em 1em;
+  width:200px;
+}
+
+div.Thumb p {
+  text-align: center;
+}

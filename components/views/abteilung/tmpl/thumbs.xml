@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Abteilungs Thumbnails">
+		<message>
+			<![CDATA[Abteilungsdetails mit Bildern]]>
+		</message>
+	</layout>
+	<state>
+		<name>Abteilungsdetails Einstellungen</name>
+		<description>Optionen zur Anzeige der Abteilungsdetails</description>
+		<params>
+	 		<param name="abteilungsid" type="text" default="" label="Abteilungs ID" description="ID der anzuzeigenden Abteilungs" size="3" ></param>
+		</params>
+	</state>
+</metadata>
