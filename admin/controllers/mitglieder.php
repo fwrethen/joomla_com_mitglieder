@@ -11,7 +11,7 @@ require( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.
 class MitgliederControllerMitglieder extends JController
 {
 
-	var $redirect = "index.php?option=com_mitglieder&controller=mitglieder";
+	//var $redirect = "index.php?option=com_mitglieder&controller=mitglieder";
 
 	function __construct()
 	{
@@ -19,6 +19,8 @@ class MitgliederControllerMitglieder extends JController
 
 		$this->registerTask( 'add'  , 	'edit' );
 		$this->registerTask( 'remove'  , 'delete' );
+		
+		$this->redirectPath = "index.php?option=com_mitglieder&controller=mitglieder";
 
 	}
 
@@ -57,7 +59,7 @@ class MitgliederControllerMitglieder extends JController
 										$config['mitglied_thumb_size']);
 			if($files == null) {
 				JError::raiseWarning( 551, JText::_( $imageManager->error ) );
-				$this->setRedirect($this->redirect, "Mitglied nicht gespeichert");
+				$this->setRedirect($this->redirectPath, "Mitglied nicht gespeichert");
 				return false;
 			}
 
@@ -87,7 +89,7 @@ class MitgliederControllerMitglieder extends JController
 		$cache = & JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function delete()
@@ -102,7 +104,7 @@ class MitgliederControllerMitglieder extends JController
 		$cache = & JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		$this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function display( )

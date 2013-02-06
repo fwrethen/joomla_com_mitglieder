@@ -37,10 +37,10 @@
 			<menu link="option=com_mitglieder&amp;controller=listen">Listen</menu>
 			<menu link="option=com_mitglieder&amp;controller=mitglieder">Mitglieder</menu>
 		</submenu>
-		<files>
+		<!--  files>
 			<filename>mitglieder.xml</filename>
 			<filename>install.sql</filename>
-		</files>
+		</files-->
 		<files folder="admin">
 			<filename>admin.mitglieder.php</filename>
 			<folder>controllers</folder>
@@ -49,6 +49,9 @@
 			<folder>tables</folder>
 			<folder>views</folder>
 			<filename>index.html</filename>
+			<filename>install.php</filename>
+			<filename>install.sql</filename>
+			<filename>uninstall.php</filename>
 		</files>
 		<!-- Administration Language File Copy Section -->
 		<languages>

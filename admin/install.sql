@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_mitglieder` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
-  `image_orginal` varchar(255) default NULL,
+  `image_original` varchar(255) default NULL,
   `image_resize` varchar(255) default NULL,
   `image_thumb` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
@@ -61,4 +61,11 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_config` (
   `show_in_config` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`name`)
 );
+-- Default Config
+INSERT IGNORE INTO #__mitglieder_config VALUES('mitglied_image_path', '/images/stories/mitglieder/mitglieder/', 1);
+INSERT IGNORE INTO #__mitglieder_config VALUES('mitglied_thumb_size', '150', 1);
+INSERT IGNORE INTO #__mitglieder_config VALUES('mitglied_image_size', '300', 1);
+INSERT IGNORE INTO #__mitglieder_config VALUES('delete_database', '0', 1);
+INSERT IGNORE INTO #__mitglieder_config VALUES('delete_pictures', '0', 1);
+INSERT IGNORE INTO #__mitglieder_config VALUES('logging', '0', 1);
 

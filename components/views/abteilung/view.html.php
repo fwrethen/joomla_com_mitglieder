@@ -11,7 +11,7 @@ class MitgliederViewAbteilung extends JView
  		$model	  = &$this->getModel();
 
 		$params = &JComponentHelper::getParams( 'com_mitglieder' );
- 		$id = JRequest::getInt('id', '-1', 'GET');
+ 		$id = JRequest::getInt('abteilungsid', '-1', 'GET');
 		if ($id === -1){
 			$id = $params->get( 'abteilungsid' );
 		}

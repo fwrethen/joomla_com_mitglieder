@@ -8,8 +8,12 @@
 	<state>
 		<name>Abteilungsdetails Einstellungen</name>
 		<description>Optionen zur Anzeige der Abteilungsdetails</description>
-		<params>
-	 		<param name="abteilungsid" type="text" default="" label="Abteilungs ID" description="ID der anzuzeigenden Abteilungs" size="3" ></param>
-	 	</params>
+		<!-- Add fields to the request variables for the layout. -->
+		<fields name="request">
+			<fieldset name="request"
+				addfieldpath="/administrator/components/com_content/models/fields">
+				<field name="abteilungsid" type="sql" default="10" label="ID der anzuzeigenden Abteilungs" query="SELECT id, name FROM #__mitglieder_abteilungen" key_field="id"  value_field="name"/>
+			</fieldset>
+		</fields>
 	</state>
 </metadata>
