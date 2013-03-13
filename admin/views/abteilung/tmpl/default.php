@@ -49,7 +49,7 @@
 		</tr>
 		<tr>
 			<td class="key">
-				<?php echo JText::_( 'Felder für die Thumbnailseite' ); ?>:
+				<?php echo JText::_( 'Felder fÃ¼r die Thumbnailseite' ); ?>:
 			</td>
 	      <td class="input">
 	            <script type="text/javascript">

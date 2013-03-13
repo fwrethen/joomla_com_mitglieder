@@ -10,10 +10,10 @@ class MitgliederViewMitglied extends JView
 	function display($tpl = null)
 	{
 	$document =& JFactory::getDocument();
-	$document->addScript('includes/js/joomla.javascript.js');
+	//$document->addScript('includes/js/joomla.javascript.js');
 			$player		=& $this->get('Data');
-			$inAbteilungen =& $this->get('Data','Abteilungen');
-			$abteilungen =& $this->get('Abteilungen','Abteilungen');
+			$inAbteilungen =& $this->get('Data','MitgliederAbteilungen');
+			$abteilungen =& $this->get('Abteilungen','MitgliederAbteilungen');
 		$isNew		= ($player->id < 1);
 
 		$text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );

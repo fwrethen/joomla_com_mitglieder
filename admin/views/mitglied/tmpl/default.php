@@ -148,16 +148,21 @@ $editor=JFactory::getEditor();
 			</td>
 	      <td class="input">
 	            <script type="text/javascript">
+	            <?php
+	            $abteilungenSelect=JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
+	            $abteilungenSelect=str_replace(array("\r\n", "\n", "\r"), '', $abteilungenSelect);
+	             
+	            ?>
       <!--
-        var abteilungList = '<?php echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name'); ?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /> <br />';
+        var abteilungList = '<?php echo $abteilungenSelect?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /> <p />';
         var maxAbteilung = <?php echo count($this->abteilungen); ?> - 1;
         var curAbteilung = <?php echo (count($this->inAbteilungen) > 0 ? (count($this->inAbteilungen)-1) : 0); ?> - 0;
       //-->
       </script>
 
 <?php echo $this->inAbteilungen[0]->id?>
-        <?php echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[0]->abteilungen_id); ?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[0]->ordering?>" /><br />
-        &nbsp; <input type="button" value="mehr Abteilungen" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" />
+        <?php echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[0]->abteilungen_id); ?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[0]->ordering?>" /><p />
+        &nbsp; <input type="button" value="mehr Abteilungen" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" /><p />
         <div id="abteilung_list_content">
         <?php
         for ($i = 1; $i < count($this->inAbteilungen); ++$i)

@@ -2338,6 +2338,13 @@ class upload {
                 $this->log .= '- MIME type detected as ' . $this->file_src_mime . ' by browser<br />';
             }
 
+            $tmp_mime_type=strstr($this->file_src_mime,';',true);
+            
+            
+            if ($tmp_mime_type)
+            {
+            	$this->file_src_mime=$tmp_mime_type;
+            }
             // we need to work some magic if we upload via Flash
             if ($this->file_src_mime == 'application/octet-stream' || !$this->file_src_mime || !is_string($this->file_src_mime) || empty($this->file_src_mime) || strpos($this->file_src_mime, '/') === FALSE) {
                 if ($this->file_src_mime == 'application/octet-stream') $this->log .= '- Flash may be rewriting MIME as application/octet-stream<br />';
