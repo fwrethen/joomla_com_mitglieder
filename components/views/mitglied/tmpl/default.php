@@ -52,7 +52,9 @@ $name = $this->mitglied->vorname . " " . $this->mitglied->name;
 echo "<h1>$name</h1>";
 
 //<title> Tag setzen
-$mainframe->setPageTitle($name);
+$document = JFactory::getDocument();
+$document->setTitle($name);
+
 
 $image = $this->mitglied->image_resize;
 $imageOrginal = $this->mitglied->image_orginal;
