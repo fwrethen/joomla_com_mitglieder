@@ -1,9 +1,12 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 require_once (JPATH_COMPONENT.DS.'lib'.DS.'mitglieder'.DS.'printfelder.php');
+
+$path=JURI::base();
+$option = JRequest::getCMD('option');
+JHTML::_('stylesheet','mitglieder.css',$path.'components/'.$option.'/lib/css/');
 ?>
 
-<link rel="stylesheet" href="<?php echo $this->baseurl .'/components/com_mitglieder/lib/css/mitglieder.css'?>" type="text/css"/>
 <h1><?php echo $this->abteilung->name; ?></h1>
 
 
