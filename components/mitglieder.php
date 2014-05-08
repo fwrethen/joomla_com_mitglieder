@@ -3,6 +3,7 @@
 
 // kein direkter Zugriff
 defined('_JEXEC') or die('Restricted access');
+if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
 // laden des Joomla! Basis Controllers
 require_once (JPATH_COMPONENT.DS.'controller.php');

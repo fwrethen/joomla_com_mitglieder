@@ -1,6 +1,7 @@
 <?php
 
 defined('_JEXEC') or die();
+if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 jimport('joomla.application.component.model');
 require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'logger.php' );
 

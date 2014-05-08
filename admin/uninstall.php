@@ -1,5 +1,6 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
+if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 require( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'config'.DS. 'config.php' );
 require( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'upload'.DS. 'image.php' );
 

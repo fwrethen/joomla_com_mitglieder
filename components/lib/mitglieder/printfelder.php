@@ -1,5 +1,6 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
+if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'logger.php' );
 
 
