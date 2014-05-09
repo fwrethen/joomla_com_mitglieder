@@ -1,5 +1,5 @@
 <?php defined('_JEXEC') or die('Restricted access');
-    				$editor =& JFactory::getEditor();
+    				$editor = JFactory::getEditor();
 ?>
 
 <script type="text/javascript">

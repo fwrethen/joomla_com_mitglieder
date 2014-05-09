@@ -21,7 +21,7 @@ class MitgliederModelAbteilung extends JModel
 
 
 	function getData($id) {
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$team = $this->getAbteilung($id);
 
@@ -33,7 +33,7 @@ class MitgliederModelAbteilung extends JModel
 
 	function getAbteilung( $id )
 	{
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery( $this->getAbteilungQuery($id) );
 		$team = $db->loadObject();
 
@@ -45,7 +45,7 @@ class MitgliederModelAbteilung extends JModel
 
 
 	function getMitglieder( $aid ) {
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$query = "SELECT mitglied.id,mitglied.name,mitglied.vorname,mitglied.image_thumb from #__mitglieder_mitglieder_abteilungen as abteilung,#__mitglieder_mitglieder as mitglied " .
 				 " WHERE mitglied.id= abteilung.mitglieder_id AND abteilungen_id = ".$aid . " order by ordering , name asc, vorname ASC";

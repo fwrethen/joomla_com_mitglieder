@@ -15,7 +15,7 @@ class MitgliederViewMitglieder extends JView
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
 
-		$items		= & $this->get( 'Data');
+		$items		= $this->get( 'Data');
 
 		$this->assignRef('items',		$items);
 

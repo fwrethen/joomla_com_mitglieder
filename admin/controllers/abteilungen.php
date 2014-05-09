@@ -23,7 +23,7 @@ class AbteilungenControllerAbteilungen extends JController
 		JRequest::setVar( 'view', 'abteilung' );
 		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar('hidemainmenu', 1);
-		$document =& JFactory::getDocument();
+		$document = JFactory::getDocument();
 
 		$viewType	= $document->getType();
 		$view = $this->getView('abteilung',$viewType);
@@ -58,7 +58,7 @@ class AbteilungenControllerAbteilungen extends JController
 		}
 
 
-		$cache = & JFactory::getCache('com_mitglieder');
+		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
 		$this->setRedirect($this->redirect, $msg);
@@ -73,7 +73,7 @@ class AbteilungenControllerAbteilungen extends JController
 			$msg = JText::_( 'Abteilung(en) Gelöscht' );
 		}
 
-		$cache = & JFactory::getCache('com_mitglieder');
+		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
 		$this->setRedirect($this->redirect, $msg);

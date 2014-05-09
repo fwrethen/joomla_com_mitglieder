@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 class Config {
-	function getConfig($keys=array()) {
+	static function getConfig($keys=array()) {
 		$config = array();
 		$query = "SELECT name,value " .
 					"FROM #__mitglieder_config ";
@@ -14,7 +14,7 @@ class Config {
 		}
 		$query .= $where;
 
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
 
@@ -29,8 +29,8 @@ class Config {
 		return $config;
 	}
 
-	function setConfig($key, $value) {
-		$db = &JFactory::getDBO();
+	static function setConfig($key, $value) {
+		$db = JFactory::getDBO();
 		$db->setQuery( "UPDATE #__mitglieder_config " .
 						" SET value='$value'" .
 						" WHERE name='$key'");

@@ -35,7 +35,7 @@ class FelderControllerFelder extends JController
 			$msg = JText::_( 'Fehler beim speichern der Felder' );
 		}
 
-		$cache = & JFactory::getCache('com_ttverein');
+		$cache = JFactory::getCache('com_ttverein');
 		$cache->clean();
 
 		$this->setRedirect($this->redirect, $msg);

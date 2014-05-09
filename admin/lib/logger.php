@@ -7,7 +7,7 @@ require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. '
 
 class Logger
 {
-	function log($comment)
+	static function log($comment)
 	{
 
 		$config=Config::getConfig(array('logging'));
@@ -20,11 +20,11 @@ class Logger
 	    	'format' => "{DATE}\t{TIME}\t{COMMENT}"
 		);
 	
-		$log = &JLog::getInstance('com_mitglieder.log.php', $options);
+		$log = JLog::getInstance('com_mitglieder.log.php', $options);
 		$log->addEntry(array('comment'=>$comment));		
 	}
 	
-	function logArray($array)
+	static function logArray($array)
 	{
 		Logger::log(print_r($array,true));
 	

@@ -9,7 +9,7 @@ class ListenViewListe extends JView
 {
 	function display($tpl = null)
 	{
-	$document =& JFactory::getDocument();
+	$document = JFactory::getDocument();
 	$document->addScript('includes/js/joomla.javascript.js');
 		$liste		= $this->get('Data');
 		if($liste->id < 1)

@@ -30,7 +30,7 @@ class MitgliederControllerMitglieder extends JController
 		JRequest::setVar( 'view', 'mitglied' );
 		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar('hidemainmenu', 1);
-		$document =& JFactory::getDocument();
+		$document = JFactory::getDocument();
 
 		$viewType	= $document->getType();
 		$view = $this->getView('mitglied',$viewType);
@@ -47,9 +47,9 @@ class MitgliederControllerMitglieder extends JController
 	function save()
 	{
 		$model = $this->getModel('mitglied');
-		$post =& JRequest::get( 'post', 2);
+		$post = JRequest::get( 'post', 2);
 
-		$image = &$_FILES['image'];
+		$image = $_FILES['image'];
 		if(is_uploaded_file($image['tmp_name'])) {
 			$config = $model->getConfig();
 			$name = $post['vorname'] . '_' . $post['name'];
@@ -87,7 +87,7 @@ class MitgliederControllerMitglieder extends JController
 
 
 
-		$cache = & JFactory::getCache('com_mitglieder');
+		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
 		return $this->setRedirect($this->redirectPath, $msg);
@@ -102,7 +102,7 @@ class MitgliederControllerMitglieder extends JController
 			$msg = JText::_( 'Mitglied(er) Gelöscht' );
 		}
 
-		$cache = & JFactory::getCache('com_mitglieder');
+		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
 		$this->setRedirect($this->redirectPath, $msg);

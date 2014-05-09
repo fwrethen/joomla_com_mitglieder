@@ -8,9 +8,9 @@ class MitgliederViewMitglied extends JView
 	{
 		$id = JRequest::getInt('id', '-1', 'GET');
 
-		$model	  = &$this->getModel();
+		$model	  = $this->getModel();
 		if ($id === -1){
-			$params = &JComponentHelper::getParams( 'com_mitglieder' );
+			$params = JComponentHelper::getParams( 'com_mitglieder' );
 			$id = $params->get( 'mitgliederid' ); 
 		}
 

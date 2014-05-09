@@ -39,7 +39,7 @@ class ListenControllerListen extends JController
 			$msg = JText::_( 'Liste konnte nicht gespeichert werden' );
 		}
 
-		$cache = & JFactory::getCache('com_mitglieder');
+		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
 		$this->setRedirect($this->redirect, $msg);
@@ -54,7 +54,7 @@ class ListenControllerListen extends JController
 			$msg = JText::_( 'Liste(n) Gelöscht' );
 		}
 
-		$cache = & JFactory::getCache('com_mitglieder');
+		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
 		$this->setRedirect($this->redirect, $msg);

@@ -41,7 +41,7 @@ class MitgliederModelMitglied extends JModel
 	 */
 	function getData()
 	{
-		$row =& $this->getTable();
+		$row = $this->getTable();
 		$row->load($this->_id);
 
 		return $row;
