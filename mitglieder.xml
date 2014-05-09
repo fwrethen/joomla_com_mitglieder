@@ -10,10 +10,12 @@
 	<version>0.9</version>
 	<description>Die Komponente dient dem Verwalten von Mitgliederlisten</description>
 
+	<scriptfile>script.php</scriptfile>
+
 	<install>
-		<sql>
-			<file driver="mysql" charset="utf8">install.sql</file>
-		</sql>
+		<schemas>
+			<schemapath driver="mysql" charset="utf8">sql/install.sql</schemapath>
+		</schemas>
 	</install>
 	<uninstall>
 	</uninstall>
@@ -45,9 +47,6 @@
 			<folder>tables</folder>
 			<folder>views</folder>
 			<filename>index.html</filename>
-			<filename>install.php</filename>
-			<filename>install.sql</filename>
-			<filename>uninstall.php</filename>
 		</files>
 		<languages>
 		</languages>
