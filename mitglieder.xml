@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install type="component" version="1.5.0">
+<extension type="component" version="2.5.0" method="upgrade">
 	<name>Mitglieder</name>
 	<author>Florian Paetz</author>
 	<creationDate>Juni 2010</creationDate>
@@ -9,25 +9,25 @@
 	<authorUrl>www.fw-rethen.de</authorUrl>
 	<version>0.9</version>
 	<description>Die Komponente dient dem Verwalten von Mitgliederlisten</description>
-	<files folder="components">
-		<filename>index.html</filename>
-		<filename>controller.php</filename>
-		<filename>mitglieder.php</filename>
-		<folder>lib</folder>
-		<folder>models</folder>
-		<folder>views</folder></files>
-	<!-- Site Main Language File Copy Section -->
+
 	<install>
 		<sql>
 			<file driver="mysql" charset="utf8">install.sql</file>
 		</sql>
 	</install>
 	<uninstall>
-    	<queries>
-    	</queries>
 	</uninstall>
-	<installfile>install.php</installfile>
-	<uninstallfile>uninstall.php</uninstallfile>
+	<update>
+	</update>
+
+	<files folder="components">
+		<filename>index.html</filename>
+		<filename>controller.php</filename>
+		<filename>mitglieder.php</filename>
+		<folder>lib</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
 
 	<administration>
 		<menu>Mitglieder</menu>
@@ -37,10 +37,6 @@
 			<menu link="option=com_mitglieder&amp;controller=listen">Listen</menu>
 			<menu link="option=com_mitglieder&amp;controller=mitglieder">Mitglieder</menu>
 		</submenu>
-		<!--  files>
-			<filename>mitglieder.xml</filename>
-			<filename>install.sql</filename>
-		</files-->
 		<files folder="admin">
 			<filename>admin.mitglieder.php</filename>
 			<folder>controllers</folder>
@@ -53,9 +49,8 @@
 			<filename>install.sql</filename>
 			<filename>uninstall.php</filename>
 		</files>
-		<!-- Administration Language File Copy Section -->
 		<languages>
 		</languages>
 	</administration>
 
-</install>
+</extension>
