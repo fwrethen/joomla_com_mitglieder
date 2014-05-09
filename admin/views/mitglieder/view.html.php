@@ -17,8 +17,7 @@ class MitgliederViewMitglieder extends JView
 
 		$items		= $this->get( 'Data');
 
-		$this->assignRef('items',		$items);
-
+		$this->items = $items;
 
 		parent::display($tpl);
 	}

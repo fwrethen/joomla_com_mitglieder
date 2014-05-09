@@ -26,8 +26,8 @@ class ListenViewListe extends JView
 			JToolBarHelper::cancel( 'cancel', 'Close' );
 		}
 
-		$this->assignRef('liste',		$liste);
-		$this->assignRef('listenid',		$this->get('Liste'));
+		$this->liste = $liste;
+		$this->listenid = $this->get('Liste');
 		
 		parent::display($tpl);
 	}

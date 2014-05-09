@@ -15,9 +15,7 @@ class MitgliederViewAbteilung extends JView
 		if ($id === -1){
 			$id = $params->get( 'abteilungsid' );
 		}
-  		$this->assignRef( 'abteilung', $model->getData($id));
-  		$this->assignRef( 'columns', $columns);
-
+  		$this->abteilung = $model->getData($id);
 
 		parent::display($tpl);
 	}

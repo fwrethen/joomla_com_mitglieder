@@ -25,9 +25,9 @@ class MitgliederViewMitglied extends JView
 			JToolBarHelper::cancel( 'cancel', 'Close' );
 		}
 
-		$this->assignRef('player',		$player);
-		$this->assignRef('inAbteilungen',		$inAbteilungen);
-		$this->assignRef('abteilungen',		$abteilungen);
+		$this->player = $player;
+		$this->inAbteilungen = $inAbteilungen;
+		$this->abteilungen = $abteilungen;
 
 		parent::display($tpl);
 	}

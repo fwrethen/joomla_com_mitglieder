@@ -10,8 +10,8 @@ class FelderViewFelder extends JView
 	{
 		JToolBarHelper::save();
 
-		$this->assignRef('felder', $this->get( 'Data'));
-		$this->assignRef('typen', $this->get( 'Typen'));
+		$this->felder = $this->get('Data');
+		$this->typen = $this->get('Typen');
 		
 		parent::display($tpl);
 	}

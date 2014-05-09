@@ -30,10 +30,9 @@ class AbteilungenViewAbteilung extends JView
 			JToolBarHelper::cancel( 'cancel', 'Close' );
 		}
 
-		$this->assignRef('team',		$team);
-		$this->assignRef('AbteilungenFelder',		$AbteilungenFelder);
-		$this->assignRef('felder',		$felder);
-
+		$this->team = $team;
+		$this->AbteilungenFelder = $AbteilungenFelder;
+		$this->felder = $felder;
 
 		parent::display($tpl);
 	}

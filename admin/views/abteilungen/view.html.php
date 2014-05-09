@@ -15,10 +15,9 @@ class AbteilungenViewAbteilungen extends JView
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
 
-		$items		= & $this->get( 'Data');
+		$items		= $this->get( 'Data');
 
-		$this->assignRef('items',		$items);
-
+		$this->items = $items;
 
 		parent::display($tpl);
 	}
