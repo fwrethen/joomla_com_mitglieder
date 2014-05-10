@@ -2,7 +2,7 @@
 defined('_JEXEC') or die();
 jimport('joomla.application.component.controller');
 
-class FelderControllerFelder extends JController
+class FelderControllerFelder extends JControllerLegacy
 {
 	var $redirect = "index.php?option=com_mitglieder&controller=felder";
 

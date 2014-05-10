@@ -2,7 +2,7 @@
 jimport( 'joomla.application.component.model' );
 
 
-class MitgliederModelMitglieder extends JModel
+class MitgliederModelMitglieder extends JModelLegacy
 {
 
 	function _buildMitgliederQuery()

@@ -5,7 +5,7 @@ jimport( 'joomla.application.component.view' );
 /**
  * @author Florian Paetz
  */
-class ListenViewListe extends JView
+class ListenViewListe extends JViewLegacy
 {
 	function display($tpl = null)
 	{

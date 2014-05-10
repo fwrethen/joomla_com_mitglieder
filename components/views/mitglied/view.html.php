@@ -2,7 +2,7 @@
 jimport( 'joomla.application.component.view');
 
 
-class MitgliederViewMitglied extends JView
+class MitgliederViewMitglied extends JViewLegacy
 {
 	function display($tpl = null)
 	{

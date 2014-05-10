@@ -8,7 +8,7 @@ jimport('joomla.application.component.model');
 /**
  * @author Florian Paetz
  */
-class AbteilungenModelAbteilungenFelder extends JModel
+class AbteilungenModelAbteilungenFelder extends JModelLegacy
 {
 	function __construct()
 	{

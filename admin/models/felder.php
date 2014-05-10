@@ -2,7 +2,7 @@
 defined('_JEXEC') or die();
 jimport( 'joomla.application.component.model' );
 
-class FelderModelFelder extends JModel
+class FelderModelFelder extends JModelLegacy
 {
 
 	function getData()

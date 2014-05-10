@@ -2,7 +2,7 @@
 jimport( 'joomla.application.component.model' );
 
 
-class AbteilungenModelAbteilungen extends JModel
+class AbteilungenModelAbteilungen extends JModelLegacy
 {
 
 	function _buildAbteilungenQuery()

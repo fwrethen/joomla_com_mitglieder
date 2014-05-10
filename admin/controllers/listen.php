@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.controller');
 
-class ListenControllerListen extends JController
+class ListenControllerListen extends JControllerLegacy
 {
 
 	var $redirect = "index.php?option=com_mitglieder&controller=listen";

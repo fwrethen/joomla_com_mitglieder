@@ -9,7 +9,7 @@ jimport('joomla.application.component.controller');
 
 require( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'upload'.DS. 'image.php' );
 
-class MitgliederControllerMitglieder extends JController
+class MitgliederControllerMitglieder extends JControllerLegacy
 {
 
 	//var $redirect = "index.php?option=com_mitglieder&controller=mitglieder";

@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view' );
 
-class FelderViewFelder extends JView
+class FelderViewFelder extends JViewLegacy
 {
 	function display($tpl = null)
 	{

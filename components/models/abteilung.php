@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.model');
 
 
-class MitgliederModelAbteilung extends JModel
+class MitgliederModelAbteilung extends JModelLegacy
 {
 
 	function __construct($options = array()) {

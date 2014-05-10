@@ -11,7 +11,7 @@ require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. '
 /**
  * @author Florian Paetz
  */
-class MitgliederModelMitglied extends JModel
+class MitgliederModelMitglied extends JModelLegacy
 {
 	function __construct()
 	{

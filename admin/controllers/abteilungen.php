@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.controller');
 
-class AbteilungenControllerAbteilungen extends JController
+class AbteilungenControllerAbteilungen extends JControllerLegacy
 {
 
 	var $redirect = "index.php?option=com_mitglieder&controller=abteilungen";

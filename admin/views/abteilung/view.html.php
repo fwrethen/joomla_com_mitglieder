@@ -5,7 +5,7 @@ jimport( 'joomla.application.component.view' );
 /**
  * @author Florian Paetz
  */
-class AbteilungenViewAbteilung extends JView
+class AbteilungenViewAbteilung extends JViewLegacy
 {
 	function display($tpl = null)
 	{

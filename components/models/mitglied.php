@@ -3,7 +3,7 @@
 defined('_JEXEC') or die();
 jimport('joomla.application.component.model');
 
-class MitgliederModelMitglied extends JModel
+class MitgliederModelMitglied extends JModelLegacy
 {
 	var $_data = null;
 	var $config = null;

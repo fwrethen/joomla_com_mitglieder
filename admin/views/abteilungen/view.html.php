@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view' );
 
-class AbteilungenViewAbteilungen extends JView
+class AbteilungenViewAbteilungen extends JViewLegacy
 {
 	function display($tpl = null)
 	{

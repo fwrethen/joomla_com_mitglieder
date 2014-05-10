@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.controller');
 
 
-class MitgliederController extends JController
+class MitgliederController extends JControllerLegacy
 {
 	function display($cachable = false, $urlparams = false)
 	{

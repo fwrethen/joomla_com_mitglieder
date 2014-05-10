@@ -7,7 +7,7 @@ jimport('joomla.application.component.model');
 /**
  * @author Florian Paetz
  */
-class ListenModelListe extends JModel
+class ListenModelListe extends JModelLegacy
 {
 	function __construct()
 	{

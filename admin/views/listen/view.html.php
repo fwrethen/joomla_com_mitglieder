@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.view' );
 
-class ListenViewListen extends JView
+class ListenViewListen extends JViewLegacy
 {
 	function display($tpl = null)
 	{

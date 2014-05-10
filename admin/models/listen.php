@@ -2,7 +2,7 @@
 jimport( 'joomla.application.component.model' );
 
 
-class ListenModelListen extends JModel
+class ListenModelListen extends JModelLegacy
 {
 
 	function _buildListenQuery()
