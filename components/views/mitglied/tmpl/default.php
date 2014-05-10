@@ -58,7 +58,7 @@ $document->setTitle($name);
 
 
 $image = $this->mitglied->image_resize;
-$imageOrginal = $this->mitglied->image_orginal;
+$imageOrginal = $this->mitglied->image_original;
 if($image) {
 	if(substr($image, 0, 1) == "/")
 		$image = substr($image, 1);

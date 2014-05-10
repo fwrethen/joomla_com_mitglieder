@@ -19,26 +19,22 @@ JHTML::_('stylesheet','mitglieder.css',$path.'components/'.$option.'/lib/css/');
 			<?php if(is_array($this->abteilung->mitglieder)) {?>
 				<?php
 				foreach($this->abteilung->mitglieder as $mitglied) {
+				$name = $mitglied->vorname . " " . $mitglied->name;
 				?>
 
 					<div class="Thumb">
 						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
-							
-						<p/>
+
 				<?php
 						$image = $mitglied->image_thumb;
 						if($image) {
 							if(substr($image, 0, 1) == "/")
 								$image = substr($image, 1);
-							if(substr($imageOrginal, 0, 1) == "/")
-								$imageOrginal = substr($imageOrginal, 1);
 
 							echo "<img src=\"" . JURI::root() . $image . "\" alt=\"$name\" />";
 						}
 						?>
-						<p/>
-<?php echo $mitglied->vorname?> <?php echo $mitglied->name;?>
-<p/>
+						<p><?php echo $name?></p>
 <table>
 
 							<?php

@@ -20,7 +20,7 @@ class com_MitgliederInstallerScript
 		 * Löschen der Mitgliederbilder
 		 */
 		if($config['delete_pictures'] == "1") {
-			$query = "SELECT image_orginal, image_resize, image_thumb
+			$query = "SELECT image_original, image_resize, image_thumb
 				FROM #__mitglieder_mitglieder";
 			$db->setQuery( $query );
 			$images = $db->loadObjectList();
