@@ -79,7 +79,7 @@ class AbteilungenControllerAbteilungen extends JController
 		$this->setRedirect($this->redirect, $msg);
 	}
 
-	function display( )
+	function display($cachable = false, $urlparams = false)
 	{
 		parent::display();
 	}

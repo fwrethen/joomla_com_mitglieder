@@ -13,7 +13,7 @@ class FelderControllerFelder extends JController
 		$this->registerTask( 'apply', 'save');
 	}
 
-	function display( )
+	function display($cachable = false, $urlparams = false)
 	{
 		parent::display();
 	}

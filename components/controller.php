@@ -6,7 +6,7 @@ jimport('joomla.application.component.controller');
 
 class MitgliederController extends JController
 {
-	function display()
+	function display($cachable = false, $urlparams = false)
 	{
 		// Setzt einen Standard view
 		if ( ! JRequest::getCmd( 'view' ) ) {

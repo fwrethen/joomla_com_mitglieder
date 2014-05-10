@@ -108,7 +108,7 @@ class MitgliederControllerMitglieder extends JController
 		$this->setRedirect($this->redirectPath, $msg);
 	}
 
-	function display( )
+	function display($cachable = false, $urlparams = false)
 	{
 		parent::display();
 	}
