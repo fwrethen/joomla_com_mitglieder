@@ -104,7 +104,7 @@ class TableMitglied extends JTable
 		 * Zusätzliche Spielerfelder laden
 		 */
 
-		$query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, kurz_text, `text`, datum, listen_id " .
+		$query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, f1.tooltip, kurz_text, `text`, datum, listen_id " .
 		"from #__mitglieder_mitglieder_felder as a, #__mitglieder_felder as f1 " .
 		"where a.felder_id= f1.id AND mitglieder_id = $oid order by f1.ordering, f1.id ASC";
 
