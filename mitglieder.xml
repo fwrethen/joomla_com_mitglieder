@@ -40,7 +40,7 @@
 			<menu link="option=com_mitglieder&amp;controller=mitglieder">Mitglieder</menu>
 		</submenu>
 		<files folder="admin">
-			<filename>admin.mitglieder.php</filename>
+			<filename>mitglieder.php</filename>
 			<folder>controllers</folder>
 			<folder>lib</folder>
 			<folder>models</folder>
