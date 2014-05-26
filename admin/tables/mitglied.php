@@ -84,10 +84,10 @@ class TableMitglied extends JTable
 	/**
 	 * Läd zusätzlich die Mannschaften und die Aufstellungen
 	 */
-	function load($oid=null) {
+	function load($keys = NULL, $reset = true) {
 
 		//Spielerdaten Laden
-		if(parent::load($oid) === false)
+		if(parent::load($keys) === false)
 			return false;
 
 		//Datenbankverbindung
@@ -106,14 +106,14 @@ class TableMitglied extends JTable
 
 		$query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, f1.tooltip, kurz_text, `text`, datum, listen_id " .
 		"from #__mitglieder_mitglieder_felder as a, #__mitglieder_felder as f1 " .
-		"where a.felder_id= f1.id AND mitglieder_id = $oid order by f1.ordering, f1.id ASC";
+		"where a.felder_id= f1.id AND mitglieder_id = $keys order by f1.ordering, f1.id ASC";
 
 		/*geh�rt ins frontend
 		 * $query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, kurz_text, `text`, wert " .
 		"from (select mitglieder_id, felder_id, kurz_text,`text`, wert " .
 		"from #__mitglieder_mitglieder_felder as f LEFT JOIN #__mitglieder_listen as l ".
 		"on l.id=f.listen_id ) as a, #__mitglieder_felder as f1 " .
-		"where a.felder_id= f1.id AND mitglieder_id = $oid order by f1.ordering, f1.id ASC";
+		"where a.felder_id= f1.id AND mitglieder_id = $keys order by f1.ordering, f1.id ASC";
 		*/
 
 		$db->setQuery( $query );
