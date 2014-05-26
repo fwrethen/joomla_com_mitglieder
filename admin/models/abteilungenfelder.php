@@ -49,8 +49,8 @@ class AbteilungenModelAbteilungenFelder extends JModelLegacy
 		$query = "SELECT id,name_frontend FROM #__mitglieder_felder";
 		$this->_db->setQuery( $query );
 		$def_obj= new stdClass();
-		$def_obj->abteilungen_id='0';
-		$def_obj->name="-";
+		$def_obj->id='0';
+		$def_obj->name_frontend="-";
 		return array_merge(array($def_obj),$this->_db->loadObjectList());
 	}
 

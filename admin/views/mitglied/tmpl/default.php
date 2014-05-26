@@ -147,31 +147,31 @@ $editor=JFactory::getEditor();
 				<?php echo JText::_( 'Abteilungen' ); ?>:
 			</td>
 	      <td class="input">
-	            <script type="text/javascript">
-	            <?php
-	            $abteilungenSelect=JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
-	            $abteilungenSelect=str_replace(array("\r\n", "\n", "\r"), '', $abteilungenSelect);
-	             
-	            ?>
-      <!--
-        var abteilungList = '<?php echo $abteilungenSelect?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /> <p />';
-        var maxAbteilung = <?php echo count($this->abteilungen); ?> - 1;
-        var curAbteilung = <?php echo (count($this->inAbteilungen) > 0 ? (count($this->inAbteilungen)-1) : 0); ?> - 0;
-      //-->
-      </script>
 
-<?php echo $this->inAbteilungen[0]->id?>
-        <?php echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[0]->abteilungen_id); ?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[0]->ordering?>" /><p />
-        &nbsp; <input type="button" value="mehr Abteilungen" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" /><p />
-        <div id="abteilung_list_content">
-        <?php
-        for ($i = 1; $i < count($this->inAbteilungen); ++$i)
-        {
-          echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id);?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[$i]->ordering?>" /> <br />
-          <?php
-        }
-        ?>
-        </div>
+		<div id="abteilung_list_content">
+		<?php
+		if (count($this->inAbteilungen) < 1)
+		{
+			echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name', '0'); ?>
+			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br /><?php
+		}
+		for ($i = 0; $i < count($this->inAbteilungen); ++$i)
+		{
+			echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id); ?>
+			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[$i]->ordering?>" /><br /><?php
+		}
+		?>
+		</div>
+
+		<script type="text/javascript">
+		<?php	$abteilungenSelect=JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name', '0');
+				$abteilungenSelect=str_replace(array("\r\n", "\n", "\r"), '', $abteilungenSelect);
+		?>
+		var abteilungList = '<?php echo $abteilungenSelect?> <input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br />';
+		var maxAbteilung = <?php echo count($this->abteilungen); ?> - 1;
+		var curAbteilung = <?php echo (count($this->inAbteilungen) > 0 ? (count($this->inAbteilungen)) : 0); ?> - 0;
+		</script>
+		<input type="button" value="mehr Abteilungen" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" />
       </td>
 
 	</tr>

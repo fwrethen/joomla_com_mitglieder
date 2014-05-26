@@ -52,26 +52,31 @@
 				<?php echo JText::_( 'Felder für die Thumbnailseite' ); ?>:
 			</td>
 	      <td class="input">
-	            <script type="text/javascript">
-      <!--
-        var abteilungList = '<?php echo JHTML::_('select.genericlist',  $this->felder, 'felder[]', ' ', 'id', 'name_frontend'); ?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="3" value="99" /> <br />';
-        var maxAbteilung = <?php echo count($this->felder); ?> - 1;
-        var curAbteilung = <?php echo (count($this->AbteilungenFelder) > 0 ? (count($this->AbteilungenFelder)-1) : 0); ?> - 0;
-      //-->
-      </script>
 
+		<div id="abteilung_list_content">
+		<?php
+		if (count($this->AbteilungenFelder) < 1)
+		{
+			echo JHTML::_('select.genericlist',  $this->felder, 'felder[]', ' ', 'id', 'name_frontend', '0'); ?>
+			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="100%" value="99" /><br /><?php
+		}
+		for ($i = 0; $i < count($this->AbteilungenFelder); ++$i)
+		{
+			echo JHTML::_('select.genericlist',  $this->felder, 'felder[]', ' ', 'id', 'name_frontend',$this->AbteilungenFelder[$i]->felder_id); ?>
+			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="100%" value="<?php echo $this->AbteilungenFelder[$i]->ordering?>" /><br /><?php
+		}
+		?>
+		</div>
 
-        <?php echo JHTML::_('select.genericlist',  $this->felder, 'felder[]', ' ', 'id', 'name_frontend',$this->AbteilungenFelder[0]->felder_id); ?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="3" value="<?php echo $this->AbteilungenFelder[0]->ordering?>" /><br />
-        &nbsp; <input type="button" value="mehr Felder" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" />
-        <div id="abteilung_list_content">
-        <?php
-        for ($i = 1; $i < count($this->AbteilungenFelder); ++$i)
-        {
-          echo JHTML::_('select.genericlist',  $this->felder, 'felder[]', ' ', 'id', 'name_frontend',$this->AbteilungenFelder[$i]->felder_id);?><input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="3" value="<?php echo $this->AbteilungenFelder[$i]->ordering?>" /> <br />
-          <?php
-        }
-        ?>
-        </div>
+		<script type="text/javascript">
+		<?php	$felderSelect=JHTML::_('select.genericlist',  $this->felder, 'felder[]', ' ', 'id', 'name_frontend', '0');
+				$felderSelect=str_replace(array("\r\n", "\n", "\r"), '', $felderSelect);
+		?>
+		var felderList = '<?php echo $felderSelect; ?> <input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="100%" value="99" /><br />';
+		var maxFelder = <?php echo count($this->felder); ?> - 1;
+		var curFelder = <?php echo (count($this->AbteilungenFelder) > 0 ? (count($this->AbteilungenFelder)) : 0); ?> - 0;
+		</script>
+		<input type="button" value="mehr Felder" onclick="if (curFelder < maxFelder) { document.getElementById('abteilung_list_content').innerHTML += felderList; ++curFelder; }" />
       </td>
 	</table>
 	</fieldset>

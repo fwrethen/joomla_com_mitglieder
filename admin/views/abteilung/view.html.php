@@ -17,8 +17,8 @@ class AbteilungenViewAbteilung extends JViewLegacy
 		else
 			$isNew = false;
 
-		$AbteilungenFelder = $this->get('Data','Felder');
-		$felder = $this->get('Felder','Felder');
+		$AbteilungenFelder = $this->get('Data','AbteilungenFelder');
+		$felder = $this->get('Felder','AbteilungenFelder');
 
 
 		$text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );

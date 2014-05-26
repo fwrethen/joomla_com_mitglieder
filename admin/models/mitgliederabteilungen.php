@@ -50,7 +50,7 @@ class MitgliederModelMitgliederAbteilungen extends JModelLegacy
 		$query = "SELECT id,name FROM #__mitglieder_abteilungen";
 		$this->_db->setQuery( $query );
 		$def_obj= new stdClass();
-		$def_obj->abteilungen_id='0';
+		$def_obj->id='0';
 		$def_obj->name="-";
 		return array_merge(array($def_obj),$this->_db->loadObjectList());
 		//$ret_array=$this->_db->loadObjectList();
