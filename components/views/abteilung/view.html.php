@@ -10,10 +10,9 @@ class MitgliederViewAbteilung extends JViewLegacy
 	{
  		$model	  = $this->getModel();
 
-		$params = JComponentHelper::getParams( 'com_mitglieder' );
- 		$id = JRequest::getInt('abteilungsid', '-1', 'GET');
+ 		$id = JFactory::getApplication()->input->get('abteilungsid', '-1', 'INT');
 		if ($id === -1){
-			$id = $params->get( 'abteilungsid' );
+			//TODO: show standard view or display error message
 		}
   		$this->abteilung = $model->getData($id);
 

@@ -5,7 +5,7 @@ require_once (JPATH_COMPONENT.DS.'lib'.DS.'mitglieder'.DS.'printfelder.php');
 
 $path=JURI::base();
 $option = JRequest::getCMD('option');
-JHTML::_('stylesheet','mitglieder.css',$path.'components/'.$option.'/lib/css/');
+JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
 ?>
 
 <h1><?php echo $this->abteilung->name; ?></h1>
@@ -23,7 +23,7 @@ JHTML::_('stylesheet','mitglieder.css',$path.'components/'.$option.'/lib/css/');
 				?>
 
 					<div class="Thumb">
-						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
+						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>"><p>
 
 				<?php
 						$image = $mitglied->image_thumb;
@@ -34,7 +34,7 @@ JHTML::_('stylesheet','mitglieder.css',$path.'components/'.$option.'/lib/css/');
 							echo "<img src=\"" . JURI::root() . $image . "\" alt=\"$name\" />";
 						}
 						?>
-						<p><?php echo $name?></p>
+						<?php echo $name?></p>
 <table>
 
 							<?php

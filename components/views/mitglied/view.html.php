@@ -6,12 +6,11 @@ class MitgliederViewMitglied extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		$id = JRequest::getInt('id', '-1', 'GET');
+		$id = JFactory::getApplication()->input->get('id', '-1', 'INT');
 
 		$model	  = $this->getModel();
 		if ($id === -1){
-			$params = JComponentHelper::getParams( 'com_mitglieder' );
-			$id = $params->get( 'mitgliederid' ); 
+			//TODO: show standard view or display error message
 		}
 
   		$this->mitglied = $model->getMitglied($id);
