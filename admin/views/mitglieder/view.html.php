@@ -12,8 +12,8 @@ class MitgliederViewMitglieder extends JViewLegacy
 		//JToolBarHelper::publishList();
 		//JToolBarHelper::unpublishList();
 		JToolBarHelper::deleteList();
-		JToolBarHelper::editListX();
-		JToolBarHelper::addNewX();
+		JToolBarHelper::editList();
+		JToolBarHelper::addNew();
 
 		$items		= $this->get( 'Data');
 

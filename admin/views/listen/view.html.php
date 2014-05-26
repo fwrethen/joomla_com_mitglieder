@@ -12,7 +12,7 @@ class ListenViewListen extends JViewLegacy
 		//JToolBarHelper::publishList();
 		//JToolBarHelper::unpublishList();
 		//JToolBarHelper::deleteList();
-		JToolBarHelper::editListX();
+		JToolBarHelper::editList();
 //		JToolBarHelper::addNewX();
 
 		$items		= $this->get( 'Data');
