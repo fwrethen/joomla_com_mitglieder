@@ -40,7 +40,7 @@ $editor=JFactory::getEditor();
 		if(substr($image,0,1) == "/")
 			$image = substr($image, 1);
 		?>
-		<img src="<?echo JURI::root() . $image;?>" width="350" align="right" alt="<?php echo $this->player->vorname . " " . $this->player->name; ?>">
+		<img src="<?php echo JURI::root() . $image;?>" width="350" align="right" alt="<?php echo $this->player->vorname . " " . $this->player->name; ?>">
 	<?php }?>
 	<table class="admintable">
 		<tr>
