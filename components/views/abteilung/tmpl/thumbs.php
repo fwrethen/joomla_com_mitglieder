@@ -17,13 +17,14 @@ JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
 			?>
 			<br />
 			<?php if(is_array($this->abteilung->mitglieder)) {?>
+			<div class="thumbswrap">
 				<?php
 				foreach($this->abteilung->mitglieder as $mitglied) {
 				$name = $mitglied->vorname . " " . $mitglied->name;
 				?>
 
 					<div class="Thumb">
-						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>"><p>
+						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
 
 				<?php
 						$image = $mitglied->image_thumb;
@@ -31,21 +32,23 @@ JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
 							if(substr($image, 0, 1) == "/")
 								$image = substr($image, 1);
 
-							echo "<img src=\"" . JURI::root() . $image . "\" alt=\"$name\" />";
+							echo "<p><img src=\"" . JURI::root() . $image . "\" alt=\"$name\" /></p>";
 						}
 						?>
-						<?php echo $name?></p>
-<table>
-
+						<p><?php echo $name?></p></a>
+						<table>
 							<?php
 							printFelder($mitglied->felder);
 							?>
-</table>
-						</a></div>
+						</table>
+						</div>
 
 
 
 			<?php
 			}
+			?>
+			</div>
+			<?php
 			}
 			?>

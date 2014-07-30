@@ -1,12 +1,23 @@
 @CHARSET "ISO-8859-1";
 
+div.thumbswrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 div.Thumb {
  float:left;
   padding: 1em 1em;
   width:200px;
   height:280px;
+  flex-basis: auto;
+  flex-grow: 1;
 }
 
 div.Thumb p {
   text-align: center;
+}
+
+div.Thumb table {
+  margin: 0 auto;
 }
