@@ -152,7 +152,7 @@ $editor=JFactory::getEditor();
 		<?php
 		if (count($this->inAbteilungen) < 1)
 		{
-			echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name', '0'); ?>
+			echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name'); ?>
 			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br /><?php
 		}
 		for ($i = 0; $i < count($this->inAbteilungen); ++$i)
@@ -164,7 +164,7 @@ $editor=JFactory::getEditor();
 		</div>
 
 		<script type="text/javascript">
-		<?php	$abteilungenSelect=JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name', '0');
+		<?php	$abteilungenSelect=JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
 				$abteilungenSelect=str_replace(array("\r\n", "\n", "\r"), '', $abteilungenSelect);
 		?>
 		var abteilungList = '<?php echo $abteilungenSelect?> <input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br />';
