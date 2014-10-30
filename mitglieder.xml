@@ -32,12 +32,12 @@
 	</files>
 
 	<administration>
-		<menu>Mitglieder</menu>
+		<menu>COM_MITGLIEDER_MENU</menu>
 		<submenu>
-			<menu link="option=com_mitglieder&amp;controller=abteilungen">Abteilungen</menu>
-			<menu link="option=com_mitglieder&amp;controller=felder">Felder</menu>
-			<menu link="option=com_mitglieder&amp;controller=listen">Listen</menu>
-			<menu link="option=com_mitglieder&amp;controller=mitglieder">Mitglieder</menu>
+			<menu link="option=com_mitglieder&amp;controller=mitglieder">COM_MITGLIEDER_MENU_MITGLIEDER</menu>
+			<menu link="option=com_mitglieder&amp;controller=abteilungen">COM_MITGLIEDER_MENU_ABTEILUNGEN</menu>
+			<menu link="option=com_mitglieder&amp;controller=felder">COM_MITGLIEDER_MENU_FELDER</menu>
+			<menu link="option=com_mitglieder&amp;controller=listen">COM_MITGLIEDER_MENU_LISTEN</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>mitglieder.php</filename>
@@ -48,7 +48,8 @@
 			<folder>views</folder>
 			<filename>index.html</filename>
 		</files>
-		<languages>
+		<languages folder="admin/language">
+			<language tag="de-DE">de-DE.com_mitglieder.sys.ini</language>
 		</languages>
 	</administration>
 
