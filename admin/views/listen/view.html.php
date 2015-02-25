@@ -15,6 +15,10 @@ class ListenViewListen extends JViewLegacy
 		JToolBarHelper::editList();
 //		JToolBarHelper::addNewX();
 
+		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
+		MitgliederHelper::addSubmenu('listen');
+		$this->sidebar = JHtmlSidebar::render();
+
 		$items		= $this->get( 'Data');
 
 		$this->items = $items;

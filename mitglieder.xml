@@ -42,6 +42,7 @@
 		<files folder="admin">
 			<filename>mitglieder.php</filename>
 			<folder>controllers</folder>
+			<folder>helpers</folder>
 			<folder>lib</folder>
 			<folder>models</folder>
 			<folder>tables</folder>
@@ -49,6 +50,7 @@
 			<filename>index.html</filename>
 		</files>
 		<languages folder="admin/language">
+			<language tag="de-DE">de-DE.com_mitglieder.ini</language>
 			<language tag="de-DE">de-DE.com_mitglieder.sys.ini</language>
 		</languages>
 	</administration>

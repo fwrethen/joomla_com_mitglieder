@@ -15,6 +15,10 @@ class MitgliederViewMitglieder extends JViewLegacy
 		JToolBarHelper::editList();
 		JToolBarHelper::addNew();
 
+		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
+		MitgliederHelper::addSubmenu('mitglieder');
+		$this->sidebar = JHtmlSidebar::render();
+
 		$items		= $this->get( 'Data');
 
 		$this->items = $items;

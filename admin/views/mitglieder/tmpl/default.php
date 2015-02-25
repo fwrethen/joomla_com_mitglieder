@@ -1,7 +1,10 @@
 <?php defined('_JEXEC') or die('Restricted access'); ?>
 
 
-
+<div id="j-sidebar-container" class="span2">
+	<?php echo $this->sidebar; ?>
+</div>
+<div id="j-main-container" class="span10">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div id="editcell">
 	<table class="adminlist">
@@ -65,3 +68,4 @@
 <input type="hidden" name="boxchecked" value="0" />
 <input type="hidden" name="controller" value="mitglieder" />
 </form>
+</div>
