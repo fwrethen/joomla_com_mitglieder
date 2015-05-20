@@ -71,17 +71,17 @@ class MitgliederModelMitglied extends JModelLegacy
 	{
 		if($data == null)
 			$data = JRequest::get( 'post' );
-			
+
 
 		//Keine Daten Vorhanden.
 		if(!is_array($data))
 		{
 			Logger::log('No Data');
 			return false;
-			
+
 		}
 		Logger::logArray($data);
-	
+
 		//Speichern der Spielerdaten
 		$row =& $this->getTable();
 
@@ -120,7 +120,7 @@ class MitgliederModelMitglied extends JModelLegacy
 			foreach($cids as $cid) {
 				$row =& $this->getTable();
 				/*
-				 * Felder l�schen löschen
+				 * Felder löschen
 				 */
 				$query = "DELETE FROM #__mitglieder_mitglieder_felder " .
 						" WHERE mitglieder_id=" . $cid;
@@ -131,7 +131,7 @@ class MitgliederModelMitglied extends JModelLegacy
 				}
 
 				/*
-				 * Mitgliederzuordnungen l�schen löschen
+				 * Mitgliederzuordnungen löschen
 				 */
 				$query = "DELETE FROM #__mitglieder_mitglieder_abteilungen " .
 						" WHERE mitglieder_id=" . $cid;

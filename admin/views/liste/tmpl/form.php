@@ -24,7 +24,7 @@ foreach($this->liste as $feld) {
 ?>
 <tr>
 	<th colspan="2">Neue Werte erstellen</th>
-	
+
 </tr>
 
 <?php

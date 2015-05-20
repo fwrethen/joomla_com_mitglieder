@@ -2339,8 +2339,8 @@ class upload {
             }
 
             $tmp_mime_type=strstr($this->file_src_mime,';',true);
-            
-            
+
+
             if ($tmp_mime_type)
             {
             	$this->file_src_mime=$tmp_mime_type;

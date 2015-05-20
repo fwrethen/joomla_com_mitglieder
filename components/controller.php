@@ -12,7 +12,7 @@ class MitgliederController extends JControllerLegacy
 		if ( ! JRequest::getCmd( 'view' ) ) {
 			JRequest::setVar('view', 'abteilung' );
 		}
-		
+
 		parent::display(true);
 	}
 }

@@ -108,7 +108,7 @@ class TableMitglied extends JTable
 		"from #__mitglieder_mitglieder_felder as a, #__mitglieder_felder as f1 " .
 		"where a.felder_id= f1.id AND mitglieder_id = $keys order by f1.ordering, f1.id ASC";
 
-		/*gehört ins frontend
+		/*gehÃ¶rt ins frontend
 		 * $query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, kurz_text, `text`, wert " .
 		"from (select mitglieder_id, felder_id, kurz_text,`text`, wert " .
 		"from #__mitglieder_mitglieder_felder as f LEFT JOIN #__mitglieder_listen as l ".

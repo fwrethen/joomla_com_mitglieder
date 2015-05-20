@@ -107,7 +107,7 @@ class AbteilungenModelAbteilung extends JModelLegacy
 //				@unlink(JPATH_ROOT . $images[0]->image_thumb);
 
 				/*
-				 * Mitgliederzuordnungen l�schen löschen
+				 * Mitgliederzuordnungen löschen
 				 */
 				$query = "DELETE FROM #__mitglieder_mitglieder_abteilungen " .
 						" WHERE abteilungen_id=" . $cid;

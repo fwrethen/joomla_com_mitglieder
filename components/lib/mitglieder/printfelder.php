@@ -7,7 +7,7 @@ require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. '
 function printFelder($felder) {
 	Logger::log( 'Inf: Print fields: ');
 	Logger::logArray($felder);
-	
+
 		foreach($felder as $id=>$feld) {
 			?>
 		<tr>

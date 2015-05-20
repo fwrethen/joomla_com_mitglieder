@@ -7,10 +7,10 @@
 <div id="j-main-container" class="span10">
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div id="editcell">
-<?php 
+<?php
 	$radio = JHTML::_('select.radiolist',$this->items,'cid','onClick="javascript:isChecked(this.checked);"','id','name_backend');
 	echo $radio;
-	
+
 
 ?>
 </div>

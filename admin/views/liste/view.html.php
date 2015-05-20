@@ -28,7 +28,7 @@ class ListenViewListe extends JViewLegacy
 
 		$this->liste = $liste;
 		$this->listenid = $this->get('Liste');
-		
+
 		parent::display($tpl);
 	}
 }

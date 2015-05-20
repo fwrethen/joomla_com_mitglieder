@@ -8,12 +8,12 @@ defined('_JEXEC') or die('Restricted access');
 
 <style type="text/css">
 <!--
-tr.row0 td 
+tr.row0 td
 {
 background-color: #f0f0f0;
 }
 
-tr.row1 td 
+tr.row1 td
 {
 background-color: #ffffff;
 }
@@ -31,7 +31,7 @@ table
 
 			<?php
 				echo $this->abteilung->description;
-			?>			
+			?>
 			<br />
 			<?php if(is_array($this->abteilung->mitglieder)) {?>
 			<h3>Namen</h3>
@@ -46,9 +46,9 @@ table
 				if ($count %2 == 0)
 				{
 				?>
-				
+
 				<tr class="<?php echo "row$k"; ?>">
-				<?php 
+				<?php
 				}
 				?>
 					<td align="<?php echo ($count%2==0)?'left':'right'?>">
@@ -56,13 +56,13 @@ table
 							<?php echo $mitglied->name . ", " . $mitglied->vorname;?>
 						</a>&nbsp;
 					</td>
-				<?php 
+				<?php
 				if ($count %2 == 1)
 				{
 				?>
-					
+
 				</tr>
-				
+
 
 				<?php
 				$k=1-$k;
@@ -70,27 +70,27 @@ table
 				else {
 					?>
 					<td>&nbsp;</td>
-					<?php 
+					<?php
 				}
 				$count++;
 				}
-				//Offene Zeile ggf. schließen
+				//Offene Zeile ggf. schlieÃŸen
 				if ($count %2 == 1)
 				{
 				?>
 					<td>&nbsp;</td>
 				</tr>
-				
+
 
 				<?php
 				}
-				
-				
-				
+
+
+
 				?>
 
 			</table>
-			<?php 
+			<?php
 			}
 			?>
 		</td>
@@ -101,4 +101,3 @@ table
 		</td>
 	</tr>
 </table>
-

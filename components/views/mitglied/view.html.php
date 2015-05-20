@@ -14,7 +14,7 @@ class MitgliederViewMitglied extends JViewLegacy
 		}
 
   		$this->mitglied = $model->getMitglied($id);
-		
+
 		parent::display($tpl);
 	}
 }

@@ -15,19 +15,19 @@ class Logger
 		{
 			return;
 		}
-		
+
 		$options = array(
 	    	'format' => "{DATE}\t{TIME}\t{COMMENT}"
 		);
-	
+
 		$log = JLog::getInstance('com_mitglieder.log.php', $options);
-		$log->addEntry(array('comment'=>$comment));		
+		$log->addEntry(array('comment'=>$comment));
 	}
-	
+
 	static function logArray($array)
 	{
 		Logger::log(print_r($array,true));
-	
+
 	}
-	
+
 }

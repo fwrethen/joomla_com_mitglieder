@@ -14,5 +14,3 @@ Mitglied_in_Abteilung
 ---------------------
 abteilung:int foreign key Abteilungen.id
 mitglied:int foreign key Abteilungen.id
-
-

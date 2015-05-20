@@ -31,7 +31,7 @@ select mitglied_id, name, kurz_text, wert from (select mitglied_id, felder_id, k
 --update felder set `show`= 0 where felder_id = 2;
 
 
-create table IF NOT EXISTS jos_mitglieder_felder (  
+create table IF NOT EXISTS jos_mitglieder_felder (
 	id int(11) not null auto_increment PRIMARY KEY,
 	`name_backend` varchar(100) NOT NULL,
 	`name_frontend` varchar(100) NOT NULL,

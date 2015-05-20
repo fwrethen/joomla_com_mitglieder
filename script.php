@@ -33,7 +33,7 @@ class com_MitgliederInstallerScript
 		 * Löschen der Datenbank-Tabellen
 		 */
 		if($config['delete_database'] == "1") {
-			$query = "DROP TABLE IF EXISTS #__mitglieder_abteilungen, " . 
+			$query = "DROP TABLE IF EXISTS #__mitglieder_abteilungen, " .
 				" #__mitglieder_felder, " .
 				" #__mitglieder_listen, " .
 				" #__mitglieder_mitglieder, " .
@@ -52,11 +52,11 @@ class com_MitgliederInstallerScript
 	{
 	}
 
-	function preflight($type, $parent) 
+	function preflight($type, $parent)
 	{
 	}
 
-	function postflight($type, $parent) 
+	function postflight($type, $parent)
 	{
 	}
 }

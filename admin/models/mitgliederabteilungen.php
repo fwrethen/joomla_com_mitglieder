@@ -74,7 +74,7 @@ class MitgliederModelMitgliederAbteilungen extends JModelLegacy
 		}
 
 		Logger::log('Delete old entries');
-		//Alle Abteilungen löschen und neu speichern
+		//Alle Abteilungen lÃ¶schen und neu speichern
 		$query="DELETE FROM #__mitglieder_mitglieder_abteilungen where mitglieder_id = $id";
 		$this->_db->setQuery($query);
 		if(!$this->_db->query()) {
@@ -84,10 +84,10 @@ class MitgliederModelMitgliederAbteilungen extends JModelLegacy
 		}
 
 		Logger::log('Done:Delete old entries');
-		
+
 		$count=count($data['abteilung']);
 		Logger::log( 'Have '.$count.'Abteilung');
-		
+
 		for($i=0; $i < $count; $i++){
 			$abteilung = $data['abteilung'][$i];
 			$ordering = $data['ordering'][$i];

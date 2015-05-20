@@ -21,7 +21,7 @@ class ListenModelListe extends JModelLegacy
 	{
 		$this->_id		= $id;
 	}
-	
+
 	function getListe()
 	{
 		return $this->_id;
@@ -37,7 +37,7 @@ class ListenModelListe extends JModelLegacy
 		//$data = $this->_db->loadObject();
 		$data=$this->_getList($query);
 		if($data == null) {
-			$data=array();			
+			$data=array();
 		}
 		else
 		{
@@ -54,7 +54,7 @@ class ListenModelListe extends JModelLegacy
 
 	function store($post=null)
 	{
-		
+
 		foreach($post['alte_wert'] as $id=>$wert) {
 			$query = "UPDATE #__mitglieder_listen " .
 					" SET wert='$wert' "  .
@@ -84,7 +84,7 @@ class ListenModelListe extends JModelLegacy
 		}
 		return true;
 	}
-		
+
 //		$row =& $this->getTable();
 //
 //		if($data == null)

@@ -78,9 +78,3 @@ if($image) {
 	printFelder($this->mitglied->felder);
 	?>
 </table>
-
-
-
-
-
-

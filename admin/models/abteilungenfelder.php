@@ -70,7 +70,7 @@ class AbteilungenModelAbteilungenFelder extends JModelLegacy
 			return false;
 		}
 
-		//Alle Abteilungen löschen und neu speichern
+		//Alle Abteilungen lÃ¶schen und neu speichern
 		$query="DELETE FROM #__mitglieder_abteilungen_felder where abteilungen_id = $id";
 		$this->_db->setQuery($query);
 		if(!$this->_db->query()) {

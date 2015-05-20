@@ -16,7 +16,7 @@ class FelderViewFelder extends JViewLegacy
 
 		$this->felder = $this->get('Data');
 		$this->typen = $this->get('Typen');
-		
+
 		parent::display($tpl);
 	}
 }
