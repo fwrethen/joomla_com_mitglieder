@@ -30,6 +30,7 @@ class TableMitglied extends JTable
 
 		$this->felder = array();
 		foreach($felder as $feld) {
+			$this->felder[$feld->id]->id = $feld->id;
 			$this->felder[$feld->id]->typ = $feld->typ;
 			if ($feld->typ=='liste')
 			{

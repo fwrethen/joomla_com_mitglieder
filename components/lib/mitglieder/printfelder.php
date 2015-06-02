@@ -65,12 +65,14 @@ function printFelder($felder) {
 					echo $feld->kurz_text;
 					break;
 				case "telefon":
-					echo $feld->text;
+					echo $feld->kurz_text;
 					break;
 				case "liste":
 					echo $feld->wert;
-          			break;
-
+					break;
+				case "bild":
+					echo '<img src="'. $feld->kurz_text .'" alt="'. $feld->name .'" />';
+					break;
 			}
 			?>
 			</td>
@@ -78,12 +80,12 @@ function printFelder($felder) {
 
 			<?php
 		}
-		?>
+/*		?>
 		<!--tr>
 			<th><?php echo $title;?></th>
 			<td><?php echo $text;?></td>
 		</tr-->
-		<?php
+		<?php	*/
 
 //	}
 

@@ -11,7 +11,7 @@ require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. '
 /**
  * @author Florian Paetz
  */
-class MitgliederModelMitglied extends JModelLegacy
+class MitgliederModelMitglied extends JModelAdmin
 {
 	function __construct()
 	{
@@ -152,6 +152,27 @@ class MitgliederModelMitglied extends JModelLegacy
 		return true;
 	}
 
+	public function getForm($data = array(), $loadData = true)
+	{
+		$formmitglied = '<?xml version="1.0" encoding="utf-8"?>
+			<form><fieldset name="details">';
+		//TODO: merge this with mitglied/view.html.php and|or move to controller
+		$player	= $this->getData();
+		foreach($player->felder as $id=>$feld) {
+			if ($feld->typ == 'bild')
+				$formmitglied .= '<field name="'.$feld->id.'" type="media"
+					directory="stories/mitglieder"
+					label="'.$feld->name.'" preview="true" />';
+		}
+		$formmitglied .= '</fieldset></form>';
+		// Get the form.
+		$form = $this->loadForm('com_mitglieder.mitglied', $formmitglied, array('control' => 'felder', 'load_data' => $loadData));
+		if (empty($form))
+		{
+			return false;
+		}
+		return $form;
+	}
 
 }
 ?>

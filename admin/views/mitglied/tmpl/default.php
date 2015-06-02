@@ -128,6 +128,8 @@ $editor=JFactory::getEditor();
 				case "liste":
          			echo JHTML::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
           			break;
+				case "bild":
+					echo $this->form->getInput($feld->id, null, $feld->wert);
 
 			}
 			if($feld->tooltip)

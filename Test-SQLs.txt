@@ -35,7 +35,7 @@ create table IF NOT EXISTS jos_mitglieder_felder (
 	id int(11) not null auto_increment PRIMARY KEY,
 	`name_backend` varchar(100) NOT NULL,
 	`name_frontend` varchar(100) NOT NULL,
-  	`typ` set('text','email','telefon','datum','jahre seit','liste') NOT NULL default 'text',
+  	`typ` set('text','email','telefon','datum','jahre seit','liste','bild') NOT NULL default 'text',
   	`tooltip` varchar(255) default NULL,
   	`show` bit NOT NULL default 1,
   	`ordering` tinyint(2) NOT NULL default '99'

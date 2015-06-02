@@ -45,6 +45,10 @@ function getTypen() {
 		$typ->typ = "liste";
 		$typen[] = $typ;
 
+		$typ = new stdClass();
+		$typ->typ = "bild";
+		$typen[] = $typ;
+
 		return $typen;
 	}
 

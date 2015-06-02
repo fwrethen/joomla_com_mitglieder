@@ -25,6 +25,8 @@ class MitgliederViewMitglied extends JViewLegacy
 			JToolBarHelper::cancel( 'cancel', 'Close' );
 		}
 
+		$this->form = $this->get('Form');
+
 		$this->player = $player;
 		$this->inAbteilungen = $inAbteilungen;
 		$this->abteilungen = $abteilungen;
