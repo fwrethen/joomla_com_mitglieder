@@ -2,12 +2,12 @@
 <extension type="component" version="2.5.0" method="upgrade">
 	<name>Mitglieder</name>
 	<author>Florian Paetz</author>
-	<creationDate>Juni 2010</creationDate>
-	<copyright>(C) Florian Paetz</copyright>
+	<creationDate>Juni 2015</creationDate>
+	<copyright>(C) Florian Paetz 2010-2015</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>florian (at) paetz.de</authorEmail>
 	<authorUrl>www.fw-rethen.de</authorUrl>
-	<version>0.9</version>
+	<version>0.10</version>
 	<description>Die Komponente dient dem Verwalten von Mitgliederlisten</description>
 
 	<scriptfile>script.php</scriptfile>
@@ -20,6 +20,9 @@
 	<uninstall>
 	</uninstall>
 	<update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
 	</update>
 
 	<files folder="components">
@@ -45,6 +48,7 @@
 			<folder>helpers</folder>
 			<folder>lib</folder>
 			<folder>models</folder>
+			<folder>sql</folder>
 			<folder>tables</folder>
 			<folder>views</folder>
 			<filename>index.html</filename>
