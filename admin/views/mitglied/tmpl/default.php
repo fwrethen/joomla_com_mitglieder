@@ -33,15 +33,6 @@ $editor=JFactory::getEditor();
 <div>
 	<fieldset class="adminform">
 	<legend><?php echo JText::_( 'Details' ); ?></legend>
-	<?php
-
-	$image = $this->player->image_original;
-	if($image) {
-		if(substr($image,0,1) == "/")
-			$image = substr($image, 1);
-		?>
-		<img src="<?php echo JURI::root() . $image;?>" width="350" align="right" alt="<?php echo $this->player->vorname . " " . $this->player->name; ?>">
-	<?php }?>
 	<table class="admintable">
 		<tr>
 			<td class="key">
@@ -63,25 +54,6 @@ $editor=JFactory::getEditor();
 			<td>
 				<input class="inputbox" type="text" name="name" id="name" size="20" value="<?php echo $this->player->name; ?>" />
 				<?php echo JHTML::tooltip("Vorname und Nachname zusammen müssen eindeutig im Verein sein"); ?>
-			</td>
-		</tr>
-		<tr>
-			<td class="key">
-				<label for="alias">
-					<?php echo JText::_( 'Neues Bild hochladen' ); ?>:
-				</label>
-			</td>
-			<td>
-				<input class="inputbox" type="file" name="image" id="image" size="35" />
-				<?php
-				$upload = get_cfg_var('upload_max_filesize');
-				$post = get_cfg_var('post_max_size');
-				if($post < $upload)
-					$upload = $post;
-				$upload = str_replace("M", " MegaByte", $upload);
-				$upload = str_replace("K", " KilloByte", $upload);
-
-				echo JHTML::tooltip("Sie können nur maximal $upload große Dateien hochladen."); ?>
 			</td>
 		</tr>
 

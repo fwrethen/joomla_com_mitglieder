@@ -56,21 +56,6 @@ echo "<h1>$name</h1>";
 $document = JFactory::getDocument();
 $document->setTitle($name);
 
-
-$image = $this->mitglied->image_resize;
-$imageOrginal = $this->mitglied->image_original;
-if($image) {
-	if(substr($image, 0, 1) == "/")
-		$image = substr($image, 1);
-	if(substr($imageOrginal, 0, 1) == "/")
-		$imageOrginal = substr($imageOrginal, 1);
-
-	if($imageOrginal)
-		echo '<a href="' . JURI::root() . $imageOrginal . '" target="_blank">';
-	echo "<img src=\"" . JURI::root() . $image . "\" align=\"right\" alt=\"$name\" />";
-	if($imageOrginal)
-		echo "</a>";
-}
 ?>
 
 <table width="300px">
