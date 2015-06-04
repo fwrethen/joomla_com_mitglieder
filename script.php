@@ -11,7 +11,7 @@ class com_MitgliederInstallerScript
 	{
 		if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 		require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'config'.DS. 'config.php' );
-		require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'upload'.DS. 'image.php' );
+		jimport('joomla.filesystem.file');
 
 		$db = JFactory::getDBO();
 		$config = Config::getConfig(array("delete_database","delete_pictures"));
@@ -24,7 +24,7 @@ class com_MitgliederInstallerScript
 				FROM #__mitglieder_mitglieder";
 			$db->setQuery( $query );
 			$images = $db->loadObjectList();
-			Image::deleteImages($images);
+			JFile::delete($images);
 			echo '<p>Mitgliederbilder wurden gel&ouml;scht.</p>';
 		}
 		else echo '<p>Mitgliederbilder wurden nicht gel&ouml;scht.</p>';

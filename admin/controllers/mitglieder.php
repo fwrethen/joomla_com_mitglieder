@@ -6,9 +6,6 @@ if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 jimport('joomla.application.component.controller');
 
 
-
-require( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'upload'.DS. 'image.php' );
-
 class MitgliederControllerMitglieder extends JControllerLegacy
 {
 
@@ -48,29 +45,6 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 	{
 		$model = $this->getModel('mitglied');
 		$post = JRequest::get( 'post', 2);
-
-		$image = $_FILES['image'];
-		if(is_uploaded_file($image['tmp_name'])) {
-			$config = $model->getConfig();
-			$name = $post['vorname'] . '_' . $post['name'];
-			$imageManager = new Image();
-			$files = $imageManager->saveImage($image, $name,
-										$config['mitglied_image_path'],
-										$config['mitglied_image_size'],
-										$config['mitglied_thumb_size']);
-			if($files == null) {
-				JError::raiseWarning( 551, JText::_( $imageManager->error ) );
-				$this->setRedirect($this->redirectPath, "Mitglied nicht gespeichert");
-				return false;
-			}
-
-			if($files != null) {
-				$post['image_original'] = $files['image_orginal'];
-				$post['image_resize'] = $files['image_resize'];
-				$post['image_thumb'] = $files['image_thumb'];
-			}
-		}
-
 
 		if ($model->store($post)) {
 			$msg = JText::_( 'Mitglied gespeichert!' );
