@@ -13,7 +13,7 @@ function printFelder($felder) {
 		<tr>
 			<td class="key">
 				<label for="alias">
-					<?php echo JText::_( $feld->name ); ?>:
+					<?php if ($feld->name) echo JText::_( $feld->name ) . ':'; ?>
 				</label>
 			</td>
 			<td>
@@ -71,7 +71,10 @@ function printFelder($felder) {
 					echo $feld->wert;
 					break;
 				case "bild":
-					echo '<img src="'. $feld->kurz_text .'" alt="'. $feld->name .'" />';
+					$params = JComponentHelper::getParams('com_mitglieder');
+					$image_size = $params->get('mitglied_image_size', '300');
+					echo '<img src="'. $feld->kurz_text .'" alt="'. $feld->name .'"
+						height="'. $image_size .'" max-width="'. $image_size .'" />';
 					break;
 			}
 			?>

@@ -16,6 +16,9 @@ class MitgliederViewAbteilung extends JViewLegacy
 		}
   		$this->abteilung = $model->getData($id);
 
+		$this->thumb_size = JComponentHelper::getParams('com_mitglieder')->get(
+			'mitglied_thumb_size', '150');
+
 		parent::display($tpl);
 	}
 }
