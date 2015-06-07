@@ -6,7 +6,6 @@ jimport('joomla.application.component.model');
 class MitgliederModelMitglied extends JModelLegacy
 {
 	var $_data = null;
-	var $config = null;
 	function __construct($options = array()) {
 		parent::__construct($options);
 

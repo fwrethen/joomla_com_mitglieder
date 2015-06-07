@@ -1,17 +1,15 @@
 <?php
 defined('_JEXEC') or die();
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
-jimport('joomla.error.log');
 
-require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'config'.DS. 'config.php' );
+jimport('joomla.error.log');
 
 class Logger
 {
 	static function log($comment)
 	{
 
-		$config=Config::getConfig(array('logging'));
-		if ($config['logging']==0)
+		$params = JComponentHelper::getParams('com_mitglieder');
+		if ($params->get('logging', '0')==0)
 		{
 			return;
 		}

@@ -43,7 +43,3 @@ create table IF NOT EXISTS jos_mitglieder_felder (
 
 
 INSERT INTO `joomla`.`jos_components` (id,name,link,menuid,parent,admin_menu_link,admin_menu_alt,`option`,ordering,admin_menu_img,iscore,params,enabled) VALUES (57,'Listen','',0,54,'option=com_mitglieder&controller=listen','Listen','com_mitglieder',8,'templates/khepri/images/menu/icon-16-help.png',0,'',1);
-
-INSERT IGNORE INTO jos_mitglieder_config VALUES('mitglied_image_path', '/images/stories/mitglieder/mitglieder/', 1);
-INSERT IGNORE INTO jos_mitglieder_config VALUES('mitglied_thumb_size', '250', 1);
-INSERT IGNORE INTO jos_mitglieder_config VALUES('mitglied_image_size', '700', 1);

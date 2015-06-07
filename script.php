@@ -9,17 +9,15 @@ class com_MitgliederInstallerScript
 
 	function uninstall($parent)
 	{
-		if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
-		require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'config'.DS. 'config.php' );
 		jimport('joomla.filesystem.file');
 
 		$db = JFactory::getDBO();
-		$config = Config::getConfig(array("delete_database","delete_pictures"));
+		$params = JComponentHelper::getParams('com_mitglieder');
 
 		/*
 		 * Löschen der Mitgliederbilder
 		 */
-		if($config['delete_pictures'] == "1") {
+		if ($params->get('delete_pictures', '0')) {
 			$query = "SELECT image_original, image_resize, image_thumb
 				FROM #__mitglieder_mitglieder";
 			$db->setQuery( $query );
@@ -32,15 +30,14 @@ class com_MitgliederInstallerScript
 		/*
 		 * Löschen der Datenbank-Tabellen
 		 */
-		if($config['delete_database'] == "1") {
+		if ($params->get('delete_database', '0')) {
 			$query = "DROP TABLE IF EXISTS #__mitglieder_abteilungen, " .
 				" #__mitglieder_felder, " .
 				" #__mitglieder_listen, " .
 				" #__mitglieder_mitglieder, " .
 				" #__mitglieder_mitglieder_felder, " .
 				" #__mitglieder_mitglieder_abteilungen," .
-				" #__mitglieder_abteilungen_felder," .
-				" #__mitglieder_config ";
+				" #__mitglieder_abteilungen_felder";
 			$db->setQuery( $query );
 			$db->query();
 			echo '<p>Datenbankeintr&auml;ge wurden gel&ouml;scht.</p>';

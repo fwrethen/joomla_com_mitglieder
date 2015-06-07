@@ -47,18 +47,6 @@ class TableMitglied extends JTable
 
 	}
 
-	/**
-	 * Gibt die Konfigurationsdaten zurück die im Zusammenhang mit dem Spieler stehen.
-	 *
-	 * @access public
-	 * @return array 'player_thumb_size', 'player_image_path', 'player_image_size'
-	 */
-	function getConfig(){
-		return Config::getConfig(array('mitglied_thumb_size',
-								'mitglied_image_path',
-								'mitglied_image_size'));
-	}
-
 
 	function bind( $from, $ignore=array() ) {
 		$felder = $this->felder;

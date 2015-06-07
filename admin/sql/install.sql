@@ -54,17 +54,3 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_abteilungen_felder` (
   `ordering` tinyint(2) NOT NULL default '99',
    PRIMARY KEY  (`abteilungen_id`,`felder_id`)
 );
-
-CREATE TABLE IF NOT EXISTS `#__mitglieder_config` (
-  `name` varchar(255) NOT NULL,
-  `value` varchar(255) default NULL,
-  `show_in_config` tinyint(1) NOT NULL default '1',
-  PRIMARY KEY  (`name`)
-);
--- Default Config
-INSERT IGNORE INTO #__mitglieder_config VALUES('mitglied_image_path', '/images/stories/mitglieder/mitglieder/', 1);
-INSERT IGNORE INTO #__mitglieder_config VALUES('mitglied_thumb_size', '150', 1);
-INSERT IGNORE INTO #__mitglieder_config VALUES('mitglied_image_size', '300', 1);
-INSERT IGNORE INTO #__mitglieder_config VALUES('delete_database', '0', 1);
-INSERT IGNORE INTO #__mitglieder_config VALUES('delete_pictures', '0', 1);
-INSERT IGNORE INTO #__mitglieder_config VALUES('logging', '0', 1);

@@ -5,7 +5,6 @@ defined('_JEXEC') or die();
 if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 jimport('joomla.application.component.model');
 
-require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'config'.DS. 'config.php' );
 require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'logger.php' );
 
 /**
@@ -45,18 +44,6 @@ class MitgliederModelMitglied extends JModelAdmin
 		$row->load($this->_id);
 
 		return $row;
-	}
-
-	/**
-	 * Gibt die Konfigurationsdaten zurück die im Zusammenhang mit dem Spieler stehen.
-	 *
-	 * @access public
-	 * @return array 'player_thumb_size', 'player_image_path', 'player_image_size'
-	 */
-	function getConfig(){
-		return Config::getConfig(array('mitglied_thumb_size',
-								'mitglied_image_path',
-								'mitglied_image_size'));
 	}
 
 	/**
@@ -154,6 +141,8 @@ class MitgliederModelMitglied extends JModelAdmin
 
 	public function getForm($data = array(), $loadData = true)
 	{
+		$params = JComponentHelper::getParams('com_mitglieder');
+		$image_path = $params->get('image_path', 'stories/mitglieder');
 		$formmitglied = '<?xml version="1.0" encoding="utf-8"?>
 			<form><fieldset name="details">';
 		//TODO: merge this with mitglied/view.html.php and|or move to controller
@@ -161,7 +150,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		foreach($player->felder as $id=>$feld) {
 			if ($feld->typ == 'bild')
 				$formmitglied .= '<field name="'.$feld->id.'" type="media"
-					directory="stories/mitglieder"
+					directory="'.$image_path.'"
 					label="'.$feld->name.'" preview="true" />';
 		}
 		$formmitglied .= '</fieldset></form>';

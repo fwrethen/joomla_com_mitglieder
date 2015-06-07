@@ -15,3 +15,5 @@ INSERT INTO `#__mitglieder_mitglieder_felder`
 		SELECT `id` FROM `#__mitglieder_felder`
 		WHERE `name_backend` = 'Profilbild' AND `typ` = 'bild'
 	), `id`, `image_original` FROM `#__mitglieder_mitglieder`;
+
+DROP TABLE IF EXISTS `#__mitglieder_config`;

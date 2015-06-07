@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="images"
+		label="Bilder"
+		description="">
+		<field
+			name="image_path"
+			type="text"
+			size="50"
+			default="stories/mitglieder"
+			label="Bildverzeichnis-Pfad"
+			description="&lt;strong&gt;Hinweis:&lt;/strong&gt;&lt;br /&gt;Der Pfad bezieht sich auf das Verzeichnis media der Joomla-Installation." />
+		<field
+			name="mitglied_thumb_size"
+			type="number"
+			size="50"
+			default="150"
+			label="Vorschaubild-Größe"
+			description="Größe des Vorschaubildes eines Mitglieds in der Übersicht. Angabe in Pixel." />
+		<field
+			name="mitglied_image_size"
+			type="number"
+			size="50"
+			default="300"
+			label="Profilbild-Größe"
+			description="Größe der Bilder auf der Detailseite des Mitglieds. Angabe in Pixel." />
+	</fieldset>
+	<fieldset name="deinstallation"
+		label="Deinstallation"
+		description="">
+		<field
+			name="delete_database"
+			type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="Datenbank löschen"
+			description="Alle Daten dieser Komponente werden bei der Deinstallation gelöscht.">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field
+			name="delete_pictures"
+			type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="Bilder löschen"
+			description="Alle Bild der Mitglieder werden bei der Deinstallation vom Webserver gelöscht.">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+	</fieldset>
+	<fieldset name="development"
+		label="Entwicklung"
+		description="Diese Einstellungen sind nur für Entwickler vorgesehen.">
+		<field
+			name="logging"
+			type="radio"
+			class="btn-group btn-group-yesno"
+			default="0"
+			label="Logging einschalten"
+			description="">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+	</fieldset>
+</config>

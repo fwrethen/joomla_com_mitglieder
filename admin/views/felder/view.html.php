@@ -9,6 +9,7 @@ class FelderViewFelder extends JViewLegacy
 	function display($tpl = null)
 	{
 		JToolBarHelper::save();
+		JToolBarHelper::preferences('com_mitglieder');
 
 		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
 		MitgliederHelper::addSubmenu('felder');

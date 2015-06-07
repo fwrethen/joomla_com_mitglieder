@@ -73,10 +73,5 @@ foreach($spieler as $id=>$einSpieler) {
 		}
 		return $spieler;
 	}
-
-	function getConfig() {
-		return Config::getConfig(array('team_image_size', 'clicktt_use'));
-	}
-
 }
 ?>

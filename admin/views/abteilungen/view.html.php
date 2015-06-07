@@ -14,6 +14,7 @@ class AbteilungenViewAbteilungen extends JViewLegacy
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editList();
 		JToolBarHelper::addNew();
+		JToolBarHelper::preferences('com_mitglieder');
 
 		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
 		MitgliederHelper::addSubmenu('abteilungen');

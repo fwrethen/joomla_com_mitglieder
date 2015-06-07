@@ -20,7 +20,6 @@ switch($controller)  {
 	case 'listen':
 	case 'mitglieder':
 	case 'altersklassen':
-	case 'config':
 	case 'controlpanel':
 	case 'help':
 
