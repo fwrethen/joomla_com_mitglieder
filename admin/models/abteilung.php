@@ -7,7 +7,7 @@ jimport('joomla.application.component.model');
 /**
  * @author Florian Paetz
  */
-class AbteilungenModelAbteilung extends JModelLegacy
+class AbteilungenModelAbteilung extends JModelAdmin
 {
 	function __construct()
 	{
@@ -130,7 +130,16 @@ class AbteilungenModelAbteilung extends JModelLegacy
 		return true;
 	}
 
-
+	public function getForm($data = array(), $loadData = true)
+	{
+		// Get the form.
+		$form = $this->loadForm('com_mitglieder.abteilung', 'abteilung', array('control' => '', 'load_data' => $loadData));
+		if (empty($form))
+		{
+			return false;
+		}
+		return $form;
+	}
 
 }
 ?>

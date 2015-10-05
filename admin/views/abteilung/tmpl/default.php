@@ -17,41 +17,19 @@
 </script>
 
 <form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
-<div>
-	<fieldset class="adminform">
-	<legend><?php echo JText::_( 'Details' ); ?></legend>
-
-	<table class="admintable">
-		<tr>
-			<td width="110" class="key">
-				<label for="title">
-					<?php echo JText::_( 'Name' ); ?>:
-				</label>
-			</td>
-			<td>
-				<input class="inputbox" type="text" name="name" id="nummer" size="100" value="<?php echo $this->team->name; ?>" />
-				<?php echo JHTML::tooltip("Bitte hier den Namen der Abteilung eintragen."); ?>
-			</td>
-		</tr>
-		<tr>
-			<td class="key" colspan=2>
-				<?php echo JText::_( 'Beschreibung' ); ?>:
-			</td>
-		</tr>
-		<tr>
-			<td colspan=2>
-
-				<?php
-
-					echo $editor->display('description', $this->team->description, '100%', '200', '30', '5', true);
-				 ?>
-			</td>
-		</tr>
-		<tr>
-			<td class="key">
-				<?php echo JText::_( 'Felder für die Thumbnailseite' ); ?>:
-			</td>
-	      <td class="input">
+<div class="form-horizontal">
+  <div class="row-fluid">
+    <div class="span9">
+      <?php
+        echo $this->form->renderField('name', null, $this->team->name);
+        echo $this->form->renderField('description', null,
+          $this->team->description);
+      ?>
+      <div class="control-group">
+        <div class="control-label">
+          <?php echo JText::_( 'Felder für die Thumbnailseite' ); ?>
+        </div>
+        <div class="controls">
 
 		<div id="abteilung_list_content">
 		<?php
@@ -77,9 +55,11 @@
 		var curFelder = <?php echo (count($this->AbteilungenFelder) > 0 ? (count($this->AbteilungenFelder)) : 0); ?> - 0;
 		</script>
 		<input type="button" value="mehr Felder" onclick="if (curFelder < maxFelder) { document.getElementById('abteilung_list_content').innerHTML += felderList; ++curFelder; }" />
-      </td>
-	</table>
-	</fieldset>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="clr"></div>
 <div class="clr"></div>

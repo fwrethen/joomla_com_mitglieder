@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset name="details">
+    <field name="name"
+      type="text"
+      size="40"
+      label="Name"
+      description="Bitte hier den Namen der Abteilung eintragen."
+      required="true" />
+    <field name="description"
+      type="editor"
+      label="Beschreibung"
+      description="" />
+  </fieldset>
+</form>

@@ -30,6 +30,8 @@ class AbteilungenViewAbteilung extends JViewLegacy
 			JToolBarHelper::cancel( 'cancel', 'Close' );
 		}
 
+		$this->form = $this->get('Form');
+
 		$this->team = $team;
 		$this->AbteilungenFelder = $AbteilungenFelder;
 		$this->felder = $felder;
