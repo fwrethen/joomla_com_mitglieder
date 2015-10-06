@@ -24,6 +24,13 @@
 			default="300"
 			label="Profilbild-Größe"
 			description="Größe der Bilder auf der Detailseite des Mitglieds. Angabe in Pixel." />
+		<field
+			name="mitglied_thumb_placeholder"
+			type="media"
+			label="Vorschaubild-Platzhalter"
+			description="Platzhalterbild für die Thumbnailanzeige, falls kein Bild vorhanden."
+			directory="stories"
+			preview="true" />
 	</fieldset>
 	<fieldset name="deinstallation"
 		label="Deinstallation"
