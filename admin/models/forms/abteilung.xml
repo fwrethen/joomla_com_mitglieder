@@ -11,5 +11,12 @@
       type="editor"
       label="Beschreibung"
       description="" />
+    <field name="thumb"
+      type="sql"
+      query="SELECT id, name_backend FROM #__mitglieder_felder WHERE typ = &apos;bild&apos;"
+      key_field="id"
+      value_field="name_backend"
+      label="Bilder für Thumbnailseite"
+      description="Als Vorschaubild kann ein Feld vom Typ &amp;bdquo;Bild&amp;ldquo; gewählt werden." />
   </fieldset>
 </form>

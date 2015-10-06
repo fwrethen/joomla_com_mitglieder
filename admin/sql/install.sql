@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_abteilungen` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(100) NOT NULL,
   `description` TEXT default NULL,
+  `thumb` int(11) default NULL,
   PRIMARY KEY  (`id`)
 );
 

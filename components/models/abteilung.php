@@ -47,7 +47,7 @@ class MitgliederModelAbteilung extends JModelLegacy
 	function getMitglieder( $aid ) {
 		$db = JFactory::getDBO();
 
-		$query = "SELECT mitglied.id,mitglied.name,mitglied.vorname,mitglied.image_thumb from #__mitglieder_mitglieder_abteilungen as abteilung,#__mitglieder_mitglieder as mitglied " .
+		$query = "SELECT mitglied.id,mitglied.name,mitglied.vorname from #__mitglieder_mitglieder_abteilungen as abteilung,#__mitglieder_mitglieder as mitglied " .
 				 " WHERE mitglied.id= abteilung.mitglieder_id AND abteilungen_id = ".$aid . " order by ordering , name asc, vorname ASC";
 		$db->setQuery( $query );
 		$spieler = $db->loadObjectList();
@@ -61,6 +61,31 @@ foreach($spieler as $id=>$einSpieler) {
 		"where a.felder_id = f1.id AND mitglieder_id = $einSpieler->id ) as a , #__mitglieder_abteilungen_felder as b WHERE a.felder_id=b.felder_id and b.abteilungen_id = $aid ORDER by b.ordering,a.name ASC";
 			$db->setQuery( $query );
 			$spieler[$id]->felder = $this->_db->loadObjectList();
+
+			/* Query in SQL:
+				SELECT `kurz_text` FROM `#__mitglieder_mitglieder_felder`
+				WHERE `mitglieder_id` = $einSpieler->id
+				AND `felder_id` = (
+					SELECT `thumb` FROM `#__mitglieder_abteilungen`
+					WHERE `id` = $aid
+				);
+			*/
+			$subQuery = $db->getQuery(true);
+			$query    = $db->getQuery(true);
+
+			$subQuery->select($db->quoteName('thumb'))
+				->from($db->quoteName('#__mitglieder_abteilungen'))
+				->where($db->quoteName('id') . ' = ' . $db->quote($aid));
+
+			$query->select($db->quoteName('kurz_text'))
+				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
+				->where($db->quoteName('mitglieder_id') . ' = '
+					. $db->quote($einSpieler->id), 'AND')
+				->where($db->quoteName('felder_id') . ' = (' . $subQuery->__toString()
+					. ')');
+
+			$db->setQuery($query);
+			$spieler[$id]->thumb = $db->loadResult();
 
 //			$query = "SELECT sf.kurz_text, sf.datum, sf.text, f.typ, f.name_frontend AS name" .
 //						" FROM #__ttverein_spieler_felder AS sf, #__ttverein_felder AS f " .

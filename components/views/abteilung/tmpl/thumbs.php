@@ -27,7 +27,7 @@ JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
 						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
 
 				<?php
-						$image = $mitglied->image_thumb;
+						$image = $mitglied->thumb;
 						if($image) {
 							if(substr($image, 0, 1) == "/")
 								$image = substr($image, 1);

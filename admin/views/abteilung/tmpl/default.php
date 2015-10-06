@@ -24,6 +24,7 @@
         echo $this->form->renderField('name', null, $this->team->name);
         echo $this->form->renderField('description', null,
           $this->team->description);
+        echo $this->form->renderField('thumb', null, $this->team->thumb);
       ?>
       <div class="control-group">
         <div class="control-label">

@@ -17,3 +17,9 @@ INSERT INTO `#__mitglieder_mitglieder_felder`
 	), `id`, `image_original` FROM `#__mitglieder_mitglieder`;
 
 DROP TABLE IF EXISTS `#__mitglieder_config`;
+
+ALTER TABLE `#__mitglieder_abteilungen` ADD `thumb` int(11) default NULL;
+UPDATE `#__mitglieder_abteilungen` SET `thumb` = (
+	SELECT `id` FROM `#__mitglieder_felder`
+	WHERE `name_backend` = 'Profilbild' AND `typ` = 'bild'
+);
