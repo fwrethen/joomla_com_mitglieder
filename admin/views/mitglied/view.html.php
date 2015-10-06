@@ -16,8 +16,8 @@ class MitgliederViewMitglied extends JViewLegacy
 			$abteilungen = $this->get('Abteilungen','MitgliederAbteilungen');
 		$isNew		= ($player->id < 1);
 
-		$text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );
-		JToolBarHelper::title(   JText::_( 'Mitglied' ).': <small>[ ' . $text.' ]</small>' );
+		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
+		JToolBarHelper::title(JText::_('Mitglied: ' . $text), 'user');
 		JToolBarHelper::save();
 		if ($isNew)  {
 			JToolBarHelper::cancel();

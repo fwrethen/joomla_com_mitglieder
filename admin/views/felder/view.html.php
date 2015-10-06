@@ -8,6 +8,7 @@ class FelderViewFelder extends JViewLegacy
 {
 	function display($tpl = null)
 	{
+		JToolBarHelper::title(JText::_('Mitglieder: Felder'), 'grid-2');
 		JToolBarHelper::save();
 		JToolBarHelper::preferences('com_mitglieder');
 

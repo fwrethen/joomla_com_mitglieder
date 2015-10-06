@@ -8,7 +8,7 @@ class AbteilungenViewAbteilungen extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		JToolBarHelper::title(   JText::_( 'Abteilungen Manager' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_( 'Mitglieder: Abteilungen' ), 'archive' );
 		//JToolBarHelper::publishList();
 		//JToolBarHelper::unpublishList();
 		JToolBarHelper::deleteList();

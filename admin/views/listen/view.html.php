@@ -8,7 +8,7 @@ class ListenViewListen extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		JToolBarHelper::title(   JText::_( 'Listen Manager' ), 'generic.png' );
+		JToolBarHelper::title(JText::_('Mitglieder: Listen'), 'list');
 		//JToolBarHelper::publishList();
 		//JToolBarHelper::unpublishList();
 		//JToolBarHelper::deleteList();

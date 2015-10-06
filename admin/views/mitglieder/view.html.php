@@ -8,7 +8,7 @@ class MitgliederViewMitglieder extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		JToolBarHelper::title(   JText::_( 'Mitglieder Manager' ), 'generic.png' );
+		JToolBarHelper::title(   JText::_( 'Mitglieder: Mitglieder' ), 'users' );
 		//JToolBarHelper::publishList();
 		//JToolBarHelper::unpublishList();
 		JToolBarHelper::deleteList();

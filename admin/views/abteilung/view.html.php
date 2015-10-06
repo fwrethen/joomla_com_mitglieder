@@ -21,8 +21,8 @@ class AbteilungenViewAbteilung extends JViewLegacy
 		$felder = $this->get('Felder','AbteilungenFelder');
 
 
-		$text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );
-		JToolBarHelper::title(   JText::_( 'Abteilung' ).': <small>[ ' . $text.' ]</small>' );
+		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
+		JToolBarHelper::title(JText::_('Abteilung: ' . $text), 'archive');
 		JToolBarHelper::save();
 		if ($isNew)  {
 			JToolBarHelper::cancel();

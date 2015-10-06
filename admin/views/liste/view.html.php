@@ -17,8 +17,8 @@ class ListenViewListe extends JViewLegacy
 		else
 			$isNew = false;
 
-		$text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );
-		JToolBarHelper::title(   JText::_( 'Liste' ).': <small>[ ' . $text.' ]</small>' );
+		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
+		JToolBarHelper::title(JText::_('Liste: ' . $text), 'list');
 		JToolBarHelper::save();
 		if ($isNew)  {
 			JToolBarHelper::cancel();
