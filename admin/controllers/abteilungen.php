@@ -7,7 +7,6 @@ jimport('joomla.application.component.controller');
 class AbteilungenControllerAbteilungen extends JControllerLegacy
 {
 
-	var $redirect = "index.php?option=com_mitglieder&controller=abteilungen";
 
 	function __construct()
 	{
@@ -16,6 +15,7 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 		$this->registerTask( 'add'  , 	'edit' );
 		$this->registerTask( 'remove'  , 'delete' );
 
+		$this->redirectPath = "index.php?option=com_mitglieder&controller=abteilungen";
 	}
 
 	function edit()
@@ -61,7 +61,7 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function delete()
@@ -76,7 +76,7 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function display($cachable = false, $urlparams = false)

@@ -9,7 +9,6 @@ jimport('joomla.application.component.controller');
 class MitgliederControllerMitglieder extends JControllerLegacy
 {
 
-	//var $redirect = "index.php?option=com_mitglieder&controller=mitglieder";
 
 	function __construct()
 	{
@@ -79,7 +78,7 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirectPath, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function display($cachable = false, $urlparams = false)

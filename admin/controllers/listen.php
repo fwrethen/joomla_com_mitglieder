@@ -7,7 +7,6 @@ jimport('joomla.application.component.controller');
 class ListenControllerListen extends JControllerLegacy
 {
 
-	var $redirect = "index.php?option=com_mitglieder&controller=listen";
 
 	function __construct()
 	{
@@ -16,6 +15,7 @@ class ListenControllerListen extends JControllerLegacy
 		$this->registerTask( 'add'  , 	'edit' );
 		$this->registerTask( 'remove'  , 'delete' );
 
+		$this->redirectPath = "index.php?option=com_mitglieder&controller=listen";
 	}
 
 	function edit()
@@ -42,7 +42,7 @@ class ListenControllerListen extends JControllerLegacy
 		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function delete()
@@ -57,7 +57,7 @@ class ListenControllerListen extends JControllerLegacy
 		$cache = JFactory::getCache('com_mitglieder');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function display($cachable = false, $urlparams = false)

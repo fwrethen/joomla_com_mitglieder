@@ -4,13 +4,15 @@ jimport('joomla.application.component.controller');
 
 class FelderControllerFelder extends JControllerLegacy
 {
-	var $redirect = "index.php?option=com_mitglieder&controller=felder";
+
 
 	function __construct()
 	{
 		parent::__construct();
 
 		$this->registerTask( 'apply', 'save');
+
+		$this->redirectPath = "index.php?option=com_mitglieder&controller=felder";
 	}
 
 	function display($cachable = false, $urlparams = false)
@@ -21,7 +23,7 @@ class FelderControllerFelder extends JControllerLegacy
 	function cancel( )
 	{
 		$msg = JText::_( 'Abgebrochen' );
-		$this->setRedirect( $this->redirect, $msg );
+		$this->setRedirect( $this->redirectPath, $msg );
 	}
 
 
@@ -38,7 +40,7 @@ class FelderControllerFelder extends JControllerLegacy
 		$cache = JFactory::getCache('com_ttverein');
 		$cache->clean();
 
-		$this->setRedirect($this->redirect, $msg);
+		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 }
