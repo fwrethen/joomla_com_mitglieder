@@ -8,7 +8,7 @@
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div id="editcell">
 <?php
-	$radio = JHTML::_('select.radiolist',$this->items,'cid','onClick="javascript:isChecked(this.checked);"','id','name_backend');
+	$radio = JHTML::_('select.radiolist',$this->items,'cid','onClick="javascript:Joomla.isChecked(this.checked);"','id','name_backend');
 	echo $radio;
 
 

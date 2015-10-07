@@ -14,7 +14,7 @@
 				<?php echo JText::_( 'NUM' ); ?>
 			</th>
 			<th width="5%">
-				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
+				<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
 			<th width="*" align="center">
 				<?php echo JHTML::_('grid.sort',   'Name', 'name', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
