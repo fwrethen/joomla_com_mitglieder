@@ -73,7 +73,7 @@ function printFelder($felder) {
 				case "bild":
 					$params = JComponentHelper::getParams('com_mitglieder');
 					$image_size = $params->get('mitglied_image_size', '300');
-					echo '<img src="'. $feld->kurz_text .'" alt="'. $feld->name .'"
+					echo '<img src="'. JURI::root() . $feld->kurz_text .'" alt="'. $feld->name .'"
 						height="'. $image_size .'" max-width="'. $image_size .'" />';
 					break;
 			}
