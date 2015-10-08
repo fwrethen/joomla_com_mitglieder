@@ -78,8 +78,7 @@ $editor=JFactory::getEditor();
 					?>
 					<input class="inputbox" type="text" name="felder[<?php echo $id;?>]" id="felder[<?php echo $id;?>]" size="10" value="<?php echo $datum;?>" />
 					<?php
-					JHTML::calendar(date("%Y-%m-%d"),"felder[$id]","felder[$id]","%d.%m.%Y");
-
+					JHTML::calendar(date("Y-m-d"),"felder[$id]","felder[$id]","%d.%m.%Y");
 					break;
 
 				case "text":
