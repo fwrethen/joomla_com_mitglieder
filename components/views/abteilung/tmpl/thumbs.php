@@ -6,25 +6,29 @@ require_once (JPATH_COMPONENT.DS.'lib'.DS.'mitglieder'.DS.'printfelder.php');
 $path=JURI::base();
 $option = JRequest::getCMD('option');
 JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
+JHTML::_('bootstrap.loadCss');
 ?>
 
 <h1><?php echo $this->abteilung->name; ?></h1>
+<p><?php echo $this->abteilung->description; ?></p>
 
+<?php
+	if(is_array($this->abteilung->mitglieder)) {
+	$i = 1;
+?>
 
+<div class="row-fluid">
+	<ul class="thumbnails">
 
-			<?php
-				echo $this->abteilung->description;
-			?>
-			<br />
-			<?php if(is_array($this->abteilung->mitglieder)) {?>
-			<div class="thumbswrap">
-				<?php
-				foreach($this->abteilung->mitglieder as $mitglied) {
-				$name = $mitglied->vorname . " " . $mitglied->name;
-				?>
+<?php
+		foreach($this->abteilung->mitglieder as $mitglied) {
+			$name = $mitglied->vorname . " " . $mitglied->name;
+?>
 
-					<div class="Thumb">
-						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
+		<li class="span4">
+			<div class="thumbnail">
+				<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>"
+					style="text-decoration: none;">
 
 				<?php
 						$image = ($mitglied->thumb) ? $mitglied->thumb : $this->thumb_placeholder;
@@ -32,25 +36,34 @@ JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
 							if(substr($image, 0, 1) == "/")
 								$image = substr($image, 1);
 
-							echo '<p><img src="' . JURI::root() . $image . '" alt="' . $name
-								. '" height="' . $this->thumb_size . '" max-width="'
-								. $this->thumb_size . '" /></p>';
+							echo '<img src="' . JURI::root() . $image . '" alt="' . $name
+								. '" />';
 						}
 						?>
-						<p><?php echo $name?></p></a>
+					<div class="caption">
+						<h6><?php echo $name; ?></h6>
 						<table>
 							<?php
 							printFelder($mitglied->felder);
 							?>
 						</table>
-						</div>
-
-
-
-			<?php
-			}
-			?>
+					</div>
+				</a>
 			</div>
-			<?php
+		</li>
+
+	<?php
+			if($i % 3 == 0) {
+	?>
+	</ul>
+	<ul class="thumbnails">
+	<?php
 			}
-			?>
+			$i++;
+		}
+	?>
+	</ul>
+</div>
+<?php
+	}
+?>
