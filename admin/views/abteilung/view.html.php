@@ -17,10 +17,6 @@ class AbteilungenViewAbteilung extends JViewLegacy
 		else
 			$isNew = false;
 
-		$AbteilungenFelder = $this->get('Data','AbteilungenFelder');
-		$felder = $this->get('Felder','AbteilungenFelder');
-
-
 		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
 		JToolBarHelper::title(JText::_('Abteilung: ' . $text), 'archive');
 		JToolBarHelper::save();
@@ -33,8 +29,6 @@ class AbteilungenViewAbteilung extends JViewLegacy
 		$this->form = $this->get('Form');
 
 		$this->team = $team;
-		$this->AbteilungenFelder = $AbteilungenFelder;
-		$this->felder = $felder;
 
 		parent::display($tpl);
 	}

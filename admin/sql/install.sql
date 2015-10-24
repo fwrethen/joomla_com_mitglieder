@@ -49,10 +49,3 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_mitglieder_abteilungen` (
   `ordering` tinyint(2) NOT NULL default '99',
    PRIMARY KEY  (`abteilungen_id`,`mitglieder_id`)
 );
-
-CREATE TABLE IF NOT EXISTS `#__mitglieder_abteilungen_felder` (
-  `abteilungen_id` int(11) NOT NULL,
-  `felder_id` int(11) NOT NULL,
-  `ordering` tinyint(2) NOT NULL default '99',
-   PRIMARY KEY  (`abteilungen_id`,`felder_id`)
-);

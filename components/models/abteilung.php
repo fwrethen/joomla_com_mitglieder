@@ -54,14 +54,6 @@ class MitgliederModelAbteilung extends JModelLegacy
 
 foreach($spieler as $id=>$einSpieler) {
 
-			$query = "select a.mitglieder_id, a.name,a.felder_id, a.typ, a.kurz_text, a.`text`, a.wert, a.datum from (select mitglieder_id, f1.name_frontend as name,a.felder_id, f1.typ, kurz_text, `text`, wert, datum " .
-		"from (select mitglieder_id, felder_id, kurz_text,`text`, wert, datum " .
-		"from #__mitglieder_mitglieder_felder as f LEFT JOIN #__mitglieder_listen as l ".
-		"on l.id=f.listen_id ) as a, #__mitglieder_felder as f1 " .
-		"where a.felder_id = f1.id AND mitglieder_id = $einSpieler->id ) as a , #__mitglieder_abteilungen_felder as b WHERE a.felder_id=b.felder_id and b.abteilungen_id = $aid ORDER by b.ordering,a.name ASC";
-			$db->setQuery( $query );
-			$spieler[$id]->felder = $this->_db->loadObjectList();
-
 			/* Query in SQL:
 				SELECT `kurz_text` FROM `#__mitglieder_mitglieder_felder`
 				WHERE `mitglieder_id` = $einSpieler->id

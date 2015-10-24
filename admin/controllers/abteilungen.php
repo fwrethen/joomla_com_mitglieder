@@ -30,10 +30,6 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 		$defModel= $this->getModel('abteilung');
 		$view->setModel($defModel,true);
 
-		$model= $this->getModel('abteilungenfelder');
-		$model->_name='Felder';
-		$view->setModel($model);
-
 		parent::display();
 	}
 
@@ -47,14 +43,6 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 			$msg = JText::_( 'Abteilung gespeichert!' );
 		} else {
 			$msg = JText::_( 'Absteilung konnte nicht gespeichert werden' );
-		}
-
-
-		$model = $this->getModel('abteilungenfelder');
-		if ($model->store($post)) {
-			$msg += JText::_( 'Felder gespeichert!' );
-		} else {
-			$msg += JText::_( 'Felder konnte nicht gespeichert werden' );
 		}
 
 

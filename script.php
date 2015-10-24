@@ -36,8 +36,7 @@ class com_MitgliederInstallerScript
 				" #__mitglieder_listen, " .
 				" #__mitglieder_mitglieder, " .
 				" #__mitglieder_mitglieder_felder, " .
-				" #__mitglieder_mitglieder_abteilungen," .
-				" #__mitglieder_abteilungen_felder";
+				" #__mitglieder_mitglieder_abteilungen";
 			$db->setQuery( $query );
 			$db->query();
 			echo '<p>Datenbankeintr&auml;ge wurden gel&ouml;scht.</p>';
