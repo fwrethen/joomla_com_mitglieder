@@ -17,7 +17,7 @@ JHTML::_('bootstrap.loadCss');
 	<tr>
 		<?php
 		foreach($this->abteilung->mitglieder as $mitglied) {
-			$name = $mitglied->vorname . " " . $mitglied->name;
+			$name = $mitglied->name . ", " . $mitglied->vorname;
 		?>
 		<td>
 			<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
