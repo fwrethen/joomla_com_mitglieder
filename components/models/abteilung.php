@@ -87,6 +87,27 @@ foreach($spieler as $id=>$einSpieler) {
 			$db->setQuery($query);
 			$spieler[$id]->thumb = $db->loadResult();
 
+			/* Retrieve field field for thumb view
+				Query as above but different subQuery:
+				SELECT `field` FROM `#__mitglieder_abteilungen` WHERE `id` = $aid
+			*/
+			$subQuery = $db->getQuery(true);
+			$query    = $db->getQuery(true);
+
+			$subQuery->select($db->quoteName('field'))
+				->from($db->quoteName('#__mitglieder_abteilungen'))
+				->where($db->quoteName('id') . ' = ' . $db->quote($aid));
+
+			$query->select($db->quoteName('text'))
+				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
+				->where($db->quoteName('mitglieder_id') . ' = '
+					. $db->quote($einSpieler->id), 'AND')
+				->where($db->quoteName('felder_id') . ' = (' . $subQuery->__toString()
+					. ')');
+
+			$db->setQuery($query);
+			$spieler[$id]->text = $db->loadResult();
+
 //			$query = "SELECT sf.kurz_text, sf.datum, sf.text, f.typ, f.name_frontend AS name" .
 //						" FROM #__ttverein_spieler_felder AS sf, #__ttverein_felder AS f " .
 //						" WHERE sf.spieler_id = " . $einSpieler->id .

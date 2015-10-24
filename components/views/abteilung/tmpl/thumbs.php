@@ -1,7 +1,6 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
-require_once (JPATH_COMPONENT.DS.'lib'.DS.'mitglieder'.DS.'printfelder.php');
 
 $path=JURI::base();
 $option = JRequest::getCMD('option');
@@ -42,11 +41,7 @@ JHTML::_('bootstrap.loadCss');
 						?>
 					<div class="caption">
 						<h6><?php echo $name; ?></h6>
-						<table>
-							<?php
-							printFelder($mitglied->felder);
-							?>
-						</table>
+						<?php echo $mitglied->text; ?>
 					</div>
 				</a>
 			</div>

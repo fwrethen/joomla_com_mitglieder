@@ -18,5 +18,12 @@
       value_field="name_backend"
       label="Bilder für Thumbnailseite"
       description="Als Vorschaubild kann ein Feld vom Typ &amp;bdquo;Bild&amp;ldquo; gewählt werden." />
+    <field name="field"
+      type="sql"
+      query="SELECT id, name_backend FROM #__mitglieder_felder WHERE typ = &apos;text&apos; UNION SELECT -1, '-' ORDER BY id"
+      key_field="id"
+      value_field="name_backend"
+      label="Felder für Thumbnailseite"
+      description="Nur Felder vom Typen &amp;bdquo;Text&amp;ldquo; möglich." />
   </fieldset>
 </form>
