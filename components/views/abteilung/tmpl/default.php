@@ -1,103 +1,41 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
+JHTML::_('bootstrap.loadCss');
 ?>
 
 
 <h1><?php echo $this->abteilung->name; ?></h1>
+<p><?php echo $this->abteilung->description; ?></p>
 
-<style type="text/css">
-<!--
-tr.row0 td
-{
-background-color: #f0f0f0;
-}
+<?php
+	if(is_array($this->abteilung->mitglieder)) {
+		$n = 1;
+?>
 
-tr.row1 td
-{
-background-color: #ffffff;
-}
-table
-{
-	border-spacing:0;
-}
-
--->
-</style>
-<table class="contentpaneopen">
-
+<table class="table table-condensed table-striped">
 	<tr>
-		<td valign="top">
-
-			<?php
-				echo $this->abteilung->description;
-			?>
-			<br />
-			<?php if(is_array($this->abteilung->mitglieder)) {?>
-			<h3>Namen</h3>
-			<table class="adminlist" width="100%">
-				<!-- tr>
-					<th>Name</th>
-				</tr-->
-				<?php
-				$count=0;
-				$k=0;
-				foreach($this->abteilung->mitglieder as $mitglied) {
-				if ($count %2 == 0)
-				{
-				?>
-
-				<tr class="<?php echo "row$k"; ?>">
-				<?php
-				}
-				?>
-					<td align="<?php echo ($count%2==0)?'left':'right'?>">
-						<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
-							<?php echo $mitglied->name . ", " . $mitglied->vorname;?>
-						</a>&nbsp;
-					</td>
-				<?php
-				if ($count %2 == 1)
-				{
-				?>
-
-				</tr>
-
-
-				<?php
-				$k=1-$k;
-				}
-				else {
-					?>
-					<td>&nbsp;</td>
-					<?php
-				}
-				$count++;
-				}
-				//Offene Zeile ggf. schließen
-				if ($count %2 == 1)
-				{
-				?>
-					<td>&nbsp;</td>
-				</tr>
-
-
-				<?php
-				}
-
-
-
-				?>
-
-			</table>
-			<?php
-			}
-			?>
-		</td>
-	</tr>
-	<tr>
+		<?php
+		foreach($this->abteilung->mitglieder as $mitglied) {
+			$name = $mitglied->vorname . " " . $mitglied->name;
+		?>
 		<td>
-			<span id="teamtabelle"></span>
+			<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
+				<?php echo $name; ?>
+			</a>
 		</td>
+		<?php
+			if($n % 3 == 0) {
+		?>
+	</tr><tr>
+		<?php
+			}
+			$n++;
+		}
+		?>
 	</tr>
 </table>
+
+<?php
+	}
+?>
