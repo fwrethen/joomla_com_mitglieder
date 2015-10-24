@@ -32,7 +32,8 @@ JHTML::_('bootstrap.loadCss');
 								$image = substr($image, 1);
 
 							echo '<img src="' . JURI::root() . $image . '" alt="' . $name
-								. '" />';
+								. '" style="width:330px;" />';
+							//TODO: set variable width depending on thumb size setting
 						}
 						?>
 					<div class="caption">
