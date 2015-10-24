@@ -1,10 +1,6 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
-$path=JURI::base();
-$option = JRequest::getCMD('option');
-JHTML::_('stylesheet',$path.'components/'.$option.'/lib/css/mitglieder.css');
 JHTML::_('bootstrap.loadCss');
 ?>
 
