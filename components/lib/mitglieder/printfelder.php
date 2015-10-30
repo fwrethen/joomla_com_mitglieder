@@ -56,7 +56,7 @@ function printFelder($felder) {
 
 					break;
 
-				case "text":
+				case "text_html":
 
 					echo $feld->text;
 

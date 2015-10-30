@@ -22,7 +22,7 @@ function getTypen() {
 		$typen = array();
 
 		$typ = new stdClass();
-		$typ->typ = "text";
+		$typ->typ = "text_html";
 		$typen[] = $typ;
 
 		$typ = new stdClass();

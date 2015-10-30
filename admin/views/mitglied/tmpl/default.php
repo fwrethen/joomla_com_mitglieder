@@ -81,7 +81,7 @@ $editor=JFactory::getEditor();
 					JHTML::calendar(date("Y-m-d"),"felder[$id]","felder[$id]","%d.%m.%Y");
 					break;
 
-				case "text":
+				case "text_html":
 
 					echo $editor->display("felder[$id]", $feld->wert, '100%', '200', '30', '5', true);
 
