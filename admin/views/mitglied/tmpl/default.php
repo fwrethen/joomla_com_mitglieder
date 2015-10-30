@@ -19,78 +19,58 @@
 </script>
 
 <form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
-<div>
-	<fieldset class="adminform">
-	<legend><?php echo JText::_( 'Details' ); ?></legend>
-	<table class="admintable">
-		<tr>
-			<td class="key">
-				<label for="title">
-					<?php echo JText::_( 'Vorname' ); ?>:
-				</label>
-			</td>
-			<td>
-				<input class="inputbox" type="text" name="vorname" id="vorname" size="20" value="<?php echo $this->player->vorname; ?>" />
-				<?php echo JHTML::tooltip("Vorname und Nachname zusammen müssen eindeutig im Verein sein"); ?>
-			</td>
-		</tr>
-		<tr>
-			<td class="key">
-				<label for="alias">
-					<?php echo JText::_( 'Nachname' ); ?>:
-				</label>
-			</td>
-			<td>
-				<input class="inputbox" type="text" name="name" id="name" size="20" value="<?php echo $this->player->name; ?>" />
-				<?php echo JHTML::tooltip("Vorname und Nachname zusammen müssen eindeutig im Verein sein"); ?>
-			</td>
-		</tr>
-
-		<?php
-
-		foreach($this->player->felder as $id=>$feld) {
-			?>
-		<tr>
-			<td class="key">
-				<label for="alias">
-					<?php echo JText::_( $feld->name ); ?>:
-				</label>
-			</td>
-			<td>
+<div class="form-horizontal">
+	<div class="row-fluid">
+		<div class="span9">
+			<div class="control-group">
+				<div class="control-label">
+					<?php echo JText::_( 'Vorname' ); ?>
+				</div>
+				<div class="controls">
+					<input class="inputbox" type="text" name="vorname" id="vorname" size="20" value="<?php echo $this->player->vorname; ?>" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="control-label">
+					<?php echo JText::_( 'Nachname' ); ?>
+				</div>
+				<div class="controls">
+					<input class="inputbox" type="text" name="name" id="name" size="20" value="<?php echo $this->player->name; ?>" />
+				</div>
+			</div>
 			<?php
-
-			switch($feld->typ) {
-				case "text":
-					echo $this->form->getInput($feld->id, null, strip_tags($feld->wert));
-					break;
-				case "text_html":
-				case "email":
-				case "telefon":
-				case "jahre seit":
-				case "bild":
-					echo $this->form->getInput($feld->id, null, $feld->wert);
-					break;
-				case "liste":
-         			echo JHTML::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
-          			break;
-			}
-			if($feld->tooltip)
-					echo JHTML::tooltip($feld->tooltip);
+				foreach($this->player->felder as $id=>$feld) {
+					switch($feld->typ) {
+						case "text":
+							echo $this->form->renderField($feld->id, null, strip_tags($feld->wert));
+							break;
+						case "text_html":
+						case "email":
+						case "telefon":
+						case "jahre seit":
+						case "bild":
+							echo $this->form->renderField($feld->id, null, $feld->wert);
+							break;
+						case "liste":
+							// TODO: beautify using renderField or similar Joomla given function
+							echo '<div class="control-group"><div class="control-label">';
+							echo JText::_( $feld->name );
+							echo '</div><div class="controls">';
+							echo JHTML::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
+							echo '</div></div>';
+							break;
+					}
 			?>
 			<input class="inputbox" type="hidden" name="typen[<?php echo $id;?>]" value="<?php echo $feld->typ; ?>" />
-			</td>
-		</tr>
-
 			<?php
-		}
+				}
+			?>
 
-		?>
-
-		<tr>
-			<td class="key">
-				<?php echo JText::_( 'Abteilungen' ); ?>:
-			</td>
-	      <td class="input">
+			<div class="control-group">
+				<div class="control-label">
+					<?php echo JText::_( 'Abteilungen' ); ?>
+				</div>
+				<div class="controls">
 
 		<div id="abteilung_list_content">
 		<?php
@@ -116,19 +96,14 @@
 		var curAbteilung = <?php echo (count($this->inAbteilungen) > 0 ? (count($this->inAbteilungen)) : 0); ?> - 0;
 		</script>
 		<input type="button" value="mehr Abteilungen" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" />
-      </td>
 
-	</tr>
-
-	</table>
-	</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="clr"></div>
-<div class="clr"></div>
 
-<input type="hidden" name="image_orginal" value="<?php echo $this->player->image_orginal; ?>" />
-<input type="hidden" name="image_resize" value="<?php echo $this->player->image_resize; ?>" />
-<input type="hidden" name="image_thumb" value="<?php echo $this->player->image_thumb; ?>" />
+
 <input type="hidden" name="option" value="com_mitglieder" />
 <input type="hidden" name="id" value="<?php echo $this->player->id; ?>" />
 <input type="hidden" name="task" value="" />
