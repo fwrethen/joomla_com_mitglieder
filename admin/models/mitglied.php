@@ -148,6 +148,9 @@ class MitgliederModelMitglied extends JModelAdmin
 		//TODO: merge this with mitglied/view.html.php and|or move to controller
 		$player	= $this->getData();
 		foreach($player->felder as $id=>$feld) {
+			if ($feld->typ == 'text')
+				$formmitglied .= '<field name="'.$feld->id.'" type="text"
+					label="'.$feld->name.'" />';
 			if ($feld->typ == 'bild')
 				$formmitglied .= '<field name="'.$feld->id.'" type="media"
 					directory="'.$image_path.'"

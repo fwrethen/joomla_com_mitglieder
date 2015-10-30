@@ -124,6 +124,7 @@ class TableMitglied extends JTable
 				break;
 
 				case 'text':
+				case 'text_html':
 				{
 					$wert = $feld->text;
 				}
@@ -191,6 +192,7 @@ class TableMitglied extends JTable
 				break;
 
 				case 'text':
+				case 'text_html':
 				{
 					$spalte = "text";
 				}

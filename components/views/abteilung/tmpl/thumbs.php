@@ -38,7 +38,7 @@ JHTML::_('bootstrap.loadCss');
 						?>
 					<div class="caption">
 						<h6><?php echo $name; ?></h6>
-						<?php echo $mitglied->text; ?>
+						<?php echo strip_tags($mitglied->text); ?>
 					</div>
 				</a>
 			</div>

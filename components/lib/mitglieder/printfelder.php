@@ -56,10 +56,11 @@ function printFelder($felder) {
 
 					break;
 
+				case "text":
+					echo strip_tags($feld->text);
+					break;
 				case "text_html":
-
 					echo $feld->text;
-
 					break;
 				case "email":
 					echo $feld->kurz_text;
