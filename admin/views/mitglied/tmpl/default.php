@@ -1,6 +1,4 @@
-<?php defined('_JEXEC') or die('Restricted access');
-$editor=JFactory::getEditor();
-?>
+<?php defined('_JEXEC') or die('Restricted access'); ?>
 
 <script type="text/javascript">
 	function submitbutton(pressbutton) {
@@ -15,15 +13,6 @@ $editor=JFactory::getEditor();
 		} else if(form.name.value == "") {
 			alert( "<?php echo JText::_( 'Geben Sie den Nachnamen des Mitglieds an', true ); ?>" );
 		}else {
-			<?php
-		foreach($this->player->felder as $id=>$feld) {
-			if ($feld->typ == 'text')
-			{
-                echo $editor->save( "felder[$id]" );
-
-			}
-		}
-			?>
 			submitform( pressbutton );
 		}
 	}
@@ -71,37 +60,19 @@ $editor=JFactory::getEditor();
 			<?php
 
 			switch($feld->typ) {
-				case "jahre seit":
-					$datum = "";
-					if($feld->wert && $feld->wert != '0000-00-00')
-						$datum = strftime("%d.%m.%Y",strtotime($feld->wert));
-					?>
-					<input class="inputbox" type="text" name="felder[<?php echo $id;?>]" id="felder[<?php echo $id;?>]" size="10" value="<?php echo $datum;?>" />
-					<?php
-					JHTML::calendar(date("Y-m-d"),"felder[$id]","felder[$id]","%d.%m.%Y");
-					break;
 				case "text":
 					echo $this->form->getInput($feld->id, null, strip_tags($feld->wert));
 					break;
 				case "text_html":
-					echo $editor->display("felder[$id]", $feld->wert, '100%', '200', '30', '5', true);
-					break;
 				case "email":
-					?>
-					<input class="inputbox" type="text" name="felder[<?php echo $id;?>]" id="felder[<?php echo $id;?>]" size="40" value="<?php echo $feld->wert; ?>" />
-					<?php
-					break;
 				case "telefon":
-					?>
-					<input class="inputbox" type="text" name="felder[<?php echo $id;?>]" id="felder[<?php echo $id;?>]" size="15" value="<?php echo $feld->wert; ?>" />
-					<?php
+				case "jahre seit":
+				case "bild":
+					echo $this->form->getInput($feld->id, null, $feld->wert);
 					break;
 				case "liste":
          			echo JHTML::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
           			break;
-				case "bild":
-					echo $this->form->getInput($feld->id, null, $feld->wert);
-
 			}
 			if($feld->tooltip)
 					echo JHTML::tooltip($feld->tooltip);

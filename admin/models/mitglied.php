@@ -148,13 +148,36 @@ class MitgliederModelMitglied extends JModelAdmin
 		//TODO: merge this with mitglied/view.html.php and|or move to controller
 		$player	= $this->getData();
 		foreach($player->felder as $id=>$feld) {
-			if ($feld->typ == 'text')
-				$formmitglied .= '<field name="'.$feld->id.'" type="text"
-					label="'.$feld->name.'" />';
-			if ($feld->typ == 'bild')
-				$formmitglied .= '<field name="'.$feld->id.'" type="media"
-					directory="'.$image_path.'"
-					label="'.$feld->name.'" preview="true" />';
+			switch ($feld->typ) {
+				case 'text':
+					$formmitglied .= '<field name="'.$feld->id.'" type="textarea"
+						label="'.$feld->name.'" description="'.$feld->tooltip.'" />';
+					break;
+				case 'text_html':
+					$formmitglied .= '<field name="'.$feld->id.'" type="editor"
+						label="'.$feld->name.'" description="'.$feld->tooltip.'" />';
+					break;
+				case 'email':
+					$formmitglied .= '<field name="'.$feld->id.'" type="email"
+						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+						validate="email" />';
+					break;
+				case 'telefon':
+					$formmitglied .= '<field name="'.$feld->id.'" type="tel"
+						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+						validate="tel" />';
+					break;
+				case 'jahre seit':
+					$formmitglied .= '<field name="'.$feld->id.'" type="calendar"
+						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+						format="%Y-%m-%d" />';
+					break;
+				case 'bild':
+					$formmitglied .= '<field name="'.$feld->id.'" type="media"
+						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+						directory="'.$image_path.'" preview="true" />';
+					break;
+			}
 		}
 		$formmitglied .= '</fieldset></form>';
 		// Get the form.
