@@ -20,7 +20,7 @@ JHTML::_('bootstrap.loadCss');
 			$name = $mitglied->vorname . " " . $mitglied->name;
 ?>
 
-		<li class="span4">
+		<li class="span<?php echo 12 / $this->thumb_rows ?>">
 			<div class="thumbnail">
 				<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>"
 					style="text-decoration: none;">
@@ -45,7 +45,7 @@ JHTML::_('bootstrap.loadCss');
 		</li>
 
 	<?php
-			if($i % 3 == 0) {
+			if($i % $this->thumb_rows == 0) {
 	?>
 	</ul>
 	<ul class="thumbnails">

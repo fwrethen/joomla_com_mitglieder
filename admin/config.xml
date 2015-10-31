@@ -31,6 +31,16 @@
 			description="Platzhalterbild für die Thumbnailanzeige, falls kein Bild vorhanden."
 			directory="stories"
 			preview="true" />
+		<field
+			name="thumbview_row_size"
+			type="list"
+			default="4"
+			label="Spaltenzahl Thumbs"
+			description="Anzahl der Bilder pro Zeile in der Thumbnailanzeige." >
+			<option value="3">3-spaltig</option>
+			<option value="4">4-spaltig</option>
+			<option value="6">6-spaltig</option>
+		</field>
 	</fieldset>
 	<fieldset name="deinstallation"
 		label="Deinstallation"
