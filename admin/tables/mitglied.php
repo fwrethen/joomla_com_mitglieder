@@ -231,65 +231,6 @@ class TableMitglied extends JTable
 
 			}
 		}
-
-		//TODO: Abteilungszuordnung
-//		//Speichern der Aufstellung
-//		if($this->mannschaften != null && is_array($this->mannschaften)) {
-//			foreach($this->mannschaften as $key =>$id) {
-//				$id = intval($id);
-//				$tmp = split("-", $key);
-//				$saison = intval($tmp[0]);
-//				$hinrunde = intval($tmp[1]);
-//				$position = intval($this->aufstellungen[$key]);
-//
-//				//Löschen des vorher gesetzten Spielers
-//
-//
-//				/*
-//				 * Spieler aus den Aufstellungen der Saison herauslöschen.
-//				 */
-//				$query = "DELETE #__ttverein_aufstellungen " .
-//						" FROM #__ttverein_aufstellungen " .
-//							" INNER JOIN #__ttverein_mannschaften " .
-//						" WHERE #__ttverein_aufstellungen.mannschafts_id=#__ttverein_mannschaften.id " .
-//							" AND #__ttverein_mannschaften.saisonstart=$saison " .
-//							" AND #__ttverein_mannschaften.hinrunde=$hinrunde" .
-//							" AND #__ttverein_aufstellungen.spieler_id=$spielerID";
-//				$this->_db->setQuery($query);
-//				$this->_db->query();
-//				/*if ( !$this->_db->query() ) {
-//               		JError::raiseError(112, $this->_db->getErrorMsg());
-//               		return false;
-//            	}*/
-//				if ($id > 0 && $position > 0)  {
-//					// Vorhandenen Spieler auf der Position löschen
-//					//Vorher "DELETE IGNORE" - Inkompatibel zu MySQL 4.0
-//					$query = "DELETE FROM #__ttverein_aufstellungen " .
-//							" WHERE mannschafts_id = $id " .
-//							" AND position = $position ";
-//					$this->_db->setQuery($query);
-//					@$this->_db->query();
-//					/*if ( !$this->_db->query() ) {
-//               			JError::raiseError(111, $this->_db->getErrorMsg());
-//               			return false;
-//            		}*/
-//
-//					//Speichern der Aufstellung
-//					$query = "INSERT INTO #__ttverein_aufstellungen " .
-//							" SET mannschafts_id=$id, spieler_id=$spielerID" .
-//							", position=$position ";
-//					$this->_db->setQuery($query);
-//
-//					if ( !$this->_db->query() ) {
-//               			JError::raiseError(113, $this->_db->getErrorMsg());
-//               			return false;
-//            		}
-//
-//				}
-//
-//			}
-//		}
-//
 		return true;
 	}
 
@@ -301,25 +242,6 @@ class TableMitglied extends JTable
 
 		//Datenbankverbindung
 		$db = &$this->_db;
-
-		/*
-		 * Bilder löschen
-		 */
-//		 //TODO löschen konfigurierbar machen.
-//		 //Nicht immer möchte mann, dass auch die Bilder glöscht werden sollen.
-//		$query = 'SELECT image_orginal, image_resize, image_thumb ' .
-//					' FROM #__ttverein_spieler ' .
-//					' WHERE id = ' . $this->$key;
-//		$db->setQuery($query);
-//		$images = $db->loadObjectList();
-//
-//		if($images[0]->image_orginal)
-//			@unlink(JPATH_ROOT . $images[0]->image_orginal);
-//		if($images[0]->image_resize)
-//			@unlink(JPATH_ROOT . $images[0]->image_resize);
-//		if($images[0]->image_thumb)
-//			@unlink(JPATH_ROOT . $images[0]->image_thumb);
-
 
 		/*
 		 * Spielerdaten löschen

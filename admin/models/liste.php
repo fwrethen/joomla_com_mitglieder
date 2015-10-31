@@ -132,29 +132,6 @@ class ListenModelListe extends JModelLegacy
 		if (count( $cids ))
 		{
 			foreach($cids as $cid) {
-//				 /*
-//				  * Bilder löschen
-//				  */
-//				 //TODO löschen konfigurierbar machen.
-//				 //Nicht immer möchte mann, dass auch die Bilder glöscht werden sollen.
-//				$query = 'SELECT image_orginal, image_resize, image_thumb ' .
-//							' FROM #__ttverein_mannschaften ' .
-//							' WHERE id = ' . $cid;
-//				$images = $this->_getList($query);
-//				@unlink(JPATH_ROOT . $images[0]->image_orginal);
-//				@unlink(JPATH_ROOT . $images[0]->image_resize);
-//				@unlink(JPATH_ROOT . $images[0]->image_thumb);
-//				/*
-//				 * Aufstellungen löschen
-//				 */
-//				$query = "DELETE FROM #__ttverein_aufstellungen " .
-//						" WHERE mannschafts_id=" . $cid;
-//				$this->_db->setQuery($query);
-//				if ( !$this->_db->query() ) {
-//					JError::raiseError(105, $this->_db->getErrorMsg());
-//               		return false;
-//				}
-
 				/*
 				 * Abteilung löschen
 				 */

@@ -100,14 +100,6 @@ foreach($spieler as $id=>$einSpieler) {
 			$db->setQuery($query);
 			$spieler[$id]->text = $db->loadResult();
 
-//			$query = "SELECT sf.kurz_text, sf.datum, sf.text, f.typ, f.name_frontend AS name" .
-//						" FROM #__ttverein_spieler_felder AS sf, #__ttverein_felder AS f " .
-//						" WHERE sf.spieler_id = " . $einSpieler->id .
-//							" AND sf.felder_id = f.id " .
-//							" AND f.zeige_in_uebersicht = 1 " .
-//						" ORDER BY f.reihenfolge, f.id ASC ";
-//			$db->setQuery( $query );
-//			$spieler[$index]->felder = $db->loadObjectList();
 		}
 		return $spieler;
 	}
