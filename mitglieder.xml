@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>florian (at) paetz.de</authorEmail>
 	<authorUrl>www.fw-rethen.de</authorUrl>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<description>Die Komponente dient dem Verwalten von Mitgliederlisten</description>
 
 	<scriptfile>script.php</scriptfile>
