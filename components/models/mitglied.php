@@ -14,7 +14,7 @@ class MitgliederModelMitglied extends JModelLegacy
 	function getMitglied( $id ) {
 
 		if(!$this->_data) {
-			$query = "select name,vorname,image_resize, image_thumb, image_original " .
+			$query = "select name,vorname " .
 			"from #__mitglieder_mitglieder where  id = ".$id;
 			$this->_db->setQuery( $query );
 			$this->_data = $this->_db->loadObject();

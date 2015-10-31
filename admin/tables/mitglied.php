@@ -7,9 +7,6 @@ class TableMitglied extends JTable
 	var $id						= 0;
 	var $vorname				= '';
 	var $name				= '';
-	var $image_original			= '';
-	var $image_resize			= '';
-	var $image_thumb			= '';
 
 	var $felder					= array();
 	var $listen					= array();

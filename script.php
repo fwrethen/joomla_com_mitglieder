@@ -17,7 +17,8 @@ class com_MitgliederInstallerScript
 		/*
 		 * Löschen der Mitgliederbilder
 		 */
-		if ($params->get('delete_pictures', '0')) {
+		// TODO: Rewrite
+		/*if ($params->get('delete_pictures', '0')) {
 			$query = "SELECT image_original, image_resize, image_thumb
 				FROM #__mitglieder_mitglieder";
 			$db->setQuery( $query );
@@ -25,7 +26,7 @@ class com_MitgliederInstallerScript
 			JFile::delete($images);
 			echo '<p>Mitgliederbilder wurden gel&ouml;scht.</p>';
 		}
-		else echo '<p>Mitgliederbilder wurden nicht gel&ouml;scht.</p>';
+		else*/ echo '<p>Mitgliederbilder wurden nicht gel&ouml;scht.</p>';
 
 		/*
 		 * Löschen der Datenbank-Tabellen

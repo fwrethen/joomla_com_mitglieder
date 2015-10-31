@@ -27,9 +27,6 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_mitglieder` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
-  `image_original` varchar(255) default NULL,
-  `image_resize` varchar(255) default NULL,
-  `image_thumb` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 );
 
