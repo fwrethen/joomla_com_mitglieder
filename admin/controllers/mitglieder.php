@@ -45,7 +45,7 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 		$model = $this->getModel('mitglied');
 		$post = JRequest::get( 'post', 2);
 
-		if ($model->store($post)) {
+		if ($model->save($post)) {
 			$msg = JText::_( 'Mitglied gespeichert!' );
 		} else {
 			$msg = JText::_( 'Mitglied konnte nicht gespeichert werden' );

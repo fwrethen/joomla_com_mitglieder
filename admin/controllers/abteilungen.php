@@ -39,7 +39,7 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 		$post = JRequest::get( 'post', 2 );
 
 
-		if ($model->store($post)) {
+		if ($model->save($post)) {
 			$msg = JText::_( 'Abteilung gespeichert!' );
 		} else {
 			$msg = JText::_( 'Absteilung konnte nicht gespeichert werden' );

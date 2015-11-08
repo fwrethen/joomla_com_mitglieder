@@ -5,8 +5,6 @@ defined('_JEXEC') or die();
 if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 jimport('joomla.application.component.model');
 
-require_once( JPATH_ADMINISTRATOR .DS. 'components' .DS. 'com_mitglieder' .DS. 'lib'.DS. 'logger.php' );
-
 /**
  * @author Florian Paetz
  */
@@ -44,51 +42,6 @@ class MitgliederModelMitglied extends JModelAdmin
 		$row->load($this->_id);
 
 		return $row;
-	}
-
-	/**
-	 * Speichert die Spielerdaten und die Aufstellung
-	 *
-	 * @access public
-	 * @param array $data Is $data = null wird versucht über
-	 * JRequest::get( 'post' ) an die Daten zu gelangen.
-	 * @return	boolean	True bei Erfolg
-	 */
-	function store(&$data=null)
-	{
-		if($data == null)
-			$data = JRequest::get( 'post' );
-
-
-		//Keine Daten Vorhanden.
-		if(!is_array($data))
-		{
-			Logger::log('No Data');
-			return false;
-
-		}
-		Logger::logArray($data);
-
-		//Speichern der Spielerdaten
-		$row =& $this->getTable();
-
-		if (!$row->bind($data)) {
-			$this->setError($this->_db->getErrorMsg());
-			return false;
-		}
-
-		if (!$row->check()) {
-			$this->setError($this->_db->getErrorMsg());
-			return false;
-		}
-
-		if (!$row->store(true)) {
-			$this->setError( $this->_db->getErrorMsg() );
-			return false;
-		}
-		$data['id']=$row->id;
-
-		return true;
 	}
 
 	/**

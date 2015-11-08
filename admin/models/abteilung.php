@@ -44,45 +44,6 @@ class AbteilungenModelAbteilung extends JModelAdmin
 		return $data;
 	}
 
-	function store($data=null)
-	{
-		$row =& $this->getTable();
-
-		if($data == null)
-			$data = JRequest::get( 'post' );
-
-		//Keine Daten Vorhanden.
-		if(!is_array($data)) {
-			JError::raiseWarning(191, "Es wurden keine Daten gespeichert");
-			return false;
-		}
-
-		/*
-		 * String(0)'' Values werden herrausgefiltert, damit sie in nicht
-		 * als String sondern mit null in die Datenbank gespeidchert werden.
-		 */
-		foreach($data as $key=>$value) {
-			if(trim($value) == '')
-				$data[$key] = null;
-		}
-
-		if (!$row->bind($data)) {
-			JError::raiseError(101, $this->_db->getErrorMsg());
-			return false;
-		}
-
-		if (!$row->check()) {
-			JError::raiseError(102, $this->_db->getErrorMsg());
-			return false;
-		}
-
-		if (!$row->store(true)) {
-			JError::raiseError(103, $this->_db->getErrorMsg());
-			return false;
-		}
-
-		return true;
-	}
 
 	function delete()
 	{
