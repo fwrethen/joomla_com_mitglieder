@@ -32,7 +32,7 @@
 			directory="stories"
 			preview="true" />
 		<field
-			name="thumbview_row_size"
+			name="thumbview_col_size"
 			type="list"
 			default="4"
 			label="Spaltenzahl Thumbs"
