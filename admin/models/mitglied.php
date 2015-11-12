@@ -2,7 +2,6 @@
 
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 jimport('joomla.application.component.model');
 
 /**
@@ -91,6 +90,44 @@ class MitgliederModelMitglied extends JModelAdmin
 		}
 		return true;
 	}
+
+	/**
+	 * Method overwrite to save the form data.
+	 *
+	 * @param   array  $data  The form data.
+	 *
+	 * @return  boolean  True on success, False on error.
+	 *
+	 * @since   1.2
+	 */
+	public function save($data)
+	{
+		require_once JPATH_COMPONENT . '/helpers/image.php';
+
+		$params = JComponentHelper::getParams('com_mitglieder');
+		$img_width = $params->get('mitglied_thumb_width', '180');
+		$img_height = $params->get('mitglied_thumb_height', '240');
+		$img_path  = JPATH_ROOT . '/';
+		$img_path .= JComponentHelper::getParams('com_media')
+			->get('image_path', 'images')  . '/';
+		$img_path .= $params->get('image_path', 'stories/mitglieder');
+		foreach($data['typen'] as $id=>$typ)
+		{
+			if (($typ == 'bild') && $data['felder'][$id])
+			{
+				$img_uri = JPATH_ROOT . '/' . $data['felder'][$id];
+				ImageHelper::createThumb($img_uri, $img_width, $img_height, $img_path);
+			}
+		}
+
+		if (parent::save($data))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 
 	public function getForm($data = array(), $loadData = true)
 	{

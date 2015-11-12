@@ -16,12 +16,29 @@ class MitgliederViewAbteilung extends JViewLegacy
 		}
   		$this->abteilung = $model->getData($id);
 
-		$this->thumb_size = JComponentHelper::getParams('com_mitglieder')->get(
-			'mitglied_thumb_size', '150');
+		$params = JComponentHelper::getParams('com_mitglieder');
+
 		$this->thumb_placeholder = JComponentHelper::getParams('com_mitglieder')
 			->get('mitglied_thumb_placeholder');
 		$this->thumb_cols = JComponentHelper::getParams('com_mitglieder')
 			->get('thumbview_col_size', '4');
+
+		// Change image for thumbnail if available
+		jimport('joomla.filesystem.folder');
+		foreach($this->abteilung->mitglieder as $mitglied)
+		{
+			$folder = JComponentHelper::getParams('com_media')->get('image_path',
+				'images') . '/' . $params->get('image_path', 'stories/mitglieder');
+			$path = JPATH_ROOT . '/' . $folder;
+			$basename = pathinfo($mitglied->thumb, PATHINFO_BASENAME);
+			$thumb = $path . '/thumbs/' . $basename;
+			if (file_exists($thumb))
+			{
+				// path for view needs to be images/... not /var/www/joomla/images/...
+				// so no JPATH_ROOT in here
+				$mitglied->thumb = $folder . '/thumbs/' . $basename;
+			}
+		}
 
 		parent::display($tpl);
 	}

@@ -11,12 +11,19 @@
 			label="Bildverzeichnis-Pfad"
 			description="&lt;strong&gt;Hinweis:&lt;/strong&gt;&lt;br /&gt;Der Pfad bezieht sich auf das Verzeichnis media der Joomla-Installation." />
 		<field
-			name="mitglied_thumb_size"
+			name="mitglied_thumb_width"
 			type="number"
 			size="50"
-			default="150"
-			label="Vorschaubild-Größe"
-			description="Größe des Vorschaubildes eines Mitglieds in der Übersicht. Angabe in Pixel." />
+			default="180"
+			label="Vorschaubild-Breite"
+			description="Breite des Vorschaubildes eines Mitglieds in der Übersicht. Angabe in Pixel." />
+		<field
+			name="mitglied_thumb_height"
+			type="number"
+			size="50"
+			default="240"
+			label="Vorschaubild-Höhe"
+			description="Höhe des Vorschaubildes eines Mitglieds in der Übersicht. Angabe in Pixel." />
 		<field
 			name="mitglied_image_size"
 			type="number"
