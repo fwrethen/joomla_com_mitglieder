@@ -9,11 +9,9 @@ class ListenViewListen extends JViewLegacy
 	function display($tpl = null)
 	{
 		JToolBarHelper::title(JText::_('Mitglieder: Listen'), 'list');
-		//JToolBarHelper::publishList();
-		//JToolBarHelper::unpublishList();
-		//JToolBarHelper::deleteList();
+		//JToolBarHelper::addNew();
 		JToolBarHelper::editList();
-//		JToolBarHelper::addNewX();
+		//JToolBarHelper::deleteList();
 		JToolBarHelper::preferences('com_mitglieder');
 
 		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';

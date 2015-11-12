@@ -9,11 +9,9 @@ class AbteilungenViewAbteilungen extends JViewLegacy
 	function display($tpl = null)
 	{
 		JToolBarHelper::title(   JText::_( 'Mitglieder: Abteilungen' ), 'archive' );
-		//JToolBarHelper::publishList();
-		//JToolBarHelper::unpublishList();
-		JToolBarHelper::deleteList();
-		JToolBarHelper::editList();
 		JToolBarHelper::addNew();
+		JToolBarHelper::editList();
+		JToolBarHelper::deleteList();
 		JToolBarHelper::preferences('com_mitglieder');
 
 		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
