@@ -1,10 +1,6 @@
 <?php
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
-
-// Require the base controller
-//require_once (JPATH_COMPONENT.DS.'controller.php');
 
 $controller = JRequest::getVar('controller');
 
@@ -25,7 +21,7 @@ switch($controller)  {
 
 }
 
-require_once (JPATH_COMPONENT.DS.'controllers'.DS. $controller . '.php');
+require_once (JPATH_COMPONENT . '/controllers/' . $controller . '.php');
 // Create the controller
 $classname	= $controller . 'Controller'.$controller;
 $controller = new $classname( );

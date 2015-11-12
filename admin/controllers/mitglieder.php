@@ -1,7 +1,6 @@
 <?php
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 
 jimport('joomla.application.component.controller');
 
