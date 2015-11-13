@@ -1,6 +1,6 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
-require_once( JPATH_COMPONENT . '/lib/logger.php' );
+require_once( JPATH_COMPONENT_ADMINISTRATOR . '/lib/logger.php' );
 
 
 function printFelder($felder) {
@@ -74,7 +74,7 @@ function printFelder($felder) {
 					$params = JComponentHelper::getParams('com_mitglieder');
 					$image_size = $params->get('mitglied_image_size', '300');
 					echo '<img src="'. JURI::root() . $feld->kurz_text .'" alt="'. $feld->name .'"
-						height="'. $image_size .'" max-width="'. $image_size .'" />';
+						style="height:'. $image_size .'px; max-width:"'. $image_size .'px;" />';
 					break;
 			}
 			?>

@@ -2,7 +2,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 require_once(JPATH_COMPONENT . '/lib/mitglieder/printfelder.php');
-require_once(JPATH_COMPONENT . '/lib/logger.php');
+require_once(JPATH_COMPONENT_ADMINISTRATOR . '/lib/logger.php');
 
 //
 //	foreach($felder as $feld) {
