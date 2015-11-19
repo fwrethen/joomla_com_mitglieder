@@ -44,7 +44,7 @@ require_once(JPATH_COMPONENT_ADMINISTRATOR . '/lib/logger.php');
 //
 //		}
 //		if ($feld->typ == "email") {
-//			$text = JHTML::_('email.cloak', $text);
+//			$text = JHtml::_('email.cloak', $text);
 //		}
 //
 //		if($text == null || $text == '')

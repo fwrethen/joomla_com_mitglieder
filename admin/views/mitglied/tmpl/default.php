@@ -56,7 +56,7 @@
 							echo '<div class="control-group"><div class="control-label">';
 							echo JText::_( $feld->name );
 							echo '</div><div class="controls">';
-							echo JHTML::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
+							echo JHtml::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
 							echo '</div></div>';
 							break;
 					}
@@ -76,19 +76,19 @@
 		<?php
 		if (count($this->inAbteilungen) < 1)
 		{
-			echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name'); ?>
+			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name'); ?>
 			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br /><?php
 		}
 		for ($i = 0; $i < count($this->inAbteilungen); ++$i)
 		{
-			echo JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id); ?>
+			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id); ?>
 			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[$i]->ordering?>" /><br /><?php
 		}
 		?>
 		</div>
 
 		<script type="text/javascript">
-		<?php	$abteilungenSelect=JHTML::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
+		<?php	$abteilungenSelect=JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
 				$abteilungenSelect=str_replace(array("\r\n", "\n", "\r"), '', $abteilungenSelect);
 		?>
 		var abteilungList = '<?php echo $abteilungenSelect?> <input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br />';

@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('bootstrap.loadCss');
+JHtml::_('bootstrap.loadCss');
 ?>
 
 

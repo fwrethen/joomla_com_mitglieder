@@ -32,7 +32,7 @@ foreach($this->felder as $feld) {
 
 			<?php
 
-			echo JHTML::_( 'select.genericlist',$this->typen,  'alte_typen[' . $feld->id . ']','class="inputbox"', 'typ', 'typ', $feld->typ );
+			echo JHtml::_( 'select.genericlist',$this->typen,  'alte_typen[' . $feld->id . ']','class="inputbox"', 'typ', 'typ', $feld->typ );
 			?>
 		</td>
 		<td>
@@ -73,7 +73,7 @@ for($i=0; $i < 5; $i++) {
 		<td>
 		<?php
 
-			echo JHTML::_( 'select.genericlist',$this->typen,  'neue_typen[]','class="inputbox"', 'typ', 'typ', null );
+			echo JHtml::_( 'select.genericlist',$this->typen,  'neue_typen[]','class="inputbox"', 'typ', 'typ', null );
 			?>
 		</td>
 		<td>
