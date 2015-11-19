@@ -1,59 +1,58 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php
+/**
+* @package     Joomla.Administrator
+* @subpackage  com_mitglieder
+*
+* @copyright   Copyright (C) 2010 - 2015
+* @license     GNU General Public License version 2 or later; see LICENSE.txt
+*/
+defined('_JEXEC') or die; ?>
 
-
+<form action="<?php echo JRoute::_('index.php?option=com_mitglieder&view=abteilungen'); ?>"
+	method="post" name="adminForm" id="adminForm">
 <div id="j-sidebar-container" class="span2">
 	<?php echo $this->sidebar; ?>
 </div>
 <div id="j-main-container" class="span10">
-<form action="index.php" method="post" name="adminForm" id="adminForm">
-<div id="editcell">
-	<table class="adminlist">
+	<table class="adminlist table table-striped table-hover span8">
 	<thead>
 		<tr>
-			<th width="5%">
-				<?php echo JText::_( 'NUM' ); ?>
+			<th width="1%" class="nowrap center">
+				<?php echo JText::_('#'); ?>
 			</th>
-			<th width="5%">
+			<th width="2%" class="nowrap center">
 				<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(<?php echo count( $this->items ); ?>);" />
 			</th>
-			<th width="*" align="center">
-				<?php echo JHTML::_('grid.sort',   'Name', 'name', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
+			<th width="95%" class="nowrap">
+				<?php echo JText::_('Name'); ?>
 			</th>
-			<th width="1%" nowrap="nowrap">
-				<?php echo JHTML::_('grid.sort',   'ID', 'id', @$this->lists['order_Dir'], @$this->lists['order'] ); ?>
+			<th width="2%" class="nowrap center">
+				<?php echo JText::_('ID'); ?>
 			</th>
 		</tr>
-
 	</thead>
-	<?php
-
-	$k = 0;
-	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
-	{
-		$row = &$this->items[$i];
-
-		$checked 	= JHTML::_('grid.id',   $i, $row->id );
-		$link 		= JRoute::_( 'index.php?option=com_mitglieder&controller=abteilungen&task=edit&cid[]='. $row->id );
-
+	<tbody>
+	<?php if (!empty($this->items)): ?>
+		<?php foreach ($this->items as $i => $row):
+			$link = JRoute::_('index.php?option=com_mitglieder&task=abteilung.edit&id=' . $row->id);
 		?>
-		<tr class="<?php echo "row$k"; ?>">
-			<td>
-				<?php echo $i+1; ?>
-			</td>
-			<td>
-				<?php echo $checked; ?>
-			</td>
-			<td align="center">
-				<?php echo $row->name;?>
-			</td>
-			<td align="center">
-				<?php echo $row->id; ?>
-			</td>
-		</tr>
-		<?php
-		$k = 1 - $k;
-	}
-	?>
+			<tr class="row<?php echo $i % 2; ?>">
+				<td class="center">
+					<?php echo $i + 1; ?>
+				</td>
+				<td class="center">
+					<?php echo JHtml::_('grid.id', $i, $row->id); ?>
+				</td>
+				<td>
+					<?php echo $row->name;?>
+				</td>
+				<td class="center">
+					<?php echo $row->id; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	<?php endif; ?>
+	</tbody>
 	</table>
 </div>
 
@@ -62,4 +61,3 @@
 <input type="hidden" name="boxchecked" value="0" />
 <input type="hidden" name="controller" value="abteilungen" />
 </form>
-</div>
