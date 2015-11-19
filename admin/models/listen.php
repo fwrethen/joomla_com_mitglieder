@@ -1,6 +1,5 @@
 <?php
-jimport( 'joomla.application.component.model' );
-
+defined('_JEXEC') or die();
 
 class ListenModelListen extends JModelLegacy
 {

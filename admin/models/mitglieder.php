@@ -1,6 +1,5 @@
 <?php
-jimport( 'joomla.application.component.model' );
-
+defined('_JEXEC') or die();
 
 class MitgliederModelMitglieder extends JModelLegacy
 {

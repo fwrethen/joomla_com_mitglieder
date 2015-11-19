@@ -1,8 +1,6 @@
 <?php
-
 defined('_JEXEC') or die();
 
-jimport('joomla.application.component.model');
 require_once( JPATH_COMPONENT . '/lib/logger.php' );
 
 

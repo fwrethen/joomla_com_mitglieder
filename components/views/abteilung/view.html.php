@@ -1,7 +1,5 @@
 <?php
-jimport( 'joomla.application.component.view');
-
-
+defined('_JEXEC') or die();
 
 class MitgliederViewAbteilung extends JViewLegacy
 {
@@ -24,7 +22,6 @@ class MitgliederViewAbteilung extends JViewLegacy
 			->get('thumbview_col_size', '4');
 
 		// Change image for thumbnail if available
-		jimport('joomla.filesystem.folder');
 		foreach($this->abteilung->mitglieder as $mitglied)
 		{
 			$folder = JComponentHelper::getParams('com_media')->get('image_path',

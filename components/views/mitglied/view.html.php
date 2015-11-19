@@ -1,6 +1,5 @@
 <?php
-jimport( 'joomla.application.component.view');
-
+defined('_JEXEC') or die();
 
 class MitgliederViewMitglied extends JViewLegacy
 {
