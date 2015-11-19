@@ -8,15 +8,13 @@ JHtml::_('bootstrap.loadCss');
 <h1><?php echo $this->abteilung->name; ?></h1>
 <p><?php echo $this->abteilung->description; ?></p>
 
-<?php
-	if(is_array($this->abteilung->mitglieder)) {
-		$n = 1;
+<?php if(is_array($this->abteilung->mitglieder)):
+	$n = 1;
 ?>
 
 <table class="table table-condensed table-striped">
 	<tr>
-		<?php
-		foreach($this->abteilung->mitglieder as $mitglied) {
+		<?php foreach($this->abteilung->mitglieder as $mitglied):
 			$name = $mitglied->name . ", " . $mitglied->vorname;
 		?>
 		<td>
@@ -24,18 +22,10 @@ JHtml::_('bootstrap.loadCss');
 				<?php echo $name; ?>
 			</a>
 		</td>
-		<?php
-			if($n % 3 == 0) {
-		?>
-	</tr><tr>
-		<?php
-			}
-			$n++;
-		}
-		?>
+		<?php if($n % 3 == 0): ?></tr><tr><?php endif; ?>
+			<?php $n++; ?>
+		<?php endforeach; ?>
 	</tr>
 </table>
 
-<?php
-	}
-?>
+<?php endif; ?>

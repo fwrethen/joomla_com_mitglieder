@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<?php
-				foreach($this->player->felder as $id=>$feld) {
+				foreach($this->player->felder as $id=>$feld):
 					switch($feld->typ) {
 						case "text":
 							echo $this->form->renderField($feld->id, null, strip_tags($feld->wert));
@@ -62,9 +62,7 @@
 					}
 			?>
 			<input class="inputbox" type="hidden" name="typen[<?php echo $id;?>]" value="<?php echo $feld->typ; ?>" />
-			<?php
-				}
-			?>
+		<?php endforeach; ?>
 
 			<div class="control-group">
 				<div class="control-label">
@@ -73,18 +71,16 @@
 				<div class="controls">
 
 		<div id="abteilung_list_content">
-		<?php
-		if (count($this->inAbteilungen) < 1)
-		{
-			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name'); ?>
-			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br /><?php
-		}
-		for ($i = 0; $i < count($this->inAbteilungen); ++$i)
-		{
-			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id); ?>
-			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[$i]->ordering?>" /><br /><?php
-		}
+		<?php if (count($this->inAbteilungen) < 1):
+			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
 		?>
+			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br />
+		<?php endif; ?>
+		<?php for ($i = 0; $i < count($this->inAbteilungen); ++$i):
+			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id);
+		?>
+			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[$i]->ordering?>" /><br />
+		<?php endfor; ?>
 		</div>
 
 		<script type="text/javascript">

@@ -18,9 +18,7 @@
 		<th>&nbsp;</th>
 
 	</tr>
-<?php
-foreach($this->felder as $feld) {
-	?>
+	<?php foreach($this->felder as $feld): ?>
 	<tr>
 		<td>
 			<input class="inputbox" type="text" name="alte_namen_backend[<?php echo $feld->id;?>]" size="20" value="<?php echo $feld->name_backend; ?>" />
@@ -52,9 +50,7 @@ foreach($this->felder as $feld) {
 		</td>
 		<td>&nbsp;</td>
 	</tr>
-<?php
-}
-?>
+	<?php endforeach; ?>
 <tr>
 	<th colspan="6">Neue Felder erstellen</th>
 	<th>&nbsp;</th>
