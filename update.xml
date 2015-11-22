@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+	<update>
+		<name>Mitglieder</name>
+		<description>Mitglieder-Komponente für Joomla</description>
+		<element>com_mitglieder</element>
+		<type>component</type>
+		<version>1.2.0</version>
+		<client>site</client>
+		<infourl title="Info">https://github.com/fwrethen/joomla_com_mitglieder/releases</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/fwrethen/joomla_com_mitglieder/archive/v1.2.0.zip</downloadurl>
+		</downloads>
+		<targetplatform name="joomla" version="3.[23456789]" />
+	</update>
+</updates>

@@ -60,4 +60,8 @@
 		</languages>
 	</administration>
 
+	<updateservers>
+		<server type="extension" name="Mitglieder Updates">https://raw.githubusercontent.com/fwrethen/joomla_com_mitglieder/master/update.xml</server>
+	</updateservers>
+
 </extension>
