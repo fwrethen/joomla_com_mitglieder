@@ -5,7 +5,7 @@
 		<description>Mitglieder-Komponente für Joomla</description>
 		<element>com_mitglieder</element>
 		<type>component</type>
-		<version>1.2.0</version>
+		<version>1.2.1</version>
 		<client>site</client>
 		<infourl title="Info">https://github.com/fwrethen/joomla_com_mitglieder/releases</infourl>
 		<downloads>
