@@ -7,16 +7,10 @@ function printFelder($felder) {
 	Logger::log( 'Inf: Print fields: ');
 	Logger::logArray($felder);
 
+	$data = array();
+
 		foreach($felder as $id=>$feld) {
-			?>
-		<tr>
-			<td class="key">
-				<label for="alias">
-					<?php if ($feld->name) echo JText::_( $feld->name ) . ':'; ?>
-				</label>
-			</td>
-			<td>
-			<?php
+			$data[$id]['key'] = $feld->name;
 
 			switch($feld->typ) {
 				case "jahre seit":
@@ -51,48 +45,40 @@ function printFelder($felder) {
 					} else {
 						$text = $alter . " Jahre";
 					}
-					echo $text;
+					$data[$id]['type'] = 'text';
+					$data[$id]['value'] = $feld->text;
 
 					break;
 
 				case "text":
-					echo strip_tags($feld->text);
+					$data[$id]['type'] = 'text';
+					// strip tags and replace newline with <br />
+					$data[$id]['value'] = nl2br(strip_tags($feld->text));
 					break;
 				case "text_html":
-					echo $feld->text;
+					$data[$id]['type'] = 'text';
+					$data[$id]['value'] = $feld->text;
 					break;
 				case "email":
-					echo $feld->kurz_text;
+					$data[$id]['type'] = 'text';
+					$data[$id]['value'] = $feld->kurz_text;
 					break;
 				case "telefon":
-					echo $feld->kurz_text;
+					$data[$id]['type'] = 'text';
+					$data[$id]['value'] = $feld->kurz_text;
 					break;
 				case "liste":
-					echo $feld->wert;
+					$data[$id]['type'] = 'text';
+					$data[$id]['value'] = $feld->wert;
 					break;
 				case "bild":
-					$params = JComponentHelper::getParams('com_mitglieder');
-					$image_size = $params->get('mitglied_image_size', '300');
-					echo '<img src="'. JURI::root() . $feld->kurz_text .'" alt="'. $feld->name .'"
-						style="max-height:'. $image_size .'px; max-width:'. $image_size .'px;" />';
+					$data[$id]['type'] = 'image';
+					$data[$id]['value'] = $feld->kurz_text;
 					break;
 			}
-			?>
-			</td>
-		</tr>
-
-			<?php
 		}
-/*		?>
-		<!--tr>
-			<th><?php echo $title;?></th>
-			<td><?php echo $text;?></td>
-		</tr-->
-		<?php	*/
 
-//	}
-
-
+	return json_encode( $data );
 
 }
 

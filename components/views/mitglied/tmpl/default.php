@@ -58,8 +58,19 @@ $document->setTitle($name);
 
 ?>
 
-<table width="300px">
+<div class="row">
 	<?php
-	printFelder($this->mitglied->felder);
-	?>
-</table>
+	$data = json_decode(printFelder($this->mitglied->felder));
+	$params = JComponentHelper::getParams('com_mitglieder');
+	$image_size = $params->get('mitglied_image_size', '300');
+	foreach ($data as $item) {
+		if ($item->type == 'image')
+			$item->value = '<img src="'. JURI::root() . $item->value 
+				.'" style="max-height:'. $image_size .'px; max-width:'
+				. $image_size .'px;" />'; ?>
+		<dl class="dl-horizontal">
+			<dt><?php echo $item->key; ?></dt>
+			<dd><?php echo $item->value; ?></dd>
+		</dl>
+	<?php } ?>
+</div>
