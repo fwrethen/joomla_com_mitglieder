@@ -14,14 +14,14 @@ class MitgliederModelMitglied extends JModelLegacy
 
 		if(!$this->_data) {
 			$query = "select name,vorname " .
-			"from #__mitglieder_mitglieder where  id = ".$id;
+			"from #__mitglieder_mitglieder where  id = ".(int) $id;
 			$this->_db->setQuery( $query );
 			$this->_data = $this->_db->loadObject();
-			$query = "select mitglieder_id, f1.name_frontend as name,a.felder_id, f1.typ, kurz_text, `text`, wert, datum " .
-		"from (select mitglieder_id, felder_id, kurz_text,`text`, wert, datum " .
+			$query = "select f1.name_frontend as name, f1.typ, kurz_text, text, wert, datum " .
+		"from (select felder_id, kurz_text, text, wert, datum " .
 		"from #__mitglieder_mitglieder_felder as f LEFT JOIN #__mitglieder_listen as l ".
-		"on l.id=f.listen_id ) as a, #__mitglieder_felder as f1 " .
-		"where a.felder_id= f1.id AND f1.show = 1 AND mitglieder_id = $id order by f1.ordering, f1.id ASC";
+		"on l.id=f.listen_id where mitglieder_id = $id) as a, #__mitglieder_felder as f1 " .
+		"where a.felder_id= f1.id AND f1.show = 1 order by f1.ordering, f1.id ASC";
 			$this->_db->setQuery( $query );
 			$this->_data->felder = $this->_db->loadObjectList();
 
