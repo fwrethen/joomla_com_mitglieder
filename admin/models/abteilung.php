@@ -42,7 +42,7 @@ class AbteilungenModelAbteilung extends JModelAdmin
 	}
 
 
-	function delete()
+	function delete(&$pks)
 	{
 		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 

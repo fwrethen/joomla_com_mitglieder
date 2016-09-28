@@ -48,7 +48,7 @@ class MitgliederModelMitglied extends JModelAdmin
 	 * @access	public
 	 * @return	boolean	True bei Erfolg
 	 */
-	function delete()
+	function delete(&$pks)
 	{
 		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 

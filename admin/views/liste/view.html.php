@@ -11,7 +11,8 @@ class ListenViewListe extends JViewLegacy
 	$document = JFactory::getDocument();
 	$document->addScript('includes/js/joomla.javascript.js');
 		$liste		= $this->get('Data');
-		if($liste->id < 1)
+		// $liste is an array with only one element: a stdClass object at index 0
+		if($liste[0]->id < 1)
 			$isNew = true;
 		else
 			$isNew = false;
