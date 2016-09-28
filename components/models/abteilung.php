@@ -9,21 +9,12 @@ class MitgliederModelAbteilung extends JModelLegacy
 
 	}
 
-	function getAbteilungQuery( $id )
-	{
-
-		$query = "SELECT * FROM #__mitglieder_abteilungen WHERE id = ".$id;
-		return $query;
-	}
-
-
-	function getData($id) {
-		$db = JFactory::getDBO();
+	function getData($id, $layout = null) {
+		// Typecast $id for security
+		$id = (int) $id;
 
 		$team = $this->getAbteilung($id);
-
 		$team->mitglieder = $this->getMitglieder($id);
-
 
 		return $team;
 	}
@@ -31,7 +22,8 @@ class MitgliederModelAbteilung extends JModelLegacy
 	function getAbteilung( $id )
 	{
 		$db = JFactory::getDBO();
-		$db->setQuery( $this->getAbteilungQuery($id) );
+		$query = "SELECT * FROM #__mitglieder_abteilungen WHERE id = ".$id;
+		$db->setQuery($query);
 		$team = $db->loadObject();
 
 		return $team;
@@ -48,8 +40,17 @@ class MitgliederModelAbteilung extends JModelLegacy
 				 " WHERE mitglied.id= abteilung.mitglieder_id AND abteilungen_id = ".$aid . " order by ordering , name asc, vorname ASC";
 		$db->setQuery( $query );
 		$spieler = $db->loadObjectList();
+		
+		return $spieler;
+	}
 
-foreach($spieler as $id=>$einSpieler) {
+	function getThumbData($aid, $spieler){
+		// Typecast $aid for security
+		$aid = (int) $aid;
+		
+		$db = JFactory::getDBO();
+
+		foreach($spieler as $id=>$einSpieler) {
 
 			/* Query in SQL:
 				SELECT `kurz_text` FROM `#__mitglieder_mitglieder_felder`

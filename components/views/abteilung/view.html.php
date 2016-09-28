@@ -7,33 +7,39 @@ class MitgliederViewAbteilung extends JViewLegacy
 	function display($tpl = null)
 	{
  		$model	  = $this->getModel();
+		$layout		= $this->getLayout();
 
  		$id = JFactory::getApplication()->input->get('abteilungsid', '-1', 'INT');
 		if ($id === -1){
 			//TODO: show standard view or display error message
 		}
-  		$this->abteilung = $model->getData($id);
+		$this->abteilung = $model->getData($id);
 
-		$params = JComponentHelper::getParams('com_mitglieder');
+		// Do thumbnail stuff only if thumb template is requested
+		if ($layout == 'thumbs'){
+			$this->abteilung->mitglieder = $model->getThumbData($id, $this->abteilung->mitglieder);
+			
+			$params = JComponentHelper::getParams('com_mitglieder');
 
-		$this->thumb_placeholder = JComponentHelper::getParams('com_mitglieder')
-			->get('mitglied_thumb_placeholder');
-		$this->thumb_cols = JComponentHelper::getParams('com_mitglieder')
-			->get('thumbview_col_size', '4');
+			$this->thumb_placeholder = JComponentHelper::getParams('com_mitglieder')
+				->get('mitglied_thumb_placeholder');
+			$this->thumb_cols = JComponentHelper::getParams('com_mitglieder')
+				->get('thumbview_col_size', '4');
 
-		// Change image for thumbnail if available
-		foreach($this->abteilung->mitglieder as $mitglied)
-		{
-			$folder = JComponentHelper::getParams('com_media')->get('image_path',
-				'images') . '/' . $params->get('image_path', 'stories/mitglieder');
-			$path = JPATH_ROOT . '/' . $folder;
-			$basename = pathinfo($mitglied->thumb, PATHINFO_BASENAME);
-			$thumb = $path . '/thumbs/' . $basename;
-			if (file_exists($thumb))
+			// Change image for thumbnail if available
+			foreach($this->abteilung->mitglieder as $mitglied)
 			{
-				// path for view needs to be images/... not /var/www/joomla/images/...
-				// so no JPATH_ROOT in here
-				$mitglied->thumb = $folder . '/thumbs/' . $basename;
+				$folder = JComponentHelper::getParams('com_media')->get('image_path',
+					'images') . '/' . $params->get('image_path', 'stories/mitglieder');
+				$path = JPATH_ROOT . '/' . $folder;
+				$basename = pathinfo($mitglied->thumb, PATHINFO_BASENAME);
+				$thumb = $path . '/thumbs/' . $basename;
+				if (file_exists($thumb))
+				{
+					// path for view needs to be images/... not /var/www/joomla/images/...
+					// so no JPATH_ROOT in here
+					$mitglied->thumb = $folder . '/thumbs/' . $basename;
+				}
 			}
 		}
 
