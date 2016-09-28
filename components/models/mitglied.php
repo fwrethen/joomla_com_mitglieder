@@ -11,20 +11,40 @@ class MitgliederModelMitglied extends JModelLegacy
 	}
 
 	function getMitglied( $id ) {
-
 		if(!$this->_data) {
-			$query = "select name,vorname " .
-			"from #__mitglieder_mitglieder where  id = ".(int) $id;
-			$this->_db->setQuery( $query );
-			$this->_data = $this->_db->loadObject();
-			$query = "select f1.name_frontend as name, f1.typ, kurz_text, text, wert, datum " .
-		"from (select felder_id, kurz_text, text, wert, datum " .
-		"from #__mitglieder_mitglieder_felder as f LEFT JOIN #__mitglieder_listen as l ".
-		"on l.id=f.listen_id where mitglieder_id = $id) as a, #__mitglieder_felder as f1 " .
-		"where a.felder_id= f1.id AND f1.show = 1 order by f1.ordering, f1.id ASC";
-			$this->_db->setQuery( $query );
-			$this->_data->felder = $this->_db->loadObjectList();
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
 
+			$query->select($db->quoteName(array('name', 'vorname')))
+				->from($db->quoteName('#__mitglieder_mitglieder'))
+				->where($db->quoteName('id') .' = '. (int) $id);
+			$db->setQuery($query);
+			$this->_data = $db->loadObjectList()[0];	// only first row needed
+
+			$query    = $db->getQuery(true);
+			$subQuery = $db->getQuery(true);
+
+			$subQuery->select($db->quoteName(array('felder_id', 'kurz_text', 'text',
+				'wert', 'datum')));
+			$subQuery->from($db->quoteName('#__mitglieder_mitglieder_felder', 'f'));
+			$subQuery->join('LEFT', $db->quoteName('#__mitglieder_listen', 'l')
+				.' ON ('. $db->quoteName('l.id') .' = '. $db->quoteName('f.listen_id')
+				.')');
+			$subQuery->where($db->quoteName('mitglieder_id') .' = '. (int) $id);
+
+			$query->select($db->quoteName(array('f1.name_frontend', 'f1.typ',
+				'kurz_text', 'text', 'wert', 'datum'),
+				array('name', 'typ', 'kurz_text','text', 'wert', 'datum')));
+			$query->from('('. $subQuery->__toString() .') AS a');
+			$query->from($db->quoteName('#__mitglieder_felder', 'f1'));
+			$query->where($db->quoteName('a.felder_id') .' = '
+				. $db->quoteName('f1.id'), 'AND');
+			$query->where($db->quoteName('f1.show') .' = 1');
+			$query->order($db->quoteName('f1.ordering') .','. $db->quoteName('f1.id')
+				.' ASC');
+
+			$db->setQuery($query);
+			$this->_data->felder = $db->loadObjectList();
 		}
 		return $this->_data;
 	}

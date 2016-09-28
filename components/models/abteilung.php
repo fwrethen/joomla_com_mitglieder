@@ -6,13 +6,9 @@ class MitgliederModelAbteilung extends JModelLegacy
 
 	function __construct($options = array()) {
 		parent::__construct($options);
-
 	}
 
 	function getData($id, $layout = null) {
-		// Typecast $id for security
-		$id = (int) $id;
-
 		$team = $this->getAbteilung($id);
 		$team->mitglieder = $this->getMitglieder($id);
 
@@ -21,34 +17,38 @@ class MitgliederModelAbteilung extends JModelLegacy
 
 	function getAbteilung( $id )
 	{
-		$db = JFactory::getDBO();
-		$query = "SELECT * FROM #__mitglieder_abteilungen WHERE id = ".$id;
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('*')
+			->from($db->quoteName('#__mitglieder_abteilungen'))
+			->where($db->quoteName('id') .' = '. (int) $id);
 		$db->setQuery($query);
-		$team = $db->loadObject();
+		$abteilung = $db->loadObject();
 
-		return $team;
-
+		return $abteilung;
 	}
 
-
-
-
 	function getMitglieder( $aid ) {
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select($db->quoteName(array('mitglied.id', 'mitglied.name',
+			'mitglied.vorname')));
+		$query->from($db->quoteName('#__mitglieder_mitglieder_abteilungen',
+			'abteilung'));
+		$query->from($db->quoteName('#__mitglieder_mitglieder', 'mitglied'));
+		$query->where($db->quoteName('mitglied.id') .' = '
+			. $db->quoteName('abteilung.mitglieder_id'));
+		$query->where($db->quoteName('abteilungen_id') .' = '. (int) $aid);
+		$query->order($db->quoteName('ordering') .','. $db->quoteName('name') .','
+			. $db->quoteName('vorname') .' ASC');
+		$db->setQuery($query);
+		$mitglieder = $db->loadObjectList();
 
-		$query = "SELECT mitglied.id,mitglied.name,mitglied.vorname from #__mitglieder_mitglieder_abteilungen as abteilung,#__mitglieder_mitglieder as mitglied " .
-				 " WHERE mitglied.id= abteilung.mitglieder_id AND abteilungen_id = ".$aid . " order by ordering , name asc, vorname ASC";
-		$db->setQuery( $query );
-		$spieler = $db->loadObjectList();
-		
-		return $spieler;
+		return $mitglieder;
 	}
 
 	function getThumbData($aid, $spieler){
-		// Typecast $aid for security
-		$aid = (int) $aid;
-		
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 
 		foreach($spieler as $id=>$einSpieler) {
 
@@ -65,7 +65,7 @@ class MitgliederModelAbteilung extends JModelLegacy
 
 			$subQuery->select($db->quoteName('thumb'))
 				->from($db->quoteName('#__mitglieder_abteilungen'))
-				->where($db->quoteName('id') . ' = ' . $db->quote($aid));
+				->where($db->quoteName('id') . ' = ' . $db->quote((int) $aid));
 
 			$query->select($db->quoteName('kurz_text'))
 				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
@@ -86,7 +86,7 @@ class MitgliederModelAbteilung extends JModelLegacy
 
 			$subQuery->select($db->quoteName('field'))
 				->from($db->quoteName('#__mitglieder_abteilungen'))
-				->where($db->quoteName('id') . ' = ' . $db->quote($aid));
+				->where($db->quoteName('id') . ' = ' . $db->quote((int) $aid));
 
 			$query->select($db->quoteName('text'))
 				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
