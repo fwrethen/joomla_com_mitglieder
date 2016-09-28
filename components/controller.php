@@ -10,6 +10,6 @@ class MitgliederController extends JControllerLegacy
 			JRequest::setVar('view', 'abteilung' );
 		}
 
-		parent::display(true);
+		parent::display($cachable, $urlparams);
 	}
 }
