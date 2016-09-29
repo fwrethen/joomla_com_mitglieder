@@ -5,11 +5,11 @@
 		<description>Mitglieder-Komponente für Joomla</description>
 		<element>com_mitglieder</element>
 		<type>component</type>
-		<version>1.2.1</version>
+		<version>1.3.0</version>
 		<client>administrator</client>
 		<infourl title="Info">https://github.com/fwrethen/joomla_com_mitglieder/releases</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/fwrethen/joomla_com_mitglieder/archive/v1.2.1.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/fwrethen/joomla_com_mitglieder/archive/v1.3.0.zip</downloadurl>
 		</downloads>
 		<targetplatform name="joomla" version="3.[23456789]" />
 	</update>
