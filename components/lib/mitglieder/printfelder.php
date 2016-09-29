@@ -14,42 +14,24 @@ function printFelder($felder) {
 
 			switch($feld->typ) {
 				case "jahre seit":
-					if(trim($feld->datum) == "0000-00-00")
-						continue;
-
-					$akt_jahr = date("Y");
-					$akt_monat = date("m");
-					$akt_tag = date("d");
-
-					$gebdat = explode("-", trim($feld->datum));
-					$geb_jahr = $gebdat[0];
-					$geb_monat = $gebdat[1];
-					$geb_tag = $gebdat[2];
-
-					$alter = $akt_jahr - $geb_jahr;
-					$v = $akt_monat - $geb_monat;
-
-					// Geb-Monat in der Zukunft
-					if ($v < 0) {
-						$alter = $alter - 1;
-
-					// aktuelles Monat ist Geb-Monat
-					} elseif ($v == 0) {
-						$d = $akt_tag - $geb_tag;
-						if ($d < 0)
-							$alter = $alter - 1;
+					// Future dates will also give positive diff but who cares...
+					$age = date_diff(date_create($feld->datum), date_create('now'));
+					if ($age->y < 1){
+						if ($age->m < 1)
+							$text = 'unbekannt';
+						elseif ($age->m == 1)
+							$text = $age->m .' Monat';
+						else
+							$text = $age->m .' Monate';
 					}
+					elseif ($age->y == 1)
+						$text = $age->y .' Jahr';
+					else
+						$text = $age->y .' Jahre';
 
-					if($alter == 0 && $v > 0) {
-						$text = $v . " Monate"; //Ungenau
-					} else {
-						$text = $alter . " Jahre";
-					}
 					$data[$id]['type'] = 'text';
-					$data[$id]['value'] = $feld->text;
-
+					$data[$id]['value'] = $text;
 					break;
-
 				case "text":
 					$data[$id]['type'] = 'text';
 					// strip tags and replace newline with <br />
