@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class ListenViewListen extends JViewLegacy
+class MitgliederViewListen extends JViewLegacy
 {
 	function display($tpl = null)
 	{

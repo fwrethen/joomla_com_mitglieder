@@ -2,7 +2,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class AbteilungenControllerAbteilungen extends JControllerLegacy
+class MitgliederControllerAbteilungen extends JControllerLegacy
 {
 
 
@@ -13,7 +13,7 @@ class AbteilungenControllerAbteilungen extends JControllerLegacy
 		$this->registerTask( 'add'  , 	'edit' );
 		$this->registerTask( 'remove'  , 'delete' );
 
-		$this->redirectPath = "index.php?option=com_mitglieder&controller=abteilungen";
+		$this->redirectPath = "index.php?option=com_mitglieder&view=abteilungen";
 	}
 
 	function edit()

@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class FelderModelFelder extends JModelLegacy
+class MitgliederModelFelder extends JModelLegacy
 {
 
 	function getData()

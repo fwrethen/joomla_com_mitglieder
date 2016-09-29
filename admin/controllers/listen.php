@@ -2,7 +2,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class ListenControllerListen extends JControllerLegacy
+class MitgliederControllerListen extends JControllerLegacy
 {
 
 
@@ -13,7 +13,7 @@ class ListenControllerListen extends JControllerLegacy
 		$this->registerTask( 'add'  , 	'edit' );
 		$this->registerTask( 'remove'  , 'delete' );
 
-		$this->redirectPath = "index.php?option=com_mitglieder&controller=listen";
+		$this->redirectPath = "index.php?option=com_mitglieder&view=listen";
 	}
 
 	function edit()

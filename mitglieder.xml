@@ -37,10 +37,10 @@
 	<administration>
 		<menu>COM_MITGLIEDER_MENU</menu>
 		<submenu>
-			<menu link="option=com_mitglieder&amp;controller=mitglieder">COM_MITGLIEDER_MENU_MITGLIEDER</menu>
-			<menu link="option=com_mitglieder&amp;controller=abteilungen">COM_MITGLIEDER_MENU_ABTEILUNGEN</menu>
-			<menu link="option=com_mitglieder&amp;controller=felder">COM_MITGLIEDER_MENU_FELDER</menu>
-			<menu link="option=com_mitglieder&amp;controller=listen">COM_MITGLIEDER_MENU_LISTEN</menu>
+			<menu link="option=com_mitglieder&amp;view=mitglieder">COM_MITGLIEDER_MENU_MITGLIEDER</menu>
+			<menu link="option=com_mitglieder&amp;view=abteilungen">COM_MITGLIEDER_MENU_ABTEILUNGEN</menu>
+			<menu link="option=com_mitglieder&amp;view=felder">COM_MITGLIEDER_MENU_FELDER</menu>
+			<menu link="option=com_mitglieder&amp;view=listen">COM_MITGLIEDER_MENU_LISTEN</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>config.xml</filename>

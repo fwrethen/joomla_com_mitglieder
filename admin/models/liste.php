@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 /**
  * @author Florian Paetz
  */
-class ListenModelListe extends JModelLegacy
+class MitgliederModelListe extends JModelLegacy
 {
 	function __construct()
 	{

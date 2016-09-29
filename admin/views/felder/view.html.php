@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class FelderViewFelder extends JViewLegacy
+class MitgliederViewFelder extends JViewLegacy
 {
 	function display($tpl = null)
 	{

@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class FelderControllerFelder extends JControllerLegacy
+class MitgliederControllerFelder extends JControllerLegacy
 {
 
 
@@ -11,7 +11,7 @@ class FelderControllerFelder extends JControllerLegacy
 
 		$this->registerTask( 'apply', 'save');
 
-		$this->redirectPath = "index.php?option=com_mitglieder&controller=felder";
+		$this->redirectPath = "index.php?option=com_mitglieder&view=felder";
 	}
 
 	function display($cachable = false, $urlparams = false)

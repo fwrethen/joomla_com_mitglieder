@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 /**
  * @author Florian Paetz
  */
-class ListenViewListe extends JViewLegacy
+class MitgliederViewListe extends JViewLegacy
 {
 	function display($tpl = null)
 	{

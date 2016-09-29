@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 /**
  * @author Florian Paetz
  */
-class AbteilungenModelAbteilung extends JModelAdmin
+class MitgliederModelAbteilung extends JModelAdmin
 {
 	function __construct()
 	{

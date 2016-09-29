@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class AbteilungenModelAbteilungen extends JModelLegacy
+class MitgliederModelAbteilungen extends JModelLegacy
 {
 
 	function _buildAbteilungenQuery()

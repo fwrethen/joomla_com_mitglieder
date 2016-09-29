@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 /**
  * @author Florian Paetz
  */
-class AbteilungenViewAbteilung extends JViewLegacy
+class MitgliederViewAbteilung extends JViewLegacy
 {
 	function display($tpl = null)
 	{

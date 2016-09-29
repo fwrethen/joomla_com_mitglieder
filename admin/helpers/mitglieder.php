@@ -7,25 +7,25 @@ class MitgliederHelper extends JHelperContent
 	{
 		JHtmlSidebar::addEntry(
 			JText::_('COM_MITGLIEDER_MENU_MITGLIEDER'),
-			'index.php?option=com_mitglieder&amp;controller=mitglieder',
+			'index.php?option=com_mitglieder&amp;view=mitglieder',
 			$vName == 'mitglieder'
 		);
 
 		JHtmlSidebar::addEntry(
 			JText::_('COM_MITGLIEDER_MENU_ABTEILUNGEN'),
-			'index.php?option=com_mitglieder&amp;controller=abteilungen',
+			'index.php?option=com_mitglieder&amp;view=abteilungen',
 			$vName == 'abteilungen'
 		);
 
 		JHtmlSidebar::addEntry(
 			JText::_('COM_MITGLIEDER_MENU_FELDER'),
-			'index.php?option=com_mitglieder&amp;controller=felder',
+			'index.php?option=com_mitglieder&amp;view=felder',
 			$vName == 'felder'
 		);
 
 		JHtmlSidebar::addEntry(
 			JText::_('COM_MITGLIEDER_MENU_LISTEN'),
-			'index.php?option=com_mitglieder&amp;controller=listen',
+			'index.php?option=com_mitglieder&amp;view=listen',
 			$vName == 'listen'
 		);
 	}

@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class ListenModelListen extends JModelLegacy
+class MitgliederModelListen extends JModelLegacy
 {
 
 	function _buildListenQuery()

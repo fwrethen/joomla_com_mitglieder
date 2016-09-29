@@ -13,7 +13,7 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 		$this->registerTask( 'add'  , 	'edit' );
 		$this->registerTask( 'remove'  , 'delete' );
 
-		$this->redirectPath = "index.php?option=com_mitglieder&controller=mitglieder";
+		$this->redirectPath = "index.php?option=com_mitglieder&view=mitglieder";
 
 	}
 

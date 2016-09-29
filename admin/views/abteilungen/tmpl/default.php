@@ -59,5 +59,5 @@ defined('_JEXEC') or die; ?>
 <input type="hidden" name="option" value="com_mitglieder" />
 <input type="hidden" name="task" value="" />
 <input type="hidden" name="boxchecked" value="0" />
-<input type="hidden" name="controller" value="abteilungen" />
+<input type="hidden" name="view" value="abteilungen" />
 </form>
