@@ -18,9 +18,10 @@ class ListenControllerListen extends JControllerLegacy
 
 	function edit()
 	{
-		JRequest::setVar( 'view', 'liste' );
-		JRequest::setVar( 'layout', 'form'  );
-		JRequest::setVar('hidemainmenu', 1);
+		$input = JFactory::getApplication()->input;
+		$input->set('view', 'liste');
+		$input->set('layout', 'form');
+		$input->set('hidemainmenu', 1);
 
 		parent::display();
 	}

@@ -19,9 +19,10 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 
 	function edit()
 	{
-		JRequest::setVar( 'view', 'mitglied' );
-		JRequest::setVar( 'layout', 'form'  );
-		JRequest::setVar('hidemainmenu', 1);
+		$input = JFactory::getApplication()->input;
+		$input->set('view', 'mitglied');
+		$input->set('layout', 'form');
+		$input->set('hidemainmenu', 1);
 		$document = JFactory::getDocument();
 
 		$viewType	= $document->getType();

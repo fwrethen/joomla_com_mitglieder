@@ -2,7 +2,10 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$controller = JRequest::getVar('controller');
+// TODO: drop custom stuff and use:
+//$controller = JControllerLegacy::getInstance('Mitglieder');
+
+$controller = JFactory::getApplication()->input->get('controller');
 
 /*
  * Standart ist das controlpanel falls kein Controler angegeben wird.
@@ -26,13 +29,8 @@ require_once (JPATH_COMPONENT . '/controllers/' . $controller . '.php');
 $classname	= $controller . 'Controller'.$controller;
 $controller = new $classname( );
 
-
-
-
 // Perform the Request task
-$controller->execute( JRequest::getVar('task'));
+$controller->execute(JFactory::getApplication()->input->get('task'));
 
 // Redirect if set by the controller
 $controller->redirect();
-
-?>
