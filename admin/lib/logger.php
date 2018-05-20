@@ -15,11 +15,12 @@ class Logger
 		}
 
 		$options = array(
-	    	'format' => "{DATE}\t{TIME}\t{COMMENT}"
+				'text_file' => 'com_mitglieder.log.php',
+				'format' => '{DATE}\t{TIME}\t{COMMENT}'
 		);
 
-		$log = JLog::getInstance('com_mitglieder.log.php', $options);
-		$log->addEntry(array('comment'=>$comment));
+		JLog::addLogger($options, JLog::ALL, 'com_mitglieder');
+		JLog::add($comment, JLog::WARNING, 'com_mitglieder');
 	}
 
 	static function logArray($array)
