@@ -24,8 +24,7 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 			$msg = JText::_( 'Mitglied konnte nicht gespeichert werden' );
 		}
 
-		$model = $this->getModel('mitgliederabteilungen');
-		if ($model->store($post)) {
+		if ($model->saveAbteilungen($post)) {
 			$msg += JText::_( 'Abteilungen gespeichert!' );
 		} else {
 			$msg += JText::_( 'Abteilungen konnte nicht gespeichert werden' );

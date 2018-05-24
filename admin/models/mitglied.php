@@ -127,6 +127,66 @@ class MitgliederModelMitglied extends JModelAdmin
 	}
 
 	/**
+	* Method to save the Abteilungen of the Mitglied.
+	*
+	* @param   array  $data  The form data.
+	*
+	* @return  boolean  True on success, False on error.
+	*
+	* @since   2.0
+	*/
+	function saveAbteilungen($data)
+	{
+		require_once( JPATH_COMPONENT . '/lib/logger.php' );
+
+		$id=(int)$data['id'];
+
+		//Keine Daten Vorhanden.
+		if(!is_array($data)) {
+			JError::raiseWarning(191, "Es wurden keine Daten gespeichert");
+			return false;
+		}
+
+		Logger::log('Delete old entries');
+		//Alle Abteilungen löschen und neu speichern
+		$query="DELETE FROM #__mitglieder_mitglieder_abteilungen where mitglieder_id = $id";
+		$this->_db->setQuery($query);
+		if(!$this->_db->query()) {
+			Logger::log( 'Err:Delete old entries'.$this->_db->getErrorMsg());
+			JError::raiseError(802, $this->_db->getErrorMsg());
+			return false;
+		}
+
+		Logger::log('Done:Delete old entries');
+
+		$count=count($data['abteilung']);
+		Logger::log( 'Mitglied has ' . $count . ' Abteilungen');
+
+		for($i=0; $i < $count; $i++){
+			$abteilung = $data['abteilung'][$i];
+			$ordering = $data['ordering'][$i];
+			if ($abteilung=='')
+				continue;
+			if ($ordering=='')
+			{
+				$ordering='99';
+			}
+			$query = "INSERT INTO #__mitglieder_mitglieder_abteilungen(" .
+					 "`mitglieder_id`, `abteilungen_id`, `ordering`) " .
+					 "VALUES ($id,$abteilung,$ordering)";
+			Logger::log('Insert new Entry: '.$query);
+			$this->_db->setQuery($query);
+			if(!$this->_db->query()) {
+				Logger::log( 'Err:Insert new entries'.$this->_db->getErrorMsg());
+				JError::raiseError(802, $this->_db->getErrorMsg());
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	* Method to retrieve the Abteilungen of the Mitglied.
 	*
 	* @return  array  An array with the Abteilungen and their respective ordering value.
