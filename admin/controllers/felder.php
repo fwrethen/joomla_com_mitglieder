@@ -9,8 +9,6 @@ class MitgliederControllerFelder extends JControllerLegacy
 	{
 		parent::__construct();
 
-		$this->registerTask( 'apply', 'save');
-
 		$this->redirectPath = "index.php?option=com_mitglieder&view=felder";
 	}
 
@@ -21,7 +19,7 @@ class MitgliederControllerFelder extends JControllerLegacy
 
 	function cancel( )
 	{
-		$msg = JText::_( 'Abgebrochen' );
+		$msg = JText::_('Änderungen verworfen');
 		$this->setRedirect( $this->redirectPath, $msg );
 	}
 

@@ -1,19 +1,26 @@
 <?php
 defined('_JEXEC') or die();
 
-class MitgliederModelFelder extends JModelLegacy
+class MitgliederModelFelder extends JModelList
 {
 
-	function getData()
+	/**
+	 * Method to get a \JDatabaseQuery object for retrieving the data set from a database.
+	 *
+	 * @return  \JDatabaseQuery  A \JDatabaseQuery object to retrieve the data set.
+	 *
+	 * @since   2.0
+	 */
+	function getListQuery()
 	{
-		$query = ' SELECT id, name_backend, name_frontend, typ, `show`, tooltip, ordering ' .
-				' FROM #__mitglieder_felder ' .
-				' ORDER BY ordering, id ASC';
-		$result = $this->_getList( $query );
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
 
+		$query->select($db->quoteName(array('id', 'name_backend', 'name_frontend', 'typ', 'show', 'tooltip', 'ordering')));
+		$query->from($db->quoteName('#__mitglieder_felder'));
+		$query->order('ordering, id ASC');
 
-
-		return $result;
+		return $query;
 	}
 
 
