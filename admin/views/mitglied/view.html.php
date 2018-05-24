@@ -6,16 +6,14 @@ class MitgliederViewMitglied extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-	$document = JFactory::getDocument();
-	//$document->addScript('includes/js/joomla.javascript.js');
-			$player		= $this->get('Data');
-			$inAbteilungen = $this->get('Data','MitgliederAbteilungen');
-			$abteilungen = $this->get('Abteilungen','MitgliederAbteilungen');
+		$player = $this->get('Data');
+		$inAbteilungen = $this->get('Abteilungen');
+		$abteilungen = $this->get('AllAbteilungen');
 		$isNew		= ($player->id < 1);
 
 		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
 		JToolBarHelper::title(JText::_('Mitglied: ' . $text), 'user');
-		JToolBarHelper::save();
+		JToolBarHelper::save('mitglieder.save');
 		if ($isNew)  {
 			JToolBarHelper::cancel();
 		} else {

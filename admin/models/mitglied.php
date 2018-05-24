@@ -12,8 +12,8 @@ class MitgliederModelMitglied extends JModelAdmin
 	{
 		parent::__construct();
 
-		$array = JRequest::getVar('cid',  0, '', 'array');
-		$this->setId((int)$array[0]);
+		$input = JFactory::getApplication()->input;
+		$this->setId($input->get('id'));
 	}
 
 	/**
@@ -48,10 +48,9 @@ class MitgliederModelMitglied extends JModelAdmin
 	 * @access	public
 	 * @return	boolean	True bei Erfolg
 	 */
-	function delete(&$pks)
+	function delete()
 	{
 		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
-
 
 		if (count( $cids ) > 0)
 		{
@@ -127,6 +126,60 @@ class MitgliederModelMitglied extends JModelAdmin
 		return false;
 	}
 
+	/**
+	* Method to retrieve the Abteilungen of the Mitglied.
+	*
+	* @return  array  An array with the Abteilungen and their respective ordering value.
+	*
+	* @since   2.0
+	*/
+	function getAbteilungen()
+	{
+		$id = $this->_id;
+
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select($db->quoteName(array('abteilungen_id', 'ordering')));
+		$query->from($db->quoteName('#__mitglieder_mitglieder_abteilungen'));
+		$query->where($db->quoteName('mitglieder_id') . ' = ' . $db->quote($id));
+		$query->order('abteilungen_id ASC');
+
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+
+		if($data == null) {
+			$data = array();
+		}
+
+		return $data;
+	}
+
+	/**
+	* Method to retrieve all available Abteilungen.
+	*
+	* @return  array  An array with all Abteilungen.
+	*
+	* @since   2.0
+	*/
+	function getAllAbteilungen()
+	{
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select($db->quoteName(array('id', 'name')));
+		$query->from($db->quoteName('#__mitglieder_abteilungen'));
+		$query->order('id ASC');
+
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+
+		$def_obj = new stdClass();
+		$def_obj->name = '-';
+
+		$data = array_merge(array($def_obj), $data);
+		return $data;
+	}
 
 	public function getForm($data = array(), $loadData = true)
 	{

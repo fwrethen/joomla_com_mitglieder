@@ -10,8 +10,8 @@ class MitgliederModelListe extends JModelLegacy
 	{
 		parent::__construct();
 
-		$array = JRequest::getVar('cid',  0, '', 'array');
-		$this->setId((int)$array[0]);
+		$input = JFactory::getApplication()->input;
+		$this->setId($input->get('id'));
 	}
 
 	function setId($id)
@@ -24,29 +24,12 @@ class MitgliederModelListe extends JModelLegacy
 		return $this->_id;
 	}
 
-	function getData($id=null)
+	function getData()
 	{
-		if($id == null)
-			$id = $this->_id;
-		$query = ' SELECT * FROM #__mitglieder_listen '.
-				'  WHERE liste = '.$id;
-		//$this->_db->setQuery( $query );
-		//$data = $this->_db->loadObject();
-		$data=$this->_getList($query);
-		if($data == null) {
-			$data=array();
-		}
-		else
-		{
-			if (!is_array($data))
-			{
-				$tmp=$data;
-				$data=array();
-				$data[]=$tmp;
-			}
-		}
+			$row = $this->getTable();
+			$row->load($this->_id);
 
-		return $data;
+			return $row;
 	}
 
 	function store($post=null)

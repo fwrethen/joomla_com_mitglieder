@@ -10,8 +10,8 @@ class MitgliederModelAbteilung extends JModelAdmin
 	{
 		parent::__construct();
 
-		$array = JRequest::getVar('cid',  0, '', 'array');
-		$this->setId((int)$array[0]);
+		$input = JFactory::getApplication()->input;
+		$this->setId($input->get('id'));
 	}
 
 	function setId($id)
@@ -19,30 +19,16 @@ class MitgliederModelAbteilung extends JModelAdmin
 		$this->_id		= $id;
 	}
 
-	function getData($id=null)
+	function getData()
 	{
-		if($id == null)
-			$id = $this->_id;
-		$query = ' SELECT * FROM #__mitglieder_abteilungen '.
-				'  WHERE id = '.$id;
-		$this->_db->setQuery( $query );
-		$data = $this->_db->loadObject();
+		$row = $this->getTable();
+		$row->load($this->_id);
 
-		if($data == null) {
-			$data = new stdClass();
-			$data->id 					= 0;
-
-
-			$data->name				= null;
-			$data->description		= null;
-
-		}
-
-		return $data;
+		return $row;
 	}
 
 
-	function delete(&$pks)
+	function delete()
 	{
 		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 

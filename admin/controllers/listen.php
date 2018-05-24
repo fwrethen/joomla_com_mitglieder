@@ -10,20 +10,7 @@ class MitgliederControllerListen extends JControllerLegacy
 	{
 		parent::__construct();
 
-		$this->registerTask( 'add'  , 	'edit' );
-		$this->registerTask( 'remove'  , 'delete' );
-
 		$this->redirectPath = "index.php?option=com_mitglieder&view=listen";
-	}
-
-	function edit()
-	{
-		$input = JFactory::getApplication()->input;
-		$input->set('view', 'liste');
-		$input->set('layout', 'form');
-		$input->set('hidemainmenu', 1);
-
-		parent::display();
 	}
 
 	function save()

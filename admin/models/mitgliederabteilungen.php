@@ -22,40 +22,6 @@ class MitgliederModelMitgliederAbteilungen extends JModelLegacy
 		$this->_id		= $id;
 	}
 
-	function getData($id=null)
-	{
-		if($id == null)
-			$id = $this->_id;
-		$query = ' SELECT abteilungen_id,ordering FROM #__mitglieder_mitglieder_abteilungen '.
-				'  WHERE mitglieder_id = '.$id;
-		$this->_db->setQuery( $query );
-		$data = $this->_db->loadObjectList();
-
-		if($data == null) {
-			$data=array();
-
-		}
-
-		return $data;
-	}
-
-
-	function getAbteilungen()
-	{
-	/*
-		 * Alle Abteilungen laden
-		 */
-		$query = "SELECT id,name FROM #__mitglieder_abteilungen";
-		$this->_db->setQuery( $query );
-		$def_obj= new stdClass();
-		$def_obj->name="-";
-		return array_merge(array($def_obj),$this->_db->loadObjectList());
-		//$ret_array=$this->_db->loadObjectList();
-		//array_unshift($ret_array, $def_obj);
-		//return $ret_array;
-	}
-
-
 	function store($data=null)
 	{
 		//$row =& $this->getTable();

@@ -10,31 +10,7 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 	{
 		parent::__construct();
 
-		$this->registerTask( 'add'  , 	'edit' );
-		$this->registerTask( 'remove'  , 'delete' );
-
 		$this->redirectPath = "index.php?option=com_mitglieder&view=mitglieder";
-
-	}
-
-	function edit()
-	{
-		$input = JFactory::getApplication()->input;
-		$input->set('view', 'mitglied');
-		$input->set('layout', 'form');
-		$input->set('hidemainmenu', 1);
-		$document = JFactory::getDocument();
-
-		$viewType	= $document->getType();
-		$view = $this->getView('mitglied',$viewType);
-		$defModel= $this->getModel('mitglied');
-		$view->setModel($defModel,true);
-
-		$model= $this->getModel('mitgliederabteilungen');
-		$model->_name='Abteilungen';
-		$view->setModel($model);
-
-		parent::display();
 	}
 
 	function save()
