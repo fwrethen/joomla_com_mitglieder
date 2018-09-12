@@ -42,7 +42,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 	}
 
 
-	function delete(&$pks)
+	function delete()
 	{
 		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 
