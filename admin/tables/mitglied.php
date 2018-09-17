@@ -32,10 +32,10 @@ class TableMitglied extends JTable
 			$this->felder[$feld->id]->typ = $feld->typ;
 			if ($feld->typ=='liste')
 			{
-				$query = " SELECT id, wert FROM #__mitglieder_listen WHERE liste = $feld->id";
-				$db->setQuery($query);
-				$liste=$db->loadObjectList('id');
-				$this->listen[$feld->id]=$liste;
+				$config = array('id' => $feld->id);
+				$liste = JModelLegacy::getInstance('Liste', 'MitgliederModel', $config);
+
+				$this->listen[$feld->id] = $liste->getData()->values;
 			}
 			$this->felder[$feld->id]->name = $feld->name_backend;
 			$this->felder[$feld->id]->wert = null;

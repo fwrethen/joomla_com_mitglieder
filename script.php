@@ -1,8 +1,45 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\Registry\Registry;
+
 class com_MitgliederInstallerScript
 {
+
+	/**
+	 * The component version we are updating from
+	 *
+	 * @var    string
+	 * @since  2.0
+	 */
+	protected $fromVersion = null;
+
+	/**
+	 * Function to act prior to installation process begins
+	 *
+	 * @param   string      $action     Which action is happening (install|uninstall|discover_install|update)
+	 * @param   JInstaller  $installer  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   2.0
+	 */
+	public function preflight($action, $installer)
+	{
+		if ($action === 'update')
+		{
+			// Get the version we are updating from
+			$manifest = $installer->getManifest();
+			if ($manifest->version)
+			{
+				$this->fromVersion = $manifest->version;
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+
 	function install($parent)
 	{
 	}
@@ -88,11 +125,52 @@ class com_MitgliederInstallerScript
 		}
 	}
 
-	function preflight($type, $parent)
+	/**
+	 * Called after any type of action
+	 *
+	 * @param   string      $action     Which action is happening (install|uninstall|discover_install|update)
+	 * @param   JInstaller  $installer  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   2.0
+	 */
+	public function postflight($action, $installer)
 	{
-	}
+		if ($action === 'update')
+		{
+			if (!empty($this->fromVersion) && version_compare($this->fromVersion, '2.0', 'lt'))
+			{
+				/*
+				 * Upgrade list data to version 2.0 database schema.
+				 */
+				$db = JFactory::getDbo();
+				$query = $db->getQuery(true)
+					->select($db->quoteName(array('id', 'liste', 'wert')))
+					->from($db->quoteName('#__mitglieder_listen'));
+				$results = $db->setQuery($query)->loadObjectList();
 
-	function postflight($type, $parent)
-	{
+				$data = array();
+				foreach ($results as $row)
+				{
+					if ($row->wert)
+						if (array_key_exists($row->liste, $data))
+							$data[$row->liste][$row->id] = $row->wert;
+						else
+							$data[$row->liste] = array($row->id => $row->wert);
+				}
+
+				foreach ($data as $id => $values) {
+					$row = new stdClass();
+					$row->id = $id;
+					// Convert the values to JSON.
+					$registry = new Registry($values);
+					$row->values = (string) $registry;
+					if ($id > 0)
+						JFactory::getDbo()->insertObject('#__mitglieder2_listen', $row);
+				}
+			}
+		}
+		return true;
 	}
 }

@@ -9,8 +9,7 @@ class MitgliederViewListe extends JViewLegacy
 	function display($tpl = null)
 	{
 		$liste		= $this->get('Data');
-		// $liste is an array with only one element: a stdClass object at index 0
-		if($liste[0]->id < 1)
+		if($liste->id < 1)
 			$isNew = true;
 		else
 			$isNew = false;
@@ -24,8 +23,8 @@ class MitgliederViewListe extends JViewLegacy
 			JToolBarHelper::cancel( 'cancel', 'Close' );
 		}
 
-		$this->liste = $liste;
-		$this->listenid = $this->get('Liste');
+		$this->liste = $liste->values;
+		$this->listenid = $liste->id;
 
 		parent::display($tpl);
 	}

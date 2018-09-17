@@ -11,11 +11,11 @@
 
 	</tr>
 <?php
-foreach($this->liste as $feld) {
+foreach($this->liste as $id => $item) {
 	?>
 	<tr>
 		<td>
-			<input class="inputbox" type="text" name="alte_wert[<?php echo $feld->id;?>]" size="20" value="<?php echo $feld->wert; ?>" />
+			<input class="inputbox" type="text" name="values[<?= $id ?>]" size="20" value="<?= $item ?>" />
 		</td>
 		<td>&nbsp;</td>
 	</tr>
@@ -28,12 +28,12 @@ foreach($this->liste as $feld) {
 </tr>
 
 <?php
-for($i=0; $i < 5; $i++) {
+$new_id = max(array_keys($this->liste)) + 1;
+for($i = $new_id; $i < $new_id + 5; $i++) {
 	?>
 	<tr>
 		<td>
-			<input class="inputbox" type="text" name="neue_wert[]" size="20" value="" />
-			<input class="inputbox" type="hidden" name="neue_liste[]" size="20" value="<?php echo $this->listenid?>" />
+			<input class="inputbox" type="text" name="values[<?= $i ?>]" size="20" value="" />
 		</td>
 		<td>&nbsp;</td>
 	</tr>
@@ -46,7 +46,7 @@ for($i=0; $i < 5; $i++) {
 </div>
 
 <input type="hidden" name="option" value="com_mitglieder" />
+<input type="hidden" name="id" value="<?php echo $this->listenid?>">
 <input type="hidden" name="task" value="" />
-<input type="hidden" name="boxchecked" value="0" />
 <input type="hidden" name="view" value="listen" />
 </form>

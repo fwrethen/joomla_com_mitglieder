@@ -1,130 +1,99 @@
 <?php
 defined('_JEXEC') or die();
 
+use Joomla\Registry\Registry;
+
 /**
- * @author Florian Paetz
+ * Liste admin model.
+ *
+ * @since  1.6
  */
-class MitgliederModelListe extends JModelLegacy
+class MitgliederModelListe extends JModelAdmin
 {
-	function __construct()
-	{
-		parent::__construct();
+  /**
+   * Constructor.
+   *
+   * @param   array  $config  An optional associative array of configuration settings.
+   *
+   * @since   2.0
+   */
+  function __construct($config = array())
+  {
+    parent::__construct($config);
 
-		$input = JFactory::getApplication()->input;
-		$this->setId($input->get('id'));
-	}
+    $input = JFactory::getApplication()->input;
+    if (isset($config['id']))
+      $this->setId($config['id']);
+    else
+      $this->setId($input->get('id'));
+  }
 
-	function setId($id)
-	{
-		$this->_id		= $id;
-	}
+  function setId($id)
+  {
+    $this->_id		= $id;
+  }
 
-	function getListe()
-	{
-		return $this->_id;
-	}
+  /**
+   * Unimplemented method for getting the form from the model.
+   *
+   * @param   array    $data      Data for the form.
+   * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+   *
+   * @return  \JForm|boolean  A \JForm object on success, false on failure
+   *
+   * @since   2.0
+   */
+  function getForm($data = array(), $loadData = true)
+  {
+    return false;
+  }
 
-	function getData()
-	{
-			$row = $this->getTable();
-			$row->load($this->_id);
+  /**
+   * Method to get a single record.
+   *
+   * @return  \JObject|boolean  Object on success, false on failure.
+   *
+   * @since   2.0
+   */
+  function getData()
+  {
+    $row = $this->getTable();
+    $row->load($this->_id);
 
-			return $row;
-	}
+    if ($row->values)
+    {
+      // Convert the values field to an array.
+      $registry = new Registry($row->values);
+      $row->values = $registry->toArray();
+    }
+    return $row;
+  }
 
-	function store($post=null)
-	{
+  /**
+   * Method overwrite to save the form data.
+   *
+   * @param   array  $data  The form data.
+   *
+   * @return  boolean  True on success, False on error.
+   *
+   * @since   2.0
+   */
+  function save($data=null)
+  {
+    /* Convert the values array to JSON. */
+    if (isset($data['values']) && is_array($data['values']))
+    {
+      /* Filter empty values from array. */
+      $values = array_filter($data['values']);
+      $registry = new Registry($values);
+      $data['values'] = (string) $registry;
+    }
 
-		foreach($post['alte_wert'] as $id=>$wert) {
-			$query = "UPDATE #__mitglieder_listen " .
-					" SET wert='$wert' "  .
-			" WHERE id=$id ";
-			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				JError::raiseError(801, $this->_db->getErrorMsg());
-				return false;
-			}
-		}
-	 	$count=count($post['neue_wert']);
-		for($i=0; $i < $count; $i++){
-			$wert = $post['neue_wert'][$i];
-			$liste = $post['neue_liste'][$i];
-			if ($wert=='')
-				continue;
-			$query = "INSERT INTO #__mitglieder_listen(" .
-							" liste, wert " .
-							" ) " .
-						" VALUES(" .
-							" '$liste', '$wert') ";
-			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				JError::raiseError(802, $this->_db->getErrorMsg());
-				return false;
-			}
-		}
-		return true;
-	}
+    if (parent::save($data))
+    {
+      return true;
+    }
 
-//		$row =& $this->getTable();
-//
-//		if($data == null)
-//			$data = JRequest::get( 'post' );
-//
-//		//Keine Daten Vorhanden.
-//		if(!is_array($data)) {
-//			JError::raiseWarning(191, "Es wurden keine Daten gespeichert");
-//			return false;
-//		}
-//
-//		/*
-//		 * String(0)'' Values werden herrausgefiltert, damit sie in nicht
-//		 * als String sondern mit null in die Datenbank gespeidchert werden.
-//		 */
-//		foreach($data as $key=>$value) {
-//			if(trim($value) == '')
-//				$data[$key] = null;
-//		}
-//
-//		if (!$row->bind($data)) {
-//			JError::raiseError(101, $this->_db->getErrorMsg());
-//			return false;
-//		}
-//
-//		if (!$row->check()) {
-//			JError::raiseError(102, $this->_db->getErrorMsg());
-//			return false;
-//		}
-//
-//		if (!$row->store(true)) {
-//			JError::raiseError(103, $this->_db->getErrorMsg());
-//			return false;
-//		}
-//
-//		return true;
-//	}
-
-	function delete()
-	{
-		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
-
-		$row =& $this->getTable();
-
-		if (count( $cids ))
-		{
-			foreach($cids as $cid) {
-				/*
-				 * Abteilung löschen
-				 */
-				if (!$row->delete( $cid )) {
-					JError::raiseError(106, $this->_db->getErrorMsg());
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-
-
+    return false;
+  }
 }
-?>

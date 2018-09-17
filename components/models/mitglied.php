@@ -2,6 +2,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
+use Joomla\Registry\Registry;
+
 class MitgliederModelMitglied extends JModelLegacy
 {
 	var $_data = null;
@@ -25,16 +27,13 @@ class MitgliederModelMitglied extends JModelLegacy
 			$subQuery = $db->getQuery(true);
 
 			$subQuery->select($db->quoteName(array('felder_id', 'kurz_text', 'text',
-				'wert', 'datum')));
+				'listen_id', 'datum')));
 			$subQuery->from($db->quoteName('#__mitglieder_mitglieder_felder', 'f'));
-			$subQuery->join('LEFT', $db->quoteName('#__mitglieder_listen', 'l')
-				.' ON ('. $db->quoteName('l.id') .' = '. $db->quoteName('f.listen_id')
-				.')');
 			$subQuery->where($db->quoteName('mitglieder_id') .' = '. (int) $id);
 
 			$query->select($db->quoteName(array('f1.name_frontend', 'f1.typ',
-				'kurz_text', 'text', 'wert', 'datum'),
-				array('name', 'typ', 'kurz_text','text', 'wert', 'datum')));
+				'kurz_text', 'text', 'felder_id', 'listen_id', 'datum'),
+				array('name', 'typ', 'kurz_text','text', 'feld_id', 'wert', 'datum')));
 			$query->from('('. $subQuery->__toString() .') AS a');
 			$query->from($db->quoteName('#__mitglieder_felder', 'f1'));
 			$query->where($db->quoteName('a.felder_id') .' = '
@@ -45,6 +44,30 @@ class MitgliederModelMitglied extends JModelLegacy
 
 			$db->setQuery($query);
 			$this->_data->felder = $db->loadObjectList();
+
+			/* If field is of type list resolve associated string value */
+			foreach ($this->_data->felder as $feld)
+			{
+				if ($feld->typ == 'liste')
+				{
+					$query = $db->getQuery(true);
+					$query->select($db->quoteName('values'))
+						->from($db->quoteName('#__mitglieder2_listen'))
+						->where($db->quoteName('id') . ' = ' . $db->quote($feld->feld_id));
+					$db->setQuery($query);
+					$result = $db->loadObject();
+
+					if ($result->values)
+					{
+						// Convert the values field to an array.
+						$registry = new Registry($result->values);
+						$result->values = $registry->toArray();
+						$feld->wert = $result->values[$feld->wert];
+					} else {
+						$feld->wert = '';
+					}
+				}
+			}
 		}
 		return $this->_data;
 	}

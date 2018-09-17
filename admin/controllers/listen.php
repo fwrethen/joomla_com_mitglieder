@@ -19,7 +19,7 @@ class MitgliederControllerListen extends JControllerLegacy
 		$post = JRequest::get( 'post' );
 
 
-		if ($model->store($post)) {
+		if ($model->save($post)) {
 			$msg = JText::_( 'Liste gespeichert!' );
 		} else {
 			$msg = JText::_( 'Liste konnte nicht gespeichert werden' );

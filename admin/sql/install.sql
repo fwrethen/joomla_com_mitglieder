@@ -17,10 +17,9 @@ CREATE TABLE IF NOT EXISTS #__mitglieder_felder (
   	`ordering` tinyint(2) NOT NULL default '99'
 );
 
-create table IF NOT EXISTS #__mitglieder_listen (
-	id int(11) not null primary Key auto_increment,
-	liste int (11) not null,
-	wert varchar(255) not null
+CREATE TABLE IF NOT EXISTS `#__mitglieder2_listen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `values` mediumtext NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `#__mitglieder_mitglieder` (
