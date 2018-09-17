@@ -1,48 +1,42 @@
 <?php defined('_JEXEC') or die('Restricted access');
 
+$new_id = ($this->liste ? max(array_keys($this->liste)) + 1 : 0);
 ?>
 
-<form action="index.php" method="post" name="adminForm" id="adminForm">
-<div id="editcell">
-	<table class="adminlist">
-	<tr>
-		<th width="180px">Wert</th>
-		<th>&nbsp;</th>
+<form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
 
-	</tr>
-<?php
-foreach($this->liste as $id => $item) {
-	?>
-	<tr>
-		<td>
-			<input class="inputbox" type="text" name="values[<?= $id ?>]" size="20" value="<?= $item ?>" />
-		</td>
-		<td>&nbsp;</td>
-	</tr>
-<?php
-}
-?>
-<tr>
-	<th colspan="2">Neue Werte erstellen</th>
+<div class="form-horizontal">
+  <div class="row-fluid">
+    <div class="span9">
+      <div class="control-group">
 
-</tr>
+        <?php if ($this->liste): ?>
+          <?php foreach($this->liste as $id => $item): ?>
+            <div class="control-group">
+              <div class="control-label">
+              </div>
+              <div class="controls">
+                <input class="inputbox" type="text" name="values[<?= $id ?>]" size="20" value="<?= $item ?>" />
+              </div>
+            </div>
+          <?php endforeach; ?>
+          <hr />
+        <?php endif; ?>
 
-<?php
-$new_id = max(array_keys($this->liste)) + 1;
-for($i = $new_id; $i < $new_id + 5; $i++) {
-	?>
-	<tr>
-		<td>
-			<input class="inputbox" type="text" name="values[<?= $i ?>]" size="20" value="" />
-		</td>
-		<td>&nbsp;</td>
-	</tr>
-<?php
-}
-?>
+        <?php for($i = $new_id; $i < $new_id + 5; $i++): ?>
+          <div class="control-group">
+            <div class="control-label">
+              <?php if ($i == $new_id) echo JText::_('Neue Werte hinzufügen:'); ?>
+            </div>
+            <div class="controls">
+              <input class="inputbox" type="text" name="values[<?= $i ?>]" size="20" value="" />
+            </div>
+          </div>
+        <?php endfor; ?>
 
-
-	</table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <input type="hidden" name="option" value="com_mitglieder" />
