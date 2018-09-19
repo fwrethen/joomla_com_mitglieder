@@ -40,8 +40,9 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 
 	function delete()
 	{
+		$cid = $this->input->get('cid', array(), 'array');
 		$model = $this->getModel('mitglied');
-		if(!$model->delete()) {
+		if(!$model->delete($cid)) {
 			$msg = JText::_( 'Fehler: Mitglied(er) konnten nicht gelöscht werden' );
 		} else {
 			$msg = JText::_( 'Mitglied(er) Gelöscht' );

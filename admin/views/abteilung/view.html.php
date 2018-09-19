@@ -8,7 +8,7 @@ class MitgliederViewAbteilung extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		$team		= $this->get('Data');
+		$team		= $this->get('Item');
 		if($team->id < 1)
 			$isNew = true;
 		else

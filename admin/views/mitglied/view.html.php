@@ -6,7 +6,7 @@ class MitgliederViewMitglied extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		$player = $this->get('Data');
+		$player = $this->get('Item');
 		$inAbteilungen = $this->get('Abteilungen');
 		$abteilungen = $this->get('AllAbteilungen');
 		$isNew		= ($player->id < 1);

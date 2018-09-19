@@ -34,8 +34,9 @@ class MitgliederControllerAbteilungen extends JControllerLegacy
 
 	function delete()
 	{
+		$cid = $this->input->get('cid', array(), 'array');
 		$model = $this->getModel('abteilung');
-		if(!$model->delete()) {
+		if(!$model->delete($cid)) {
 			$msg = JText::_( 'Fehler: Abteilung(en) konnten nicht gelöscht werden' );
 		} else {
 			$msg = JText::_( 'Abteilung(en) Gelöscht' );

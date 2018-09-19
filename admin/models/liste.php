@@ -6,7 +6,7 @@ use Joomla\Registry\Registry;
 /**
  * Liste admin model.
  *
- * @since  1.6
+ * @since  0.9
  */
 class MitgliederModelListe extends JModelAdmin
 {
@@ -15,58 +15,34 @@ class MitgliederModelListe extends JModelAdmin
    *
    * @param   array  $config  An optional associative array of configuration settings.
    *
-   * @since   2.0
+   * @since   0.9
    */
   function __construct($config = array())
   {
     parent::__construct($config);
-
-    $input = JFactory::getApplication()->input;
-    if (isset($config['id']))
-      $this->setId($config['id']);
-    else
-      $this->setId($input->get('id'));
-  }
-
-  function setId($id)
-  {
-    $this->_id		= $id;
-  }
-
-  /**
-   * Unimplemented method for getting the form from the model.
-   *
-   * @param   array    $data      Data for the form.
-   * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
-   *
-   * @return  \JForm|boolean  A \JForm object on success, false on failure
-   *
-   * @since   2.0
-   */
-  function getForm($data = array(), $loadData = true)
-  {
-    return false;
   }
 
   /**
    * Method to get a single record.
    *
+   * @param   integer  $pk  The id of the primary key.
+   *
    * @return  \JObject|boolean  Object on success, false on failure.
    *
    * @since   2.0
    */
-  function getData()
+  function getItem($pk = null)
   {
-    $row = $this->getTable();
-    $row->load($this->_id);
+    $item = parent::getItem($pk);
 
-    if ($row->values)
+    if (property_exists($item, 'values'))
     {
       // Convert the values field to an array.
-      $registry = new Registry($row->values);
-      $row->values = $registry->toArray();
+      $registry = new Registry($item->values);
+      $item->values = $registry->toArray();
     }
-    return $row;
+
+    return $item;
   }
 
   /**
@@ -94,6 +70,21 @@ class MitgliederModelListe extends JModelAdmin
       return true;
     }
 
+    return false;
+  }
+
+  /**
+   * Method for getting the form from the model.
+   *
+   * @param   array    $data      Data for the form.
+   * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+   *
+   * @return  \JForm|boolean  A \JForm object on success, false on failure
+   *
+   * @since   2.0
+   */
+  function getForm($data = array(), $loadData = true)
+  {
     return false;
   }
 }

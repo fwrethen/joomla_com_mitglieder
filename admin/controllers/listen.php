@@ -31,21 +31,6 @@ class MitgliederControllerListen extends JControllerLegacy
 		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
-	function delete()
-	{
-		$model = $this->getModel('liste');
-		if(!$model->delete()) {
-			$msg = JText::_( 'Fehler: Liste(n) konnten nicht gelöscht werden' );
-		} else {
-			$msg = JText::_( 'Liste(n) Gelöscht' );
-		}
-
-		$cache = JFactory::getCache('com_mitglieder');
-		$cache->clean();
-
-		return $this->setRedirect($this->redirectPath, $msg);
-	}
-
 	function display($cachable = false, $urlparams = false)
 	{
 		parent::display();

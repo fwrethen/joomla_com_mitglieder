@@ -8,7 +8,7 @@ class MitgliederViewListe extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		$liste		= $this->get('Data');
+		$liste		= $this->get('Item');
 		if($liste->id < 1)
 			$isNew = true;
 		else
