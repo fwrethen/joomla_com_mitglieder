@@ -77,7 +77,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_mitglieder.abteilung', 'abteilung', array('control' => '', 'load_data' => $loadData));
+		$form = $this->loadForm('com_mitglieder.abteilung', 'abteilung', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form))
 		{
 			return false;
@@ -85,5 +85,22 @@ class MitgliederModelAbteilung extends JModelAdmin
 		return $form;
 	}
 
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return  mixed  The data for the form.
+	 *
+	 * @since   2.0
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_mitglieder.edit.abteilung.data', array());
+		if (empty($data))
+		{
+			$data = $this->getItem();
+		}
+		$this->preprocessData('com_mitglieder.abteilung', $data);
+		return $data;
+	}
 }
-?>

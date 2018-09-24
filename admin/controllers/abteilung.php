@@ -21,7 +21,7 @@ class MitgliederControllerAbteilung extends JControllerForm
    * @var    string
    * @since  2.0
    */
-   protected $view_list = 'abteilung';
+   protected $view_list = 'abteilungen';
 
   /**
    * The prefix to use with controller messages.

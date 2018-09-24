@@ -16,24 +16,23 @@
 	}
 </script>
 
-<form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
+<form action="<?php echo JRoute::_('index.php?option=com_mitglieder&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
 <div class="form-horizontal">
   <div class="row-fluid">
     <div class="span9">
       <?php
-        echo $this->form->renderField('name', null, $this->team->name);
-        echo $this->form->renderField('description', null,
-          $this->team->description);
-        echo $this->form->renderField('thumb', null, $this->team->thumb);
-        echo $this->form->renderField('field', null, $this->team->field);
+        echo $this->form->renderField('name');
+        echo $this->form->renderField('description');
+        echo $this->form->renderField('thumb');
+        echo $this->form->renderField('field');
       ?>
+    </div>
+    <div class="span3">
+      <?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
     </div>
   </div>
 </div>
 
-
-<input type="hidden" name="option" value="com_mitglieder" />
-<input type="hidden" name="id" value="<?php echo $this->team->id; ?>" />
 <input type="hidden" name="task" value="" />
-<input type="hidden" name="view" value="abteilungen" />
+<?php echo JHtml::_('form.token'); ?>
 </form>

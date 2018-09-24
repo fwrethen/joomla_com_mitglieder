@@ -42,15 +42,15 @@ class MitgliederViewAbteilung extends JViewLegacy
 		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
 
 		JToolBarHelper::title(JText::_('Abteilung: ' . $text), 'archive');
-		JToolBarHelper::save('abteilungen.save');
+		JToolBarHelper::save('abteilung.save');
 
 		if (empty($this->item->id))
 		{
-			JToolbarHelper::cancel('cancel');
+			JToolbarHelper::cancel('abteilung.cancel');
 		}
 		else
 		{
-			JToolbarHelper::cancel('cancel', 'JTOOLBAR_CLOSE');
+			JToolbarHelper::cancel('abteilung.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
 }
