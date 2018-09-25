@@ -21,7 +21,7 @@ class MitgliederControllerListe extends JControllerForm
    * @var    string
    * @since  2.0
    */
-   protected $view_list = 'liste';
+   protected $view_list = 'listen';
 
   /**
    * The prefix to use with controller messages.

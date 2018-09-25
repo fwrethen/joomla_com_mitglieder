@@ -56,11 +56,25 @@ class MitgliederModelListe extends JModelAdmin
    */
   function save($data=null)
   {
-    /* Convert the values array to JSON. */
     if (isset($data['values']) && is_array($data['values']))
     {
+      /* Prepare form data as needed for database. */
+      $values = array();
+      $max_id = max(array_column($data['values'], 'id'));
+      foreach ($data['values'] as $value) {
+        /* Add id to new elements. */
+        if ($value['id'] == 0)
+        {
+          $max_id += 1;
+          $values[$max_id] = $value['title'];
+        } else {
+          $values[$value['id']] = $value['title'];
+        }
+      }
+
       /* Filter empty values from array. */
-      $values = array_filter($data['values']);
+      $values = array_filter($values);
+      /* Convert the values array to JSON. */
       $registry = new Registry($values);
       $data['values'] = (string) $registry;
     }
@@ -85,6 +99,42 @@ class MitgliederModelListe extends JModelAdmin
    */
   function getForm($data = array(), $loadData = true)
   {
-    return false;
+    // Get the form.
+    $form = $this->loadForm('com_mitglieder.liste', 'liste', array('control' => 'jform', 'load_data' => $loadData));
+    if (empty($form))
+    {
+      return false;
+    }
+    return $form;
+  }
+
+  /**
+   * Method to get the data that should be injected in the form.
+   *
+   * @return  mixed  The data for the form.
+   *
+   * @since   2.0
+   */
+  protected function loadFormData()
+  {
+    // Check the session for previously entered form data.
+    $data = JFactory::getApplication()->getUserState('com_mitglieder.edit.liste.data', array());
+    if (empty($data))
+    {
+      $data = $this->getItem();
+    }
+
+    /* Prepare data structure for form. */
+    if (property_exists($data, 'values'))
+    {
+      $values = array();
+      foreach ($data->values as $key => $value) {
+        $values['values' . $key] = array('id' => $key, 'title' => $value);
+      }
+      $data->values = $values;
+    }
+
+    $this->preprocessData('com_mitglieder.liste', $data);
+    return $data;
   }
 }

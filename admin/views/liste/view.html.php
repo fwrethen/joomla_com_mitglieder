@@ -19,6 +19,7 @@ class MitgliederViewListe extends JViewLegacy
 	 */
 	function display($tpl = null)
 	{
+		$this->form = $this->get('Form');
 		$this->item = $this->get('Item');
 
 		$this->liste = $this->item->values;
@@ -42,15 +43,15 @@ class MitgliederViewListe extends JViewLegacy
 		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
 
 		JToolBarHelper::title(JText::_('Liste: ' . $text), 'list');
-		JToolBarHelper::save('listen.save');
+		JToolBarHelper::save('liste.save');
 
 		if (empty($this->item->id))
 		{
-			JToolbarHelper::cancel('cancel');
+			JToolbarHelper::cancel('liste.cancel');
 		}
 		else
 		{
-			JToolbarHelper::cancel('cancel', 'JTOOLBAR_CLOSE');
+			JToolbarHelper::cancel('liste.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
 }
