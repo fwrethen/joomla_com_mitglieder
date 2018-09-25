@@ -44,15 +44,15 @@ class MitgliederViewMitglied extends JViewLegacy
 		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
 
 		JToolBarHelper::title(JText::_('Mitglied: ' . $text), 'user');
-		JToolBarHelper::save('mitglieder.save');
+		JToolBarHelper::save('mitglied.save');
 
 		if (empty($this->item->id))
 		{
-			JToolbarHelper::cancel('cancel');
+			JToolbarHelper::cancel('mitglied.cancel');
 		}
 		else
 		{
-			JToolbarHelper::cancel('cancel', 'JTOOLBAR_CLOSE');
+			JToolbarHelper::cancel('mitglied.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
 }
