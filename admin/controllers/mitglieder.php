@@ -2,40 +2,13 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class MitgliederControllerMitglieder extends JControllerLegacy
+class MitgliederControllerMitglieder extends JControllerAdmin
 {
-
-
 	function __construct()
 	{
 		parent::__construct();
 
 		$this->redirectPath = "index.php?option=com_mitglieder&view=mitglieder";
-	}
-
-	function save()
-	{
-		$model = $this->getModel('mitglied');
-		$post = JRequest::get( 'post', 2);
-
-		if ($model->save($post)) {
-			$msg = JText::_( 'Mitglied gespeichert!' );
-		} else {
-			$msg = JText::_( 'Mitglied konnte nicht gespeichert werden' );
-		}
-
-		if ($model->saveAbteilungen($post)) {
-			$msg += JText::_( 'Abteilungen gespeichert!' );
-		} else {
-			$msg += JText::_( 'Abteilungen konnte nicht gespeichert werden' );
-		}
-
-
-
-		$cache = JFactory::getCache('com_mitglieder');
-		$cache->clean();
-
-		return $this->setRedirect($this->redirectPath, $msg);
 	}
 
 	function delete()
@@ -53,13 +26,4 @@ class MitgliederControllerMitglieder extends JControllerLegacy
 
 		return $this->setRedirect($this->redirectPath, $msg);
 	}
-
-	function display($cachable = false, $urlparams = false)
-	{
-		parent::display();
-	}
-
-
-
 }
-?>
