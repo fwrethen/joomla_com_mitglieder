@@ -46,19 +46,10 @@ class MitgliederModelAbteilung extends JModelAdmin
 					->where($db->quoteName('abteilungen_id') . ' = ' . $db->quote($pk));
 				$db->setQuery($query);
 
-				if (!$db->query()) {
-					JError::raiseError(105, $this->_db->getErrorMsg());
-					return false;
-				}
+				$db->execute();
 
-				/*
-				 * Abteilung löschen
-				 */
-				if (!$row->delete( $pk )) {
-					JError::raiseError(106, $this->_db->getErrorMsg());
-					return false;
-				}
-
+				// Abteilung löschen
+				$row->delete($pk);
 			}
 		}
 		return true;

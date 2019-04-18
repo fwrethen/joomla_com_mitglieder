@@ -47,16 +47,16 @@ class MitgliederController extends JControllerLegacy
 		if ($view == 'mitglied' && $layout == 'edit' && !$this->checkEditId('com_mitglieder.edit.mitglied', $id))
 		{
 			// Somehow the person just went to the form - we don't allow that.
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
-			$this->setMessage($this->getError(), 'error');
+			$error = JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id);
+			$this->setMessage($error, 'error');
 			$this->setRedirect(JRoute::_('index.php?option=com_mitglieder&view=mitglieder', false));
 			return false;
 		}
 		elseif ($view == 'abteilung' && $layout == 'edit' && !$this->checkEditId('com_mitglieder.edit.abteilung', $id))
 		{
 			// Somehow the person just went to the form - we don't allow that.
-			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
-			$this->setMessage($this->getError(), 'error');
+			$error = JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id);
+			$this->setMessage($error, 'error');
 			$this->setRedirect(JRoute::_('index.php?option=com_mitglieder&view=abteilungen', false));
 			return false;
 		}

@@ -37,14 +37,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		if ($pk > 0)
 		{
 			// Attempt to load the row.
-			$return = $table->load($pk);
-
-			// Check for a table object error.
-			if ($return === false && $table->getError())
-			{
-				$this->setError($table->getError());
-				return false;
-			}
+			$table->load($pk);
 		}
 
 		return $table;
@@ -71,10 +64,7 @@ class MitgliederModelMitglied extends JModelAdmin
 				$query = "DELETE FROM #__mitglieder_mitglieder_felder " .
 						" WHERE mitglieder_id=" . $pk;
 				$this->_db->setQuery($query);
-				if ( !$this->_db->query() ) {
-					JError::raiseError(105, $this->_db->getErrorMsg());
-               		return false;
-				}
+				$this->_db->execute();
 
 				/*
 				 * Mitgliederzuordnungen löschen
@@ -82,10 +72,7 @@ class MitgliederModelMitglied extends JModelAdmin
 				$query = "DELETE FROM #__mitglieder_mitglieder_abteilungen " .
 						" WHERE mitglieder_id=" . $pk;
 				$this->_db->setQuery($query);
-				if ( !$this->_db->query() ) {
-					JError::raiseError(105, $this->_db->getErrorMsg());
-               		return false;
-				}
+				$this->_db->execute();
 				/*
 				 * Spieler löschen
 				 */
@@ -136,14 +123,15 @@ class MitgliederModelMitglied extends JModelAdmin
 	}
 
 	/**
-	* Method to save the Abteilungen of the Mitglied.
-	*
-	* @param   array  $data  The form data.
-	*
-	* @return  boolean  True on success, False on error.
-	*
-	* @since   2.0
-	*/
+	 * Method to save the Abteilungen of the Mitglied.
+	 *
+	 * @param   array $data The form data.
+	 *
+	 * @return  boolean  True on success, False on error.
+	 *
+	 * @since   2.0
+	 * @throws Exception
+	 */
 	function saveAbteilungen($data)
 	{
 		require_once( JPATH_COMPONENT . '/lib/logger.php' );
@@ -152,19 +140,14 @@ class MitgliederModelMitglied extends JModelAdmin
 
 		//Keine Daten Vorhanden.
 		if(!is_array($data)) {
-			JError::raiseWarning(191, "Es wurden keine Daten gespeichert");
-			return false;
+			throw new Exception("Es wurden keine Daten gespeichert");
 		}
 
 		Logger::log('Delete old entries');
 		//Alle Abteilungen löschen und neu speichern
 		$query="DELETE FROM #__mitglieder_mitglieder_abteilungen where mitglieder_id = $id";
 		$this->_db->setQuery($query);
-		if(!$this->_db->query()) {
-			Logger::log( 'Err:Delete old entries'.$this->_db->getErrorMsg());
-			JError::raiseError(802, $this->_db->getErrorMsg());
-			return false;
-		}
+		$this->_db->execute();
 
 		Logger::log('Done:Delete old entries');
 
@@ -185,11 +168,7 @@ class MitgliederModelMitglied extends JModelAdmin
 					 "VALUES ($id,$abteilung,$ordering)";
 			Logger::log('Insert new Entry: '.$query);
 			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				Logger::log( 'Err:Insert new entries'.$this->_db->getErrorMsg());
-				JError::raiseError(802, $this->_db->getErrorMsg());
-				return false;
-			}
+			$this->_db->execute();
 		}
 
 		return true;

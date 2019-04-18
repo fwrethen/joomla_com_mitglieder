@@ -71,7 +71,7 @@ class com_MitgliederInstallerScript
 		$img_path	= JPATH_ROOT . '/'
 			. JComponentHelper::getParams('com_media')->get('image_path', 'images')
 			. '/' . $params->get('image_path', 'stories/mitglieder') . '/thumbs/';
-		if (JFolder::delete($img_path))
+		if (recursive_remove_directory($img_path))
 		{
 			echo '<p>Thumbnails wurden gel&ouml;scht.</p>';
 		}
@@ -88,7 +88,7 @@ class com_MitgliederInstallerScript
 				" #__mitglieder_mitglieder_felder, " .
 				" #__mitglieder_mitglieder_abteilungen";
 			$db->setQuery( $query );
-			$db->query();
+			$db->execute();
 			echo '<p>Datenbankeintr&auml;ge wurden gel&ouml;scht.</p>';
 		}
 		else echo '<p>Datenbankeintr&auml;ge wurden nicht gel&ouml;scht.</p>';

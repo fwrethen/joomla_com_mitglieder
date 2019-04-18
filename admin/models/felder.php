@@ -83,10 +83,7 @@ function getTypen() {
 						" ordering=$ordering " .
 			" WHERE id=$id ";
 			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				JError::raiseError(801, $this->_db->getErrorMsg());
-				return false;
-			}
+			$this->_db->execute();
 		}
 		for($i=0; $i < count($post['neue_namen_backend']); $i++){
 			$name_backend = $post['neue_namen_backend'][$i];
@@ -113,10 +110,7 @@ function getTypen() {
 							" '$name_backend', '$name_frondend', $zeige_in_uebersicht, " .
 							" '$typ', '$tooltip',$ordering) ";
 			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				JError::raiseError(802, $this->_db->getErrorMsg());
-				return false;
-			}
+			$this->_db->execute();
 		}
 		return true;
 	}

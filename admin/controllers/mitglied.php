@@ -61,8 +61,8 @@ class MitgliederControllerMitglied extends JControllerForm
         $this->setMessage(\JText::_('JLIB_APPLICATION_SAVE_SUCCESS'));
         return true;
       } else {
-        $this->setError(\JText::_('JLIB_APPLICATION_ERROR_SAVE_FAILED'));
-        $this->setMessage($this->getError(), 'error');
+        $error = \JText::_('JLIB_APPLICATION_ERROR_SAVE_FAILED');
+        $this->setMessage($error, 'error');
         return false;
       }
   }
