@@ -27,11 +27,7 @@
 			<input class="inputbox" type="text" name="alte_namen_frondend[<?php echo $feld->id;?>]" size="20" value="<?php echo $feld->name_frontend; ?>" />
 		</td>
 		<td>
-
-			<?php
-
-			echo JHtml::_( 'select.genericlist',$this->typen,  'alte_typen[' . $feld->id . ']','class="inputbox"', 'typ', 'typ', $feld->typ );
-			?>
+			<?php echo JHtml::_('select.genericlist', $this->types, 'alte_typen[' . $feld->id . ']', 'class="inputbox"', null, null, $feld->typ); ?>
 		</td>
 		<td>
 			<input class="inputbox" type="text" name="alte_tooltip[<?php echo $feld->id;?>]" size="20" value="<?php echo $feld->tooltip; ?>" />
@@ -67,10 +63,7 @@ for($i=0; $i < 5; $i++) {
 			<input class="inputbox" type="text" name="neue_namen_frontend[]" size="20" value="" />
 		</td>
 		<td>
-		<?php
-
-			echo JHtml::_( 'select.genericlist',$this->typen,  'neue_typen[]','class="inputbox"', 'typ', 'typ', null );
-			?>
+		    <?php echo JHtml::_('select.genericlist', $this->types, 'neue_typen[]', 'class="inputbox"'); ?>
 		</td>
 		<td>
 			<input class="inputbox" type="text" name="neue_tooltip[]" size="20" value="" />

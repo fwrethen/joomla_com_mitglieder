@@ -15,7 +15,7 @@ class MitgliederViewFelder extends JViewLegacy
 		$this->sidebar = JHtmlSidebar::render();
 
 		$this->felder = $this->get('Items');
-		$this->typen = $this->get('Typen');
+		$this->types = $this->get('Types');
 
 		parent::display($tpl);
 	}

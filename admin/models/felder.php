@@ -23,44 +23,28 @@ class MitgliederModelFelder extends JModelList
 		return $query;
 	}
 
-
-function getTypen() {
-		$typen = array();
-
-		$typ = new stdClass();
-		$typ->typ = "text";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "text_html";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "email";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "telefon";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "datum";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "jahre seit";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "liste";
-		$typen[] = $typ;
-
-		$typ = new stdClass();
-		$typ->typ = "bild";
-		$typen[] = $typ;
+	/**
+	 * Method to get an array of the supported field types. Key is the internal reference, value the display name.
+	 *
+	 * @return  array   An array of field types.
+	 *
+	 * @since   2.0
+	 */
+	function getTypes() {
+		$typen = [
+			'text' => 'Text',
+			'text_html' => 'HTML',
+			'email' => 'E-Mail',
+			'telefon' => 'Telefon',
+			'datum' => 'Datum',
+			'jahre seit' => 'Jahre seit',
+			'liste' => 'Liste',
+			'bild' => 'Bild',
+		];
 
 		return $typen;
 	}
+
 
 	function store($post=null)
 	{
