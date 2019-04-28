@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS #__mitglieder_felder (
 	id int(11) not null auto_increment PRIMARY KEY,
 	`name_backend` varchar(100) NOT NULL,
 	`name_frontend` varchar(100) NOT NULL,
-  	`typ` set('text','text_html','email','telefon','datum','jahre seit','liste','bild') NOT NULL default 'text',
+  	`typ` VARCHAR(100) NOT NULL DEFAULT 'text',
   	`tooltip` varchar(255) default NULL,
   	`show` tinyint(1) NOT NULL default 1,
   	`ordering` tinyint(2) NOT NULL default '99'
