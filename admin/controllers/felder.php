@@ -28,7 +28,9 @@ class MitgliederControllerFelder extends JControllerLegacy
 	function save()
 	{
 		$model = $this->getModel('felder');
-		if ($model->store(JRequest::get( 'post' ))) {
+		$formData = $this->input->get('jform', null, 'string');
+
+		if ($model->store($formData)) {
 			$msg = JText::_( 'Felder gespeichert!' );
 		} else {
 			$msg = JText::_( 'Fehler beim speichern der Felder' );

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <field
+    name="id"
+    type="number"
+    label="JGLOBAL_FIELD_ID_LABEL"
+    description="JGLOBAL_FIELD_ID_DESC"
+    default="0"
+    readonly="true"
+    class="readonly" />
+  <field
+    name="name_backend"
+    type="text"
+    size="40"
+    filter="safehtml"
+    label="Feldname (Backend)"
+    description="" />
+  <field
+    name="name_frontend"
+    type="text"
+    size="40"
+    filter="safehtml"
+    label="Feldname (Frontend)"
+    description="" />
+  <field
+    name="typ"
+    type="list"
+    label="Typ"
+    description="">
+    <option value="text">Text</option>
+    <option value="text_html">HTML</option>
+    <option value="email">E-Mail</option>
+    <option value="telefon">Telefon</option>
+    <option value="datum">Datum</option>
+    <option value="jahre seit">Jahre seit</option>
+    <option value="liste">Liste</option>
+    <option value="bild">Bild</option>
+  </field>
+  <field
+    name="tooltip"
+    type="text"
+    filter="safehtml"
+    size="40"
+    label="Hilfetext"
+    description="" />
+  <field
+    name="show"
+    type="checkbox"
+    label="Anzeigen"
+    description="" />
+</form>
