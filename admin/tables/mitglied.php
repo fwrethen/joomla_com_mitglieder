@@ -12,7 +12,7 @@ class TableMitglied extends JTable
 	var $listen					= array();
 
 
-	function TableMitglied(& $db) {
+	function __construct($db) {
 		parent::__construct('#__mitglieder_mitglieder', 'id', $db);
 
 		/*
@@ -39,8 +39,6 @@ class TableMitglied extends JTable
 			$this->felder[$feld->id]->wert = null;
 			$this->felder[$feld->id]->tooltip = $feld->tooltip;
 		}
-
-
 	}
 
 

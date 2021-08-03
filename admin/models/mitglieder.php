@@ -11,7 +11,7 @@ class MitgliederModelMitglieder extends JModelList
    * @note    Calling getState in this method will result in recursion.
    * @since   2.0
    */
-  protected function populateState()
+  protected function populateState($ordering = NULL, $direction = NULL)
   {
     // Set list limit to no limit.
     $this->setState('list.limit', 0);
