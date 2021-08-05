@@ -21,6 +21,8 @@ class com_MitgliederInstallerScript extends InstallerScript
 	public function __construct()
 	{
 		$this->extension = 'com_mitglieder';
+		$this->minimumJoomla = '3.9';
+		$this->minimumPhp = '7.4';
 	}
 
 	/**
@@ -35,6 +37,22 @@ class com_MitgliederInstallerScript extends InstallerScript
 	 */
 	public function preflight($action, $installer)
 	{
+		// Check for the minimum PHP version before continuing
+		if (!empty($this->minimumPhp) && version_compare(PHP_VERSION, $this->minimumPhp, '<'))
+		{
+			\JLog::add(\JText::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPhp), \JLog::WARNING, 'jerror');
+
+			return false;
+		}
+
+		// Check for the minimum Joomla version before continuing
+		if (!empty($this->minimumJoomla) && version_compare(JVERSION, $this->minimumJoomla, '<'))
+		{
+			\JLog::add(\JText::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomla), \JLog::WARNING, 'jerror');
+
+			return false;
+		}
+
 		if ($action === 'update')
 		{
 			// Get the version we are updating from
