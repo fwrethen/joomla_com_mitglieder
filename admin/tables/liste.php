@@ -24,6 +24,6 @@ class TableListe extends JTable
    */
   function __construct($db)
   {
-    parent::__construct('#__mitglieder2_listen', 'id', $db);
+    parent::__construct('#__mitglieder_listen', 'id', $db);
   }
 }

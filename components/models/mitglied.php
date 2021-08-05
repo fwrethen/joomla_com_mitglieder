@@ -52,7 +52,7 @@ class MitgliederModelMitglied extends JModelLegacy
 				{
 					$query = $db->getQuery(true);
 					$query->select($db->quoteName('values'))
-						->from($db->quoteName('#__mitglieder2_listen'))
+						->from($db->quoteName('#__mitglieder_listen'))
 						->where($db->quoteName('id') . ' = ' . $db->quote($feld->feld_id));
 					$db->setQuery($query);
 					$result = $db->loadObject();

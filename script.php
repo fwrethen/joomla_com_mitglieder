@@ -161,7 +161,7 @@ class com_MitgliederInstallerScript extends InstallerScript
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
 					->select($db->quoteName(array('id', 'liste', 'wert')))
-					->from($db->quoteName('#__mitglieder_listen'));
+					->from($db->quoteName('#__mitglieder_listen_v1'));
 				$results = $db->setQuery($query)->loadObjectList();
 
 				$data = array();
@@ -181,7 +181,7 @@ class com_MitgliederInstallerScript extends InstallerScript
 					$registry = new Registry($values);
 					$row->values = (string) $registry;
 					if ($id > 0)
-						JFactory::getDbo()->insertObject('#__mitglieder2_listen', $row);
+						JFactory::getDbo()->insertObject('#__mitglieder_listen', $row);
 				}
 			}
 		}
