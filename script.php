@@ -1,9 +1,10 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Installer\InstallerScript;
 use Joomla\Registry\Registry;
 
-class com_MitgliederInstallerScript
+class com_MitgliederInstallerScript extends InstallerScript
 {
 
 	/**
@@ -15,10 +16,18 @@ class com_MitgliederInstallerScript
 	protected $fromVersion = null;
 
 	/**
+	 * @since 2.0
+	 */
+	public function __construct()
+	{
+		$this->extension = 'com_mitglieder';
+	}
+
+	/**
 	 * Function to act prior to installation process begins
 	 *
 	 * @param   string      $action     Which action is happening (install|uninstall|discover_install|update)
-	 * @param   JInstaller  $installer  The class calling this method
+	 * @param   JInstallerAdapter  $installer  The class calling this method
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -29,14 +38,19 @@ class com_MitgliederInstallerScript
 		if ($action === 'update')
 		{
 			// Get the version we are updating from
-			$manifest = $installer->getManifest();
-			if ($manifest->version)
+			$manifest = $this->getItemArray('manifest_cache', '#__extensions', 'element', \JFactory::getDbo()->quote($this->extension));
+
+			// Check whether we have an old release installed and skip this check when this here is the initial install.
+			if (isset($manifest['version']))
 			{
-				$this->fromVersion = $manifest->version;
+				$this->fromVersion = $manifest['version'];
+
 				return true;
 			}
+
 			return false;
 		}
+
 		return true;
 	}
 
@@ -129,7 +143,7 @@ class com_MitgliederInstallerScript
 	 * Called after any type of action
 	 *
 	 * @param   string      $action     Which action is happening (install|uninstall|discover_install|update)
-	 * @param   JInstaller  $installer  The class calling this method
+	 * @param   JInstallerAdapter  $installer  The class calling this method
 	 *
 	 * @return  boolean  True on success
 	 *
