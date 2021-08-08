@@ -11,13 +11,14 @@ class MitgliederViewMitglieder extends JViewLegacy
 		JToolBarHelper::deleteList('', 'mitglieder.delete');
 		JToolBarHelper::preferences('com_mitglieder');
 
-		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
-		MitgliederHelper::addSubmenu('mitglieder');
-		$this->sidebar = JHtmlSidebar::render();
+		if (version_compare(JVERSION, '4', '<')) {
+			require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
+			MitgliederHelper::addSubmenu('mitglieder');
+			$this->sidebar = JHtmlSidebar::render();
+		}
 
 		$this->items = $this->get('Items');
 
 		parent::display($tpl);
 	}
 }
-?>

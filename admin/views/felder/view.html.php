@@ -39,8 +39,10 @@ class MitgliederViewFelder extends JViewLegacy
 		JToolBarHelper::cancel('felder.cancel', 'JTOOLBAR_CANCEL');
 		JToolBarHelper::preferences('com_mitglieder');
 
-		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
-		MitgliederHelper::addSubmenu('felder');
-		$this->sidebar = JHtmlSidebar::render();
+		if (version_compare(JVERSION, '4', '<')) {
+			require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
+			MitgliederHelper::addSubmenu('felder');
+			$this->sidebar = JHtmlSidebar::render();
+		}
 	}
 }
