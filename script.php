@@ -1,6 +1,7 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Installer\InstallerScript;
 use Joomla\Registry\Registry;
 
@@ -78,8 +79,6 @@ class com_MitgliederInstallerScript extends InstallerScript
 
 	function uninstall($parent)
 	{
-		jimport('joomla.filesystem.folder');
-
 		$db = JFactory::getDBO();
 		$params = JComponentHelper::getParams('com_mitglieder');
 
@@ -103,7 +102,7 @@ class com_MitgliederInstallerScript extends InstallerScript
 		$img_path	= JPATH_ROOT . '/'
 			. JComponentHelper::getParams('com_media')->get('image_path', 'images')
 			. '/' . $params->get('image_path', 'stories/mitglieder') . '/thumbs/';
-		if (recursive_remove_directory($img_path))
+		if (Folder::delete($img_path))
 		{
 			echo '<p>Thumbnails wurden gel&ouml;scht.</p>';
 		}
