@@ -11,18 +11,6 @@ use Joomla\Registry\Registry;
 class MitgliederModelListe extends JModelAdmin
 {
   /**
-   * Constructor.
-   *
-   * @param   array  $config  An optional associative array of configuration settings.
-   *
-   * @since   0.9
-   */
-  function __construct($config = array())
-  {
-    parent::__construct($config);
-  }
-
-  /**
    * Method to get a single record.
    *
    * @param   integer  $pk  The id of the primary key.
@@ -33,16 +21,25 @@ class MitgliederModelListe extends JModelAdmin
    */
   function getItem($pk = null)
   {
-    $item = parent::getItem($pk);
+      $item = parent::getItem($pk);
 
-    if (property_exists($item, 'values'))
-    {
-      // Convert the values field to an array.
-      $registry = new Registry($item->values);
-      $item->values = $registry->toArray();
-    }
+      // If the item does not exist yet, set id and insert it to the db.
+	  if ($item->id === null) {
+		  $pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName() . '.id');
+		  $item->id = $pk;
 
-    return $item;
+		  $table = $this->getTable();
+		  $table->getDbo()->insertObject($table->getTableName(), $item);
+	  }
+
+	  if (property_exists($item, 'values'))
+	  {
+		  // Convert the values field to an array.
+		  $registry = new Registry($item->values);
+		  $item->values = $registry->toArray();
+	  }
+
+	  return $item;
   }
 
   /**
