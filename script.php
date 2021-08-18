@@ -127,33 +127,12 @@ class com_MitgliederInstallerScript extends InstallerScript
 
 	function update($parent)
 	{
-		/*
-		 * (Re-)Generate Thumbnails
-		 */
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		$query->select($db->quoteName('kurz_text'))
-			->from($db->quoteName('#__mitglieder_mitglieder_felder'))
-			->leftJoin($db->quoteName('#__mitglieder_felder')." ON "
-			.$db->quoteName('felder_id')." = ".$db->quoteName('id'))
-			->where($db->quoteName('typ')." = ".$db->quote('bild'));
-		$db->setQuery($query);
-		$images = $db->loadColumn();
-
-		$params = JComponentHelper::getParams('com_mitglieder');
-		$img_width  = $params->get('mitglied_thumb_width',  '180');
-		$img_height = $params->get('mitglied_thumb_height', '240');
-		$img_path   = $params->get('image_path', 'stories/mitglieder');
-		$img_path	= JPATH_ROOT . '/'
-			. JComponentHelper::getParams('com_media')->get('image_path', 'images')
-			. '/' . $img_path;
-
-		require_once JPATH_ADMINISTRATOR . '/components/com_mitglieder/helpers/image.php';
-		foreach ($images as $image)
+		if (!empty($this->fromVersion) && version_compare($this->fromVersion, '2.0', 'lt'))
 		{
-			$image = JPATH_ROOT . '/' . $image;
-			ImageHelper::createThumb($image, $img_width, $img_height, $img_path, true);
+			$this->migration20();
 		}
+
+		return true;
 	}
 
 	/**
@@ -168,40 +147,78 @@ class com_MitgliederInstallerScript extends InstallerScript
 	 */
 	public function postflight($action, $installer)
 	{
-		if ($action === 'update')
+		if ($action === 'update' && !empty($this->fromVersion) )
 		{
-			if (!empty($this->fromVersion) && version_compare($this->fromVersion, '2.0', 'lt'))
+			/*
+			 * (Re-)Generate Thumbnails
+			 */
+			$db = JFactory::getDBO();
+			$query = $db->getQuery(true);
+			$query->select($db->quoteName('kurz_text'))
+				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
+				->leftJoin($db->quoteName('#__mitglieder_felder')." ON "
+					.$db->quoteName('felder_id')." = ".$db->quoteName('id'))
+				->where($db->quoteName('typ')." = ".$db->quote('bild'));
+			$db->setQuery($query);
+			$images = $db->loadColumn();
+
+			$params = JComponentHelper::getParams('com_mitglieder');
+			$img_width  = $params->get('mitglied_thumb_width',  '180');
+			$img_height = $params->get('mitglied_thumb_height', '240');
+			$img_path   = $params->get('image_path', 'stories/mitglieder');
+			$img_path	= JPATH_ROOT . '/'
+				. JComponentHelper::getParams('com_media')->get('image_path', 'images')
+				. '/' . $img_path;
+
+			require_once JPATH_ADMINISTRATOR . '/components/com_mitglieder/helpers/image.php';
+			foreach ($images as $image)
 			{
-				/*
-				 * Upgrade list data to version 2.0 database schema.
-				 */
-				$db = JFactory::getDbo();
-				$query = $db->getQuery(true)
-					->select($db->quoteName(array('id', 'liste', 'wert')))
-					->from($db->quoteName('#__mitglieder_listen_v1'));
-				$results = $db->setQuery($query)->loadObjectList();
-
-				$data = array();
-				foreach ($results as $row)
-				{
-					if ($row->wert)
-						if (array_key_exists($row->liste, $data))
-							$data[$row->liste][$row->id] = $row->wert;
-						else
-							$data[$row->liste] = array($row->id => $row->wert);
-				}
-
-				foreach ($data as $id => $values) {
-					$row = new stdClass();
-					$row->id = $id;
-					// Convert the values to JSON.
-					$registry = new Registry($values);
-					$row->values = (string) $registry;
-					if ($id > 0)
-						JFactory::getDbo()->insertObject('#__mitglieder_listen', $row);
-				}
+				$image = JPATH_ROOT . '/' . $image;
+				ImageHelper::createThumb($image, $img_width, $img_height, $img_path, true);
 			}
 		}
+
 		return true;
+	}
+
+	/**
+	 * Migrate list data to version 2.0 database schema.
+	 *
+	 * @since 2.0
+	 */
+	private function migration20()
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true)
+			->select($db->quoteName(array('id', 'liste', 'wert')))
+			->from($db->quoteName('#__mitglieder_listen_v1'));
+		$results = $db->setQuery($query)->loadObjectList();
+
+		$data = [];
+		foreach ($results as $row)
+		{
+			if ($row->wert)
+				if (array_key_exists($row->liste, $data)) {
+					$data[$row->liste][$row->id] = $row->wert;
+				} else {
+					$data[$row->liste] = [$row->id => $row->wert];
+				}
+		}
+
+		foreach ($data as $id => $values)
+		{
+			if ($id <= 0)
+			{
+				continue;
+			}
+
+			$row     = new stdClass();
+			$row->id = $id;
+			// Convert the values to JSON.
+			$registry    = new Registry($values);
+			$row->values = (string) $registry;
+
+			JFactory::getDbo()->insertObject('#__mitglieder_listen', $row);
+		}
 	}
 }
