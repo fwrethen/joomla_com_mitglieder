@@ -4,7 +4,7 @@
 	function submitbutton(pressbutton) {
 		var form = document.adminForm;
 		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 			return;
 		}
 
@@ -13,7 +13,7 @@
 		} else if(form.name.value == "") {
 			alert( "<?php echo JText::_( 'Geben Sie den Nachnamen des Mitglieds an', true ); ?>" );
 		}else {
-			submitform( pressbutton );
+			Joomla.submitform( pressbutton );
 		}
 	}
 </script>

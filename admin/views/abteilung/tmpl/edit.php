@@ -1,20 +1,4 @@
-<?php defined('_JEXEC') or die('Restricted access');
-    				$editor = JFactory::getEditor();
-?>
-
-<script type="text/javascript">
-	function submitbutton(pressbutton) {
-		var form = document.adminForm;
-		if (pressbutton == 'cancel') {
-			submitform( pressbutton );
-			return;
-		}
-        <?php
-                echo $editor->save( 'description' );
-        ?>
-		submitform( pressbutton );
-	}
-</script>
+<?php defined('_JEXEC') or die('Restricted access'); ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_mitglieder&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
 <div class="form-horizontal">
