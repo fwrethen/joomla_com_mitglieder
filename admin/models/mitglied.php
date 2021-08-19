@@ -134,8 +134,6 @@ class MitgliederModelMitglied extends JModelAdmin
 	 */
 	function saveAbteilungen($data)
 	{
-		require_once( JPATH_COMPONENT . '/lib/logger.php' );
-
 		$id=(int)$data['id'];
 
 		//Keine Daten Vorhanden.
@@ -143,16 +141,12 @@ class MitgliederModelMitglied extends JModelAdmin
 			throw new Exception("Es wurden keine Daten gespeichert");
 		}
 
-		Logger::log('Delete old entries');
 		//Alle Abteilungen löschen und neu speichern
 		$query="DELETE FROM #__mitglieder_mitglieder_abteilungen where mitglieder_id = $id";
 		$this->_db->setQuery($query);
 		$this->_db->execute();
 
-		Logger::log('Done:Delete old entries');
-
 		$count=count($data['abteilung']);
-		Logger::log( 'Mitglied has ' . $count . ' Abteilungen');
 
 		for($i=0; $i < $count; $i++){
 			$abteilung = $data['abteilung'][$i];
@@ -166,7 +160,7 @@ class MitgliederModelMitglied extends JModelAdmin
 			$query = "INSERT INTO #__mitglieder_mitglieder_abteilungen(" .
 					 "`mitglieder_id`, `abteilungen_id`, `ordering`) " .
 					 "VALUES ($id,$abteilung,$ordering)";
-			Logger::log('Insert new Entry: '.$query);
+
 			$this->_db->setQuery($query);
 			$this->_db->execute();
 		}
