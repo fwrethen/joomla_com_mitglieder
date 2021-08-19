@@ -2,83 +2,73 @@
 defined('_JEXEC') or die();
 
 /**
- * @author Florian Paetz
+ * Abteilung admin model.
+ *
+ * @since  0.9
  */
 class MitgliederModelAbteilung extends JModelAdmin
 {
-	function __construct()
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @since   0.9
+	 */
+	function __construct($config = array())
 	{
-		parent::__construct();
-
-		$array = JRequest::getVar('cid',  0, '', 'array');
-		$this->setId((int)$array[0]);
+		parent::__construct($config);
 	}
 
-	function setId($id)
+	/**
+	 * Method to delete one or more records.
+	 *
+	 * @param   array  &$pks  An array of record primary keys.
+	 *
+	 * @return  boolean  True if successful, false if an error occurs.
+	 *
+	 * @since   0.9
+	 */
+	function delete(&$pks)
 	{
-		$this->_id		= $id;
-	}
-
-	function getData($id=null)
-	{
-		if($id == null)
-			$id = $this->_id;
-		$query = ' SELECT * FROM #__mitglieder_abteilungen '.
-				'  WHERE id = '.$id;
-		$this->_db->setQuery( $query );
-		$data = $this->_db->loadObject();
-
-		if($data == null) {
-			$data = new stdClass();
-			$data->id 					= 0;
-
-
-			$data->name				= null;
-			$data->description		= null;
-
-		}
-
-		return $data;
-	}
-
-
-	function delete()
-	{
-		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
-
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
 		$row =& $this->getTable();
 
-		if (count( $cids ))
+		if (count( $pks ))
 		{
-			foreach($cids as $cid) {
+			foreach($pks as $pk) {
 				/*
 				 * Mitgliederzuordnungen löschen
 				 */
-				$query = "DELETE FROM #__mitglieder_mitglieder_abteilungen " .
-						" WHERE abteilungen_id=" . $cid;
-				$this->_db->setQuery($query);
-				if ( !$this->_db->query() ) {
-					JError::raiseError(105, $this->_db->getErrorMsg());
-               		return false;
-				}
+				$query->delete()
+					->from($db->quoteName('#__mitglieder_mitglieder_abteilungen'))
+					->where($db->quoteName('abteilungen_id') . ' = ' . $db->quote($pk));
+				$db->setQuery($query);
 
-				/*
-				 * Abteilung löschen
-				 */
-				if (!$row->delete( $cid )) {
-					JError::raiseError(106, $this->_db->getErrorMsg());
-					return false;
-				}
+				$db->execute();
 
+				// Abteilung löschen
+				$row->delete($pk);
 			}
 		}
 		return true;
 	}
 
+	/**
+	 * Method for getting the form from the model.
+	 *
+	 * @param   array    $data      Data for the form.
+	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+	 *
+	 * @return  \JForm|boolean  A \JForm object on success, false on failure
+	 *
+	 * @since   1.0
+	 */
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_mitglieder.abteilung', 'abteilung', array('control' => '', 'load_data' => $loadData));
+		$form = $this->loadForm('com_mitglieder.abteilung', 'abteilung', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form))
 		{
 			return false;
@@ -86,5 +76,22 @@ class MitgliederModelAbteilung extends JModelAdmin
 		return $form;
 	}
 
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return  mixed  The data for the form.
+	 *
+	 * @since   2.0
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_mitglieder.edit.abteilung.data', array());
+		if (empty($data))
+		{
+			$data = $this->getItem();
+		}
+		$this->preprocessData('com_mitglieder.abteilung', $data);
+		return $data;
+	}
 }
-?>

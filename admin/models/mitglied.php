@@ -1,88 +1,83 @@
 <?php
-
-// Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
 /**
- * @author Florian Paetz
+ * Mitglied admin model.
+ *
+ * @since  0.9
  */
 class MitgliederModelMitglied extends JModelAdmin
 {
-	function __construct()
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @since   0.9
+	 */
+	function __construct($config = array())
 	{
-		parent::__construct();
-
-		$array = JRequest::getVar('cid',  0, '', 'array');
-		$this->setId((int)$array[0]);
+		parent::__construct($config);
 	}
 
 	/**
-	 * Beim Erzeugen des Objektes setzt Joomla automatisch die ID
-	 *
-	 * @access public
-	 * @param int $id
-	 */
-	function setId($id) {
-		$this->_id		= intval($id);
-	}
-
-
-	/**
-	 * Läd die Spielerdaten, alle Mannschaften mit ihrer Altersklasse
-	 * und Alle Mannschaften in der der Spieler aufgestellt ist.
-	 *
-	 * @access	public
-	 * @return mixed Ein Objekt mit allen Spielerdaten.
-	 */
-	function getData()
+   * Method to get a single record.
+   *
+   * @param   integer  $pk  The id of the primary key.
+   *
+   * @return  \JObject|boolean  Object on success, false on failure.
+   *
+   * @since   2.0
+   */
+  function getItem($pk = null)
 	{
-		$row = $this->getTable();
-		$row->load($this->_id);
+		$pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName() . '.id');
+		$table = $this->getTable();
 
-		return $row;
-	}
-
-	/**
-	 * Löscht alle Spieler Daten
-	 *
-	 * @access	public
-	 * @return	boolean	True bei Erfolg
-	 */
-	function delete()
-	{
-		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
-
-
-		if (count( $cids ) > 0)
+		if ($pk > 0)
 		{
-			foreach($cids as $cid) {
+			// Attempt to load the row.
+			$table->load($pk);
+		}
+
+		return $table;
+	}
+
+	/**
+	 * Method to delete one or more records.
+	 *
+	 * @param   array  &$pks  An array of record primary keys.
+	 *
+	 * @return  boolean  True if successful, false if an error occurs.
+	 *
+	 * @since   0.9
+	 */
+	function delete(&$pks)
+	{
+		if (count( $pks ) > 0)
+		{
+			foreach($pks as $pk) {
 				$row =& $this->getTable();
 				/*
 				 * Felder löschen
 				 */
 				$query = "DELETE FROM #__mitglieder_mitglieder_felder " .
-						" WHERE mitglieder_id=" . $cid;
+						" WHERE mitglieder_id=" . $pk;
 				$this->_db->setQuery($query);
-				if ( !$this->_db->query() ) {
-					JError::raiseError(105, $this->_db->getErrorMsg());
-               		return false;
-				}
+				$this->_db->execute();
 
 				/*
 				 * Mitgliederzuordnungen löschen
 				 */
 				$query = "DELETE FROM #__mitglieder_mitglieder_abteilungen " .
-						" WHERE mitglieder_id=" . $cid;
+						" WHERE mitglieder_id=" . $pk;
 				$this->_db->setQuery($query);
-				if ( !$this->_db->query() ) {
-					JError::raiseError(105, $this->_db->getErrorMsg());
-               		return false;
-				}
+				$this->_db->execute();
 				/*
 				 * Spieler löschen
 				 */
 
-				if (!$row->delete( $cid )) {
+				if (!$row->delete( $pk )) {
 					return false;
 				}
 			}
@@ -127,7 +122,117 @@ class MitgliederModelMitglied extends JModelAdmin
 		return false;
 	}
 
+	/**
+	 * Method to save the Abteilungen of the Mitglied.
+	 *
+	 * @param   array $data The form data.
+	 *
+	 * @return  boolean  True on success, False on error.
+	 *
+	 * @since   2.0
+	 * @throws Exception
+	 */
+	function saveAbteilungen($data)
+	{
+		$id=(int)$data['id'];
 
+		//Keine Daten Vorhanden.
+		if(!is_array($data)) {
+			throw new Exception("Es wurden keine Daten gespeichert");
+		}
+
+		//Alle Abteilungen löschen und neu speichern
+		$query="DELETE FROM #__mitglieder_mitglieder_abteilungen where mitglieder_id = $id";
+		$this->_db->setQuery($query);
+		$this->_db->execute();
+
+		$count=count($data['abteilung']);
+
+		for($i=0; $i < $count; $i++){
+			$abteilung = $data['abteilung'][$i];
+			$ordering = $data['ordering'][$i];
+			if ($abteilung=='')
+				continue;
+			if ($ordering=='')
+			{
+				$ordering='99';
+			}
+			$query = "INSERT INTO #__mitglieder_mitglieder_abteilungen(" .
+					 "`mitglieder_id`, `abteilungen_id`, `ordering`) " .
+					 "VALUES ($id,$abteilung,$ordering)";
+
+			$this->_db->setQuery($query);
+			$this->_db->execute();
+		}
+
+		return true;
+	}
+
+	/**
+	* Method to retrieve the Abteilungen of the Mitglied.
+	*
+	* @return  array  An array with the Abteilungen and their respective ordering value.
+	*
+	* @since   2.0
+	*/
+	function getAbteilungen()
+	{
+		$id = (int) $this->getState($this->getName() . '.id');
+
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select($db->quoteName(array('abteilungen_id', 'ordering')));
+		$query->from($db->quoteName('#__mitglieder_mitglieder_abteilungen'));
+		$query->where($db->quoteName('mitglieder_id') . ' = ' . $db->quote($id));
+		$query->order('abteilungen_id ASC');
+
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+
+		if($data == null) {
+			$data = array();
+		}
+
+		return $data;
+	}
+
+	/**
+	* Method to retrieve all available Abteilungen.
+	*
+	* @return  array  An array with all Abteilungen.
+	*
+	* @since   2.0
+	*/
+	function getAllAbteilungen()
+	{
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select($db->quoteName(array('id', 'name')));
+		$query->from($db->quoteName('#__mitglieder_abteilungen'));
+		$query->order('id ASC');
+
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+
+		$def_obj = new stdClass();
+		$def_obj->name = '-';
+
+		$data = array_merge(array($def_obj), $data);
+		return $data;
+	}
+
+	/**
+	 * Method for getting the form from the model.
+	 *
+	 * @param   array    $data      Data for the form.
+	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+	 *
+	 * @return  \JForm|boolean  A \JForm object on success, false on failure
+	 *
+	 * @since   1.0
+	 */
 	public function getForm($data = array(), $loadData = true)
 	{
 		$params = JComponentHelper::getParams('com_mitglieder');
@@ -135,7 +240,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		$formmitglied = '<?xml version="1.0" encoding="utf-8"?>
 			<form><fieldset name="details">';
 		//TODO: merge this with mitglied/view.html.php and|or move to controller
-		$player	= $this->getData();
+		$player	= $this->getItem();
 		foreach($player->felder as $id=>$feld) {
 			switch ($feld->typ) {
 				case 'text':

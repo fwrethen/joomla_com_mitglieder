@@ -1,12 +1,7 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
-require_once( JPATH_COMPONENT_ADMINISTRATOR . '/lib/logger.php' );
-
 
 function printFelder($felder) {
-	Logger::log( 'Inf: Print fields: ');
-	Logger::logArray($felder);
-
 	$data = array();
 
 		foreach($felder as $id=>$feld) {

@@ -12,7 +12,7 @@ class TableMitglied extends JTable
 	var $listen					= array();
 
 
-	function TableMitglied(& $db) {
+	function __construct($db) {
 		parent::__construct('#__mitglieder_mitglieder', 'id', $db);
 
 		/*
@@ -32,17 +32,13 @@ class TableMitglied extends JTable
 			$this->felder[$feld->id]->typ = $feld->typ;
 			if ($feld->typ=='liste')
 			{
-				$query = " SELECT id, wert FROM #__mitglieder_listen WHERE liste = $feld->id";
-				$db->setQuery($query);
-				$liste=$db->loadObjectList('id');
-				$this->listen[$feld->id]=$liste;
+				$liste = JModelLegacy::getInstance('Liste', 'MitgliederModel');
+				$this->listen[$feld->id] = $liste->getItem($feld->id)->values;
 			}
 			$this->felder[$feld->id]->name = $feld->name_backend;
 			$this->felder[$feld->id]->wert = null;
 			$this->felder[$feld->id]->tooltip = $feld->tooltip;
 		}
-
-
 	}
 
 
@@ -215,7 +211,7 @@ class TableMitglied extends JTable
 						" WHERE felder_id = $felderID " .
 							" AND mitglieder_id = $spielerID ";
 				$db->setQuery($query);
-				$db->query();
+				$db->execute();
 			}
 			else {
 				$wert = "'" . $feld->wert . "'";
@@ -225,7 +221,7 @@ class TableMitglied extends JTable
 							" $spalte=$wert ".
 				"ON DUPLICATE KEY UPDATE $spalte=$wert ";
 				$db->setQuery($query);
-				$db->query();
+				$db->execute();
 
 			}
 		}
@@ -254,8 +250,7 @@ class TableMitglied extends JTable
 				" WHERE mitglieder_id = ". $this->$key;
 		$db->setQuery( $query );
 
-		if($db->query() === false)
-			return false;
+		$db->execute();
 
 		/*
 		 * Abteilungen löschen
@@ -264,7 +259,7 @@ class TableMitglied extends JTable
 				" WHERE mitglieder_id=" . $this->$key;
 		$db->setQuery($query);
 
-		return $db->query();
+		return $db->execute();
 	}
 }
 ?>

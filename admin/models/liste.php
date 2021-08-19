@@ -1,147 +1,137 @@
 <?php
 defined('_JEXEC') or die();
 
+use Joomla\Registry\Registry;
+
 /**
- * @author Florian Paetz
+ * Liste admin model.
+ *
+ * @since  0.9
  */
-class MitgliederModelListe extends JModelLegacy
+class MitgliederModelListe extends JModelAdmin
 {
-	function __construct()
-	{
-		parent::__construct();
+  /**
+   * Method to get a single record.
+   *
+   * @param   integer  $pk  The id of the primary key.
+   *
+   * @return  \JObject|boolean  Object on success, false on failure.
+   *
+   * @since   2.0
+   */
+  function getItem($pk = null)
+  {
+      $item = parent::getItem($pk);
 
-		$array = JRequest::getVar('cid',  0, '', 'array');
-		$this->setId((int)$array[0]);
-	}
+      // If the item does not exist yet, set id and insert it to the db.
+	  if ($item->id === null) {
+		  $pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName() . '.id');
+		  $item->id = $pk;
 
-	function setId($id)
-	{
-		$this->_id		= $id;
-	}
+		  $table = $this->getTable();
+		  $table->getDbo()->insertObject($table->getTableName(), $item);
+	  }
 
-	function getListe()
-	{
-		return $this->_id;
-	}
+	  if (property_exists($item, 'values'))
+	  {
+		  // Convert the values field to an array.
+		  $registry = new Registry($item->values);
+		  $item->values = $registry->toArray();
+	  }
 
-	function getData($id=null)
-	{
-		if($id == null)
-			$id = $this->_id;
-		$query = ' SELECT * FROM #__mitglieder_listen '.
-				'  WHERE liste = '.$id;
-		//$this->_db->setQuery( $query );
-		//$data = $this->_db->loadObject();
-		$data=$this->_getList($query);
-		if($data == null) {
-			$data=array();
-		}
-		else
-		{
-			if (!is_array($data))
-			{
-				$tmp=$data;
-				$data=array();
-				$data[]=$tmp;
-			}
-		}
+	  return $item;
+  }
 
-		return $data;
-	}
+  /**
+   * Method overwrite to save the form data.
+   *
+   * @param   array  $data  The form data.
+   *
+   * @return  boolean  True on success, False on error.
+   *
+   * @since   2.0
+   */
+  function save($data=null)
+  {
+    if (isset($data['values']) && is_array($data['values']))
+    {
+      /* Prepare form data as needed for database. */
+      $values = array();
+      $max_id = max(array_column($data['values'], 'id'));
+      foreach ($data['values'] as $value) {
+        /* Add id to new elements. */
+        if ($value['id'] == 0)
+        {
+          $max_id += 1;
+          $values[$max_id] = $value['title'];
+        } else {
+          $values[$value['id']] = $value['title'];
+        }
+      }
 
-	function store($post=null)
-	{
+      /* Filter empty values from array. */
+      $values = array_filter($values);
+      /* Convert the values array to JSON. */
+      $registry = new Registry($values);
+      $data['values'] = (string) $registry;
+    }
 
-		foreach($post['alte_wert'] as $id=>$wert) {
-			$query = "UPDATE #__mitglieder_listen " .
-					" SET wert='$wert' "  .
-			" WHERE id=$id ";
-			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				JError::raiseError(801, $this->_db->getErrorMsg());
-				return false;
-			}
-		}
-	 	$count=count($post['neue_wert']);
-		for($i=0; $i < $count; $i++){
-			$wert = $post['neue_wert'][$i];
-			$liste = $post['neue_liste'][$i];
-			if ($wert=='')
-				continue;
-			$query = "INSERT INTO #__mitglieder_listen(" .
-							" liste, wert " .
-							" ) " .
-						" VALUES(" .
-							" '$liste', '$wert') ";
-			$this->_db->setQuery($query);
-			if(!$this->_db->query()) {
-				JError::raiseError(802, $this->_db->getErrorMsg());
-				return false;
-			}
-		}
-		return true;
-	}
+    if (parent::save($data))
+    {
+      return true;
+    }
 
-//		$row =& $this->getTable();
-//
-//		if($data == null)
-//			$data = JRequest::get( 'post' );
-//
-//		//Keine Daten Vorhanden.
-//		if(!is_array($data)) {
-//			JError::raiseWarning(191, "Es wurden keine Daten gespeichert");
-//			return false;
-//		}
-//
-//		/*
-//		 * String(0)'' Values werden herrausgefiltert, damit sie in nicht
-//		 * als String sondern mit null in die Datenbank gespeidchert werden.
-//		 */
-//		foreach($data as $key=>$value) {
-//			if(trim($value) == '')
-//				$data[$key] = null;
-//		}
-//
-//		if (!$row->bind($data)) {
-//			JError::raiseError(101, $this->_db->getErrorMsg());
-//			return false;
-//		}
-//
-//		if (!$row->check()) {
-//			JError::raiseError(102, $this->_db->getErrorMsg());
-//			return false;
-//		}
-//
-//		if (!$row->store(true)) {
-//			JError::raiseError(103, $this->_db->getErrorMsg());
-//			return false;
-//		}
-//
-//		return true;
-//	}
+    return false;
+  }
 
-	function delete()
-	{
-		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
+  /**
+   * Method for getting the form from the model.
+   *
+   * @param   array    $data      Data for the form.
+   * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+   *
+   * @return  \JForm|boolean  A \JForm object on success, false on failure
+   *
+   * @since   2.0
+   */
+  function getForm($data = array(), $loadData = true)
+  {
+    // Get the form.
+    $form = $this->loadForm('com_mitglieder.liste', 'liste', array('control' => 'jform', 'load_data' => $loadData));
+    if (empty($form))
+    {
+      return false;
+    }
+    return $form;
+  }
 
-		$row =& $this->getTable();
+  /**
+   * Method to get the data that should be injected in the form.
+   *
+   * @return  mixed  The data for the form.
+   *
+   * @since   2.0
+   */
+  protected function loadFormData()
+  {
+    // Check the session for previously entered form data.
+    $data = JFactory::getApplication()->getUserState('com_mitglieder.edit.liste.data', array());
+    if (empty($data))
+    {
+      $data = $this->getItem();
+    }
 
-		if (count( $cids ))
-		{
-			foreach($cids as $cid) {
-				/*
-				 * Abteilung löschen
-				 */
-				if (!$row->delete( $cid )) {
-					JError::raiseError(106, $this->_db->getErrorMsg());
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    /* Prepare data structure for form. */
+    if (property_exists($data, 'values'))
+    {
+      $values = array();
+      foreach ($data->values as $key => $value) {
+        $values['values' . $key] = array('id' => $key, 'title' => $value);
+      }
+      $data->values = $values;
+    }
 
-
-
+    $this->preprocessData('com_mitglieder.liste', $data);
+    return $data;
+  }
 }
-?>

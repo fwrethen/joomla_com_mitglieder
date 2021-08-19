@@ -2,34 +2,56 @@
 defined('_JEXEC') or die();
 
 /**
- * @author Florian Paetz
+ * View to edit a liste.
+ *
+ * @since  0.9
  */
 class MitgliederViewListe extends JViewLegacy
 {
+	/**
+	 * Display the view
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise an Error object.
+	 *
+	 * @since   0.9
+	 */
 	function display($tpl = null)
 	{
-	$document = JFactory::getDocument();
-	$document->addScript('includes/js/joomla.javascript.js');
-		$liste		= $this->get('Data');
-		// $liste is an array with only one element: a stdClass object at index 0
-		if($liste[0]->id < 1)
-			$isNew = true;
-		else
-			$isNew = false;
+		$this->form = $this->get('Form');
+		$this->item = $this->get('Item');
 
-		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
-		JToolBarHelper::title(JText::_('Liste: ' . $text), 'list');
-		JToolBarHelper::save();
-		if ($isNew)  {
-			JToolBarHelper::cancel();
-		} else {
-			JToolBarHelper::cancel( 'cancel', 'Close' );
-		}
+		$this->liste = $this->item->values;
+		$this->listenid = $this->item->id;
 
-		$this->liste = $liste;
-		$this->listenid = $this->get('Liste');
+		$this->addToolbar();
 
 		parent::display($tpl);
 	}
+
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @return  void
+	 *
+	 * @since   2.0
+	 */
+	protected function addToolbar()
+	{
+		$isNew = ($this->item->id == 0);
+		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
+
+		JToolBarHelper::title(JText::_('Liste: ' . $text), 'list');
+		JToolBarHelper::save('liste.save');
+
+		if (empty($this->item->id))
+		{
+			JToolbarHelper::cancel('liste.cancel');
+		}
+		else
+		{
+			JToolbarHelper::cancel('liste.cancel', 'JTOOLBAR_CLOSE');
+		}
+	}
 }
-?>

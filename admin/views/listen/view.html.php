@@ -7,19 +7,18 @@ class MitgliederViewListen extends JViewLegacy
 	{
 		JToolBarHelper::title(JText::_('Mitglieder: Listen'), 'list');
 		//JToolBarHelper::addNew();
-		JToolBarHelper::editList();
+		JToolBarHelper::editList('liste.edit');
 		//JToolBarHelper::deleteList();
 		JToolBarHelper::preferences('com_mitglieder');
 
-		require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
-		MitgliederHelper::addSubmenu('listen');
-		$this->sidebar = JHtmlSidebar::render();
+		if (version_compare(JVERSION, '4', '<')) {
+			require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
+			MitgliederHelper::addSubmenu('listen');
+			$this->sidebar = JHtmlSidebar::render();
+		}
 
-		$items		= $this->get( 'Data');
-
-		$this->items = $items;
+		$this->items = $this->get('Items');
 
 		parent::display($tpl);
 	}
 }
-?>

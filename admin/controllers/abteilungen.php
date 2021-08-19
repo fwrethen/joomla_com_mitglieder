@@ -2,76 +2,26 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
-class MitgliederControllerAbteilungen extends JControllerLegacy
+class MitgliederControllerAbteilungen extends JControllerAdmin
 {
+  function __construct()
+  {
+    parent::__construct();
+  }
 
-
-	function __construct()
-	{
-		parent::__construct();
-
-		$this->registerTask( 'add'  , 	'edit' );
-		$this->registerTask( 'remove'  , 'delete' );
-
-		$this->redirectPath = "index.php?option=com_mitglieder&view=abteilungen";
-	}
-
-	function edit()
-	{
-		$input = JFactory::getApplication()->input;
-		$input->set('view', 'abteilung');
-		$input->set('layout', 'form');
-		$input->set('hidemainmenu', 1);
-		$document = JFactory::getDocument();
-
-		$viewType	= $document->getType();
-		$view = $this->getView('abteilung',$viewType);
-		$defModel= $this->getModel('abteilung');
-		$view->setModel($defModel,true);
-
-		parent::display();
-	}
-
-	function save()
-	{
-		$model = $this->getModel('abteilung');
-		$post = JRequest::get( 'post', 2 );
-
-
-		if ($model->save($post)) {
-			$msg = JText::_( 'Abteilung gespeichert!' );
-		} else {
-			$msg = JText::_( 'Absteilung konnte nicht gespeichert werden' );
-		}
-
-
-		$cache = JFactory::getCache('com_mitglieder');
-		$cache->clean();
-
-		return $this->setRedirect($this->redirectPath, $msg);
-	}
-
-	function delete()
-	{
-		$model = $this->getModel('abteilung');
-		if(!$model->delete()) {
-			$msg = JText::_( 'Fehler: Abteilung(en) konnten nicht gelöscht werden' );
-		} else {
-			$msg = JText::_( 'Abteilung(en) Gelöscht' );
-		}
-
-		$cache = JFactory::getCache('com_mitglieder');
-		$cache->clean();
-
-		return $this->setRedirect($this->redirectPath, $msg);
-	}
-
-	function display($cachable = false, $urlparams = false)
-	{
-		parent::display();
-	}
-
-
-
+  /**
+   * Method to get a model object, loading it if required.
+   *
+   * @param   string  $name    The model name. Optional.
+   * @param   string  $prefix  The class prefix. Optional.
+   * @param   array   $config  Configuration array for model. Optional.
+   *
+   * @return  JModelLegacy  The model.
+   *
+   * @since   2.0
+   */
+  public function getModel($name = 'Abteilung', $prefix = 'MitgliederModel', $config = array('ignore_request' => true))
+  {
+    return parent::getModel($name, $prefix, $config);
+  }
 }
-?>

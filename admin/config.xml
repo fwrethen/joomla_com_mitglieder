@@ -73,18 +73,4 @@
 			<option value="0">JNO</option>
 		</field>
 	</fieldset>
-	<fieldset name="development"
-		label="Entwicklung"
-		description="Diese Einstellungen sind nur für Entwickler vorgesehen.">
-		<field
-			name="logging"
-			type="radio"
-			class="btn-group btn-group-yesno"
-			default="0"
-			label="Logging einschalten"
-			description="">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-	</fieldset>
 </config>

@@ -1,33 +1,58 @@
 <?php
-// Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
+/**
+ * View to edit a mitglied.
+ *
+ * @since  0.9
+ */
 class MitgliederViewMitglied extends JViewLegacy
 {
+	/**
+	 * Display the view
+	 *
+	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return  mixed  A string if successful, otherwise an Error object.
+	 *
+	 * @since   0.9
+	 */
 	function display($tpl = null)
 	{
-	$document = JFactory::getDocument();
-	//$document->addScript('includes/js/joomla.javascript.js');
-			$player		= $this->get('Data');
-			$inAbteilungen = $this->get('Data','MitgliederAbteilungen');
-			$abteilungen = $this->get('Abteilungen','MitgliederAbteilungen');
-		$isNew		= ($player->id < 1);
-
-		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
-		JToolBarHelper::title(JText::_('Mitglied: ' . $text), 'user');
-		JToolBarHelper::save();
-		if ($isNew)  {
-			JToolBarHelper::cancel();
-		} else {
-			JToolBarHelper::cancel( 'cancel', 'Close' );
-		}
-
 		$this->form = $this->get('Form');
+		$this->item = $this->get('Item');
+		$this->inAbteilungen = $this->get('Abteilungen');
+		$this->abteilungen = $this->get('AllAbteilungen');
 
-		$this->player = $player;
-		$this->inAbteilungen = $inAbteilungen;
-		$this->abteilungen = $abteilungen;
+		$this->player = &$this->item;
+
+		$this->addToolbar();
 
 		parent::display($tpl);
+	}
+
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @return  void
+	 *
+	 * @since   2.0
+	 */
+	protected function addToolbar()
+	{
+		$isNew = ($this->item->id == 0);
+		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
+
+		JToolBarHelper::title(JText::_('Mitglied: ' . $text), 'user');
+		JToolBarHelper::save('mitglied.save');
+
+		if (empty($this->item->id))
+		{
+			JToolbarHelper::cancel('mitglied.cancel');
+		}
+		else
+		{
+			JToolbarHelper::cancel('mitglied.cancel', 'JTOOLBAR_CLOSE');
+		}
 	}
 }

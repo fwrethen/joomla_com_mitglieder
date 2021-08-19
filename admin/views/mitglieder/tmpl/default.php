@@ -66,4 +66,5 @@ defined('_JEXEC') or die; ?>
 <input type="hidden" name="task" value="" />
 <input type="hidden" name="boxchecked" value="0" />
 <input type="hidden" name="view" value="mitglieder" />
+<?php echo JHtml::_('form.token'); ?>
 </form>
