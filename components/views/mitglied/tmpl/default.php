@@ -2,7 +2,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 require_once(JPATH_COMPONENT . '/lib/mitglieder/printfelder.php');
-require_once(JPATH_COMPONENT_ADMINISTRATOR . '/lib/logger.php');
 
 $name = $this->mitglied->vorname . " " . $this->mitglied->name;
 echo "<h1>$name</h1>";
