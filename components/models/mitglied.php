@@ -51,9 +51,9 @@ class MitgliederModelMitglied extends JModelLegacy
 				if ($feld->typ == 'liste')
 				{
 					$query = $db->getQuery(true);
-					$query->select($db->quoteName('values'))
-						->from($db->quoteName('#__mitglieder_listen'))
-						->where($db->quoteName('id') . ' = ' . $db->quote($feld->feld_id));
+					$query->select($db->qn('values'))
+						->from($db->qn('#__mitglieder_listen'))
+						->where($db->qn('felder_id') . ' = ' . $db->q($feld->feld_id));
 					$db->setQuery($query);
 					$result = $db->loadObject();
 

@@ -26,10 +26,10 @@ class MitgliederModelListe extends JModelAdmin
       // If the item does not exist yet, set id and insert it to the db.
 	  if ($item->id === null) {
 		  $pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName() . '.id');
-		  $item->id = $pk;
+		  $item->felder_id = $pk;
 
 		  $table = $this->getTable();
-		  $table->getDbo()->insertObject($table->getTableName(), $item);
+		  $table->getDbo()->insertObject($table->getTableName(), $item, 'id');
 	  }
 
 	  if (property_exists($item, 'values'))

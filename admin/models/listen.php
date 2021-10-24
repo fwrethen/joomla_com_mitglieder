@@ -17,7 +17,7 @@ class MitgliederModelListen extends JModelList
     $this->setState('list.limit', 0);
     $this->setState('list.start', 0);
   }
-  
+
   /**
    * Method to get a \JDatabaseQuery object for retrieving the data set from a database.
    *
@@ -30,10 +30,14 @@ class MitgliederModelListen extends JModelList
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
 
-    $query->select($db->quoteName(array('id', 'name_backend')));
-    $query->from($db->quoteName('#__mitglieder_felder'));
-		$query->where($db->quoteName('typ') . ' = ' . $db->quote('liste'));
-    $query->order('id ASC');
+	$query->select($db->qn(['f.id', 'name_backend']))
+        ->from($db->qn('#__mitglieder_listen', 'l'))
+	    ->rightJoin(
+			$db->qn('#__mitglieder_felder', 'f')
+			. ' ON ' . $db->qn('l.felder_id') . ' = ' . $db->qn('f.id')
+	    )
+		->where($db->qn('f.typ') . ' = ' . $db->q('liste'))
+        ->order('f.ordering');
 
     return $query;
   }
