@@ -1,7 +1,9 @@
 <?php
 defined('_JEXEC') or die();
 
-class MitgliederViewMitglieder extends JViewLegacy
+use Joomla\CMS\MVC\View\HtmlView;
+
+class MitgliederViewMitglieder extends HtmlView
 {
 	function display($tpl = null)
 	{

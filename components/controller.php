@@ -1,7 +1,9 @@
 <?php
 defined('_JEXEC') or die();
 
-class MitgliederController extends JControllerLegacy
+use Joomla\CMS\MVC\Controller\BaseController;
+
+class MitgliederController extends BaseController
 {
 	function display($cachable = false, $urlparams = false)
 	{

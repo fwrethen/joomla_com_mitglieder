@@ -1,18 +1,20 @@
 <?php
 defined('_JEXEC') or die();
 
+use Joomla\CMS\MVC\View\HtmlView;
+
 /**
  * @property \Joomla\CMS\Form\Form $form
  */
 
-class MitgliederViewFelder extends JViewLegacy
+class MitgliederViewFelder extends HtmlView
 {
 	/**
 	 * Display the view
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
 	 *
-	 * @return  mixed  A string if successful, otherwise an Error object.
+	 * @return  void
 	 *
 	 * @since   0.9
 	 */

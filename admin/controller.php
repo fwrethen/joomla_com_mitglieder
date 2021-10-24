@@ -9,7 +9,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-//JLoader::register('MitgliederHelper', JPATH_COMPONENT . '/helpers/mitglieder.php');
+use Joomla\CMS\MVC\Controller\BaseController;
 
 /**
 * Mitglieder master display controller.
@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 * @subpackage  com_mitglieder
 * @since       2.0
 */
-class MitgliederController extends JControllerLegacy
+class MitgliederController extends BaseController
 {
 	/**
 	 * The default view for the display method.

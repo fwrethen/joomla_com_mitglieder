@@ -1,7 +1,9 @@
 <?php
 defined('_JEXEC') or die();
 
-class MitgliederViewAbteilung extends JViewLegacy
+use Joomla\CMS\MVC\View\HtmlView;
+
+class MitgliederViewAbteilung extends HtmlView
 {
 
 	function display($tpl = null)
@@ -18,7 +20,7 @@ class MitgliederViewAbteilung extends JViewLegacy
 		// Do thumbnail stuff only if thumb template is requested
 		if ($layout == 'thumbs'){
 			$this->abteilung->mitglieder = $model->getThumbData($id, $this->abteilung->mitglieder);
-			
+
 			$params = JComponentHelper::getParams('com_mitglieder');
 
 			$this->thumb_placeholder = JComponentHelper::getParams('com_mitglieder')

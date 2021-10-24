@@ -1,12 +1,14 @@
 <?php
 defined('_JEXEC') or die();
 
+use Joomla\CMS\MVC\View\HtmlView;
+
 /**
  * View to edit a liste.
  *
  * @since  0.9
  */
-class MitgliederViewListe extends JViewLegacy
+class MitgliederViewListe extends HtmlView
 {
 	/**
 	 * Display the view

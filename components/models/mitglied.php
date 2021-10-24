@@ -2,15 +2,12 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die();
 
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\Registry\Registry;
 
-class MitgliederModelMitglied extends JModelLegacy
+class MitgliederModelMitglied extends BaseDatabaseModel
 {
 	var $_data = null;
-	function __construct($options = array()) {
-		parent::__construct($options);
-
-	}
 
 	function getMitglied( $id ) {
 		if(!$this->_data) {

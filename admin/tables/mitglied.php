@@ -2,6 +2,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+
 class TableMitglied extends JTable
 {
 	var $id						= 0;
@@ -32,7 +34,7 @@ class TableMitglied extends JTable
 			$this->felder[$feld->id]->typ = $feld->typ;
 			if ($feld->typ=='liste')
 			{
-				$liste = JModelLegacy::getInstance('Liste', 'MitgliederModel');
+				$liste = BaseDatabaseModel::getInstance('Liste', 'MitgliederModel');
 				$this->listen[$feld->id] = $liste->getItem($feld->id)->values;
 			}
 			$this->felder[$feld->id]->name = $feld->name_backend;

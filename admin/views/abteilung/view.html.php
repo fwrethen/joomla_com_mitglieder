@@ -1,12 +1,14 @@
 <?php
 defined('_JEXEC') or die();
 
+use Joomla\CMS\MVC\View\HtmlView;
+
 /**
  * View to edit an abteilung.
  *
  * @since  0.9
  */
-class MitgliederViewAbteilung extends JViewLegacy
+class MitgliederViewAbteilung extends HtmlView
 {
 	/**
 	 * Display the view

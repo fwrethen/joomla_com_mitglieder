@@ -1,13 +1,10 @@
 <?php
 defined('_JEXEC') or die();
 
-class MitgliederModelAbteilung extends JModelLegacy
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+
+class MitgliederModelAbteilung extends BaseDatabaseModel
 {
-
-	function __construct($options = array()) {
-		parent::__construct($options);
-	}
-
 	function getData($id, $layout = null) {
 		$team = $this->getAbteilung($id);
 		$team->mitglieder = $this->getMitglieder($id);

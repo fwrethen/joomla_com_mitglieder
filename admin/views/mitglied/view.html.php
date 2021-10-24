@@ -1,12 +1,14 @@
 <?php
 defined('_JEXEC') or die();
 
+use Joomla\CMS\MVC\View\HtmlView;
+
 /**
  * View to edit a mitglied.
  *
  * @since  0.9
  */
-class MitgliederViewMitglied extends JViewLegacy
+class MitgliederViewMitglied extends HtmlView
 {
 	/**
 	 * Display the view

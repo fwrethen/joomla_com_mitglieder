@@ -2,7 +2,9 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$controller = JControllerLegacy::getInstance('Mitglieder');
+use Joomla\CMS\MVC\Controller\BaseController;
+
+$controller = BaseController::getInstance('Mitglieder');
 
 // Perform the Request task
 $controller->execute(JFactory::getApplication()->input->get('task'));

@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-class MitgliederControllerFelder extends JControllerLegacy
+class MitgliederControllerFelder extends JControllerAdmin
 {
 
 

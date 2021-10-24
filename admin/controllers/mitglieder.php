@@ -4,11 +4,6 @@ defined('_JEXEC') or die();
 
 class MitgliederControllerMitglieder extends JControllerAdmin
 {
-  function __construct()
-  {
-    parent::__construct();
-  }
-
   /**
    * Method to get a model object, loading it if required.
    *
