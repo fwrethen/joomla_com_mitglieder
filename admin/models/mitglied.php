@@ -182,9 +182,9 @@ class MitgliederModelMitglied extends JModelAdmin
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 
-		$query->select($db->quoteName(array('abteilungen_id', 'ordering')));
-		$query->from($db->quoteName('#__mitglieder_mitglieder_abteilungen'));
-		$query->where($db->quoteName('mitglieder_id') . ' = ' . $db->quote($id));
+		$query->select($db->qn(array('abteilungen_id', 'ordering')));
+		$query->from($db->qn('#__mitglieder_mitglieder_abteilungen'));
+		$query->where($db->qn('mitglieder_id') . ' = ' . $db->q($id));
 		$query->order('abteilungen_id ASC');
 
 		$db->setQuery($query);
@@ -209,8 +209,8 @@ class MitgliederModelMitglied extends JModelAdmin
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 
-		$query->select($db->quoteName(array('id', 'name')));
-		$query->from($db->quoteName('#__mitglieder_abteilungen'));
+		$query->select($db->qn(array('id', 'name')));
+		$query->from($db->qn('#__mitglieder_abteilungen'));
 		$query->order('id ASC');
 
 		$db->setQuery($query);

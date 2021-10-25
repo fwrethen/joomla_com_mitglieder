@@ -57,7 +57,7 @@ class com_MitgliederInstallerScript extends InstallerScript
 		if ($action === 'update')
 		{
 			// Get the version we are updating from
-			$manifest = $this->getItemArray('manifest_cache', '#__extensions', 'element', \JFactory::getDbo()->quote($this->extension));
+			$manifest = $this->getItemArray('manifest_cache', '#__extensions', 'element', \JFactory::getDbo()->q($this->extension));
 
 			// Check whether we have an old release installed and skip this check when this here is the initial install.
 			if (isset($manifest['version']))
@@ -154,11 +154,11 @@ class com_MitgliederInstallerScript extends InstallerScript
 			 */
 			$db = JFactory::getDBO();
 			$query = $db->getQuery(true);
-			$query->select($db->quoteName('text'))
-				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
-				->leftJoin($db->quoteName('#__mitglieder_felder')." ON "
-					.$db->quoteName('felder_id')." = ".$db->quoteName('id'))
-				->where($db->quoteName('typ')." = ".$db->quote('bild'));
+			$query->select($db->qn('text'))
+				->from($db->qn('#__mitglieder_mitglieder_felder'))
+				->leftJoin($db->qn('#__mitglieder_felder')." ON "
+					.$db->qn('felder_id')." = ".$db->qn('id'))
+				->where($db->qn('typ')." = ".$db->q('bild'));
 			$db->setQuery($query);
 			$images = $db->loadColumn();
 
@@ -190,8 +190,8 @@ class com_MitgliederInstallerScript extends InstallerScript
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true)
-			->select($db->quoteName(array('id', 'liste', 'wert')))
-			->from($db->quoteName('#__mitglieder_listen_v1'));
+			->select($db->qn(array('id', 'liste', 'wert')))
+			->from($db->qn('#__mitglieder_listen_v1'));
 		$results = $db->setQuery($query)->loadObjectList();
 
 		$data = [];

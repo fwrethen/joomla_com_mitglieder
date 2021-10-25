@@ -30,8 +30,8 @@ class MitgliederModelMitglieder extends JModelList
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
 
-    $query->select($db->quoteName(array('id', 'name', 'vorname')));
-    $query->from($db->quoteName('#__mitglieder_mitglieder'));
+    $query->select($db->qn(array('id', 'name', 'vorname')));
+    $query->from($db->qn('#__mitglieder_mitglieder'));
     $query->order('name ASC, vorname ASC');
 
     return $query;

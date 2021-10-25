@@ -42,8 +42,8 @@ class MitgliederModelAbteilung extends JModelAdmin
 				 * Mitgliederzuordnungen löschen
 				 */
 				$query->delete()
-					->from($db->quoteName('#__mitglieder_mitglieder_abteilungen'))
-					->where($db->quoteName('abteilungen_id') . ' = ' . $db->quote($pk));
+					->from($db->qn('#__mitglieder_mitglieder_abteilungen'))
+					->where($db->qn('abteilungen_id') . ' = ' . $db->q($pk));
 				$db->setQuery($query);
 
 				$db->execute();

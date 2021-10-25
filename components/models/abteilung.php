@@ -17,8 +17,8 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*')
-			->from($db->quoteName('#__mitglieder_abteilungen'))
-			->where($db->quoteName('id') .' = '. (int) $id);
+			->from($db->qn('#__mitglieder_abteilungen'))
+			->where($db->qn('id') .' = '. (int) $id);
 		$db->setQuery($query);
 		$abteilung = $db->loadObject();
 
@@ -28,16 +28,13 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 	function getMitglieder( $aid ) {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select($db->quoteName(array('mitglied.id', 'mitglied.name',
-			'mitglied.vorname')));
-		$query->from($db->quoteName('#__mitglieder_mitglieder_abteilungen',
-			'abteilung'));
-		$query->from($db->quoteName('#__mitglieder_mitglieder', 'mitglied'));
-		$query->where($db->quoteName('mitglied.id') .' = '
-			. $db->quoteName('abteilung.mitglieder_id'));
-		$query->where($db->quoteName('abteilungen_id') .' = '. (int) $aid);
-		$query->order($db->quoteName('ordering') .','. $db->quoteName('name') .','
-			. $db->quoteName('vorname') .' ASC');
+		$query->select($db->qn(array('mitglied.id', 'mitglied.name', 'mitglied.vorname')));
+		$query->from($db->qn('#__mitglieder_mitglieder_abteilungen', 'abteilung'));
+		$query->from($db->qn('#__mitglieder_mitglieder', 'mitglied'));
+		$query->where($db->qn('mitglied.id') .' = ' . $db->qn('abteilung.mitglieder_id'));
+		$query->where($db->qn('abteilungen_id') .' = '. (int) $aid);
+		$query->order($db->qn('ordering') .','. $db->qn('name') .','
+			. $db->qn('vorname') .' ASC');
 		$db->setQuery($query);
 		$mitglieder = $db->loadObjectList();
 
@@ -60,16 +57,14 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 			$subQuery = $db->getQuery(true);
 			$query    = $db->getQuery(true);
 
-			$subQuery->select($db->quoteName('thumb'))
-				->from($db->quoteName('#__mitglieder_abteilungen'))
-				->where($db->quoteName('id') . ' = ' . $db->quote((int) $aid));
+			$subQuery->select($db->qn('thumb'))
+				->from($db->qn('#__mitglieder_abteilungen'))
+				->where($db->qn('id') . ' = ' . $db->q((int) $aid));
 
-			$query->select($db->quoteName('text'))
-				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
-				->where($db->quoteName('mitglieder_id') . ' = '
-					. $db->quote($einSpieler->id), 'AND')
-				->where($db->quoteName('felder_id') . ' = (' . $subQuery->__toString()
-					. ')');
+			$query->select($db->qn('text'))
+				->from($db->qn('#__mitglieder_mitglieder_felder'))
+				->where($db->qn('mitglieder_id') . ' = ' . $db->q($einSpieler->id), 'AND')
+				->where($db->qn('felder_id') . ' = (' . $subQuery->__toString() . ')');
 
 			$db->setQuery($query);
 			$spieler[$id]->thumb = $db->loadResult();
@@ -81,16 +76,14 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 			$subQuery = $db->getQuery(true);
 			$query    = $db->getQuery(true);
 
-			$subQuery->select($db->quoteName('field'))
-				->from($db->quoteName('#__mitglieder_abteilungen'))
-				->where($db->quoteName('id') . ' = ' . $db->quote((int) $aid));
+			$subQuery->select($db->qn('field'))
+				->from($db->qn('#__mitglieder_abteilungen'))
+				->where($db->qn('id') . ' = ' . $db->q((int) $aid));
 
-			$query->select($db->quoteName('text'))
-				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
-				->where($db->quoteName('mitglieder_id') . ' = '
-					. $db->quote($einSpieler->id), 'AND')
-				->where($db->quoteName('felder_id') . ' = (' . $subQuery->__toString()
-					. ')');
+			$query->select($db->qn('text'))
+				->from($db->qn('#__mitglieder_mitglieder_felder'))
+				->where($db->qn('mitglieder_id') . ' = ' . $db->q($einSpieler->id), 'AND')
+				->where($db->qn('felder_id') . ' = (' . $subQuery->__toString() . ')');
 
 			$db->setQuery($query);
 			$spieler[$id]->text = $db->loadResult();

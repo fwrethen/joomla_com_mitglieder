@@ -30,8 +30,8 @@ class MitgliederModelAbteilungen extends JModelList
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
 
-    $query->select($db->quoteName(array('id', 'name', 'description')));
-    $query->from($db->quoteName('#__mitglieder_abteilungen'));
+    $query->select($db->qn(['id', 'name', 'description']));
+    $query->from($db->qn('#__mitglieder_abteilungen'));
     $query->order('id ASC');
 
     return $query;

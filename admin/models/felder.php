@@ -29,8 +29,8 @@ class MitgliederModelFelder extends JModelAdmin
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
-		$query->select($db->quoteName(['id', 'name_backend', 'name_frontend', 'typ', 'show', 'tooltip', 'ordering']));
-		$query->from($db->quoteName('#__mitglieder_felder'));
+		$query->select($db->qn(['id', 'name_backend', 'name_frontend', 'typ', 'show', 'tooltip', 'ordering']));
+		$query->from($db->qn('#__mitglieder_felder'));
 		$query->order('ordering, id ASC');
 
 		return $query;

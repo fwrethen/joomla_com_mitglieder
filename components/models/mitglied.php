@@ -14,30 +14,29 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 
-			$query->select($db->quoteName(array('name', 'vorname')))
-				->from($db->quoteName('#__mitglieder_mitglieder'))
-				->where($db->quoteName('id') .' = '. (int) $id);
+			$query->select($db->qn(['name', 'vorname']))
+				->from($db->qn('#__mitglieder_mitglieder'))
+				->where($db->qn('id') .' = '. (int) $id);
 			$db->setQuery($query);
 			$this->_data = $db->loadObjectList()[0];	// only first row needed
 
 			$query    = $db->getQuery(true);
 			$subQuery = $db->getQuery(true);
 
-			$subQuery->select($db->quoteName(['felder_id', 'text', 'listen_id', 'datum']));
-			$subQuery->from($db->quoteName('#__mitglieder_mitglieder_felder', 'f'));
-			$subQuery->where($db->quoteName('mitglieder_id') .' = '. (int) $id);
+			$subQuery->select($db->qn(['felder_id', 'text', 'listen_id', 'datum']));
+			$subQuery->from($db->qn('#__mitglieder_mitglieder_felder', 'f'));
+			$subQuery->where($db->qn('mitglieder_id') .' = '. (int) $id);
 
-			$query->select($db->quoteName(
+			$query->select($db->qn(
 				['f1.name_frontend', 'f1.typ', 'text', 'felder_id', 'listen_id', 'datum'],
 				['name', 'typ', 'text', 'feld_id', 'wert', 'datum']
 			));
 			$query->from('('. $subQuery->__toString() .') AS a');
-			$query->from($db->quoteName('#__mitglieder_felder', 'f1'));
-			$query->where($db->quoteName('a.felder_id') .' = '
-				. $db->quoteName('f1.id'), 'AND');
-			$query->where($db->quoteName('f1.show') .' = 1');
-			$query->order($db->quoteName('f1.ordering') .','. $db->quoteName('f1.id')
-				.' ASC');
+			$query->from($db->qn('#__mitglieder_felder', 'f1'));
+			$query->where($db->qn('a.felder_id') .' = '
+				. $db->qn('f1.id'), 'AND');
+			$query->where($db->qn('f1.show') .' = 1');
+			$query->order($db->qn('f1.ordering') .','. $db->qn('f1.id') .' ASC');
 
 			$db->setQuery($query);
 			$this->_data->felder = $db->loadObjectList();
