@@ -7,3 +7,10 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_listen` (
 
 ALTER TABLE `#__mitglieder_felder`
   CHANGE `typ` `typ` VARCHAR(100) NOT NULL DEFAULT 'text';
+
+UPDATE `#__mitglieder_mitglieder_felder`
+SET `text` = `kurz_text`
+WHERE `text` IS NULL AND `kurz_text` IS NOT NULL;
+
+ALTER TABLE  `#__mitglieder_mitglieder_felder`
+DROP COLUMN `kurz_text`;

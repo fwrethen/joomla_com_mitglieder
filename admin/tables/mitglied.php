@@ -89,13 +89,13 @@ class TableMitglied extends JTable
 		 * Zusätzliche Spielerfelder laden
 		 */
 
-		$query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, f1.tooltip, kurz_text, `text`, datum, listen_id " .
+		$query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, f1.tooltip, `text`, datum, listen_id " .
 		"from #__mitglieder_mitglieder_felder as a, #__mitglieder_felder as f1 " .
 		"where a.felder_id= f1.id AND mitglieder_id = $keys order by f1.ordering, f1.id ASC";
 
 		/*gehört ins frontend
-		 * $query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, kurz_text, `text`, wert " .
-		"from (select mitglieder_id, felder_id, kurz_text,`text`, wert " .
+		 * $query = "select mitglieder_id, f1.name_backend,a.felder_id, f1.typ, `text`, wert " .
+		"from (select mitglieder_id, felder_id,`text`, wert " .
 		"from #__mitglieder_mitglieder_felder as f LEFT JOIN #__mitglieder_listen as l ".
 		"on l.id=f.listen_id ) as a, #__mitglieder_felder as f1 " .
 		"where a.felder_id= f1.id AND mitglieder_id = $keys order by f1.ordering, f1.id ASC";
@@ -108,21 +108,9 @@ class TableMitglied extends JTable
 		foreach($mitgliedFelder as $feld) {
 			switch ($feld->typ)
 			{
-				/*
-				 * Datum
-				 */
-
-
 				case "jahre seit":
 				{
 					$wert = $feld->datum;
-				}
-				break;
-
-				case 'text':
-				case 'text_html':
-				{
-					$wert = $feld->text;
 				}
 				break;
 				case 'liste':
@@ -130,9 +118,11 @@ class TableMitglied extends JTable
 					$wert = $feld->listen_id;
 				}
 				break;
+				case 'text':
+				case 'text_html':
 				default:
 				{
-					$wert = $feld->kurz_text;
+					$wert = $feld->text;
 				}
 				break;
 			}
@@ -163,11 +153,6 @@ class TableMitglied extends JTable
 
 			switch ($feld->typ)
 			{
-				/*
-				 * Datum
-				 */
-
-
 				case "jahre seit":
 				 {
 					$spalte = "datum";
@@ -186,21 +171,16 @@ class TableMitglied extends JTable
 
 				}
 				break;
-
-				case 'text':
-				case 'text_html':
-				{
-					$spalte = "text";
-				}
-				break;
 				case 'liste':
 				{
 					$spalte = "listen_id";
 				}
 				break;
+				case 'text':
+				case 'text_html':
 				default:
 				{
-					$spalte = "kurz_text";
+					$spalte = "text";
 				}
 				break;
 			}

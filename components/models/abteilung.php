@@ -50,7 +50,7 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 		foreach($spieler as $id=>$einSpieler) {
 
 			/* Query in SQL:
-				SELECT `kurz_text` FROM `#__mitglieder_mitglieder_felder`
+				SELECT `text` FROM `#__mitglieder_mitglieder_felder`
 				WHERE `mitglieder_id` = $einSpieler->id
 				AND `felder_id` = (
 					SELECT `thumb` FROM `#__mitglieder_abteilungen`
@@ -64,7 +64,7 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 				->from($db->quoteName('#__mitglieder_abteilungen'))
 				->where($db->quoteName('id') . ' = ' . $db->quote((int) $aid));
 
-			$query->select($db->quoteName('kurz_text'))
+			$query->select($db->quoteName('text'))
 				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
 				->where($db->quoteName('mitglieder_id') . ' = '
 					. $db->quote($einSpieler->id), 'AND')

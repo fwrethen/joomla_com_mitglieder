@@ -32,9 +32,8 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_mitglieder` (
 CREATE TABLE IF NOT EXISTS `#__mitglieder_mitglieder_felder` (
   `felder_id` int(11) NOT NULL,
   `mitglieder_id` int(11) NOT NULL,
-  `kurz_text` varchar(255) default NULL,
   `datum` date default NULL,
-  `text` text,
+  `text` text default NULL,
   `listen_id` int(11) default NULL,
   PRIMARY KEY  (`felder_id`,`mitglieder_id`)
 );

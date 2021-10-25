@@ -38,11 +38,11 @@ function printFelder($felder) {
 					break;
 				case "email":
 					$data[$id]['type'] = 'text';
-					$data[$id]['value'] = $feld->kurz_text;
+					$data[$id]['value'] = $feld->text;
 					break;
 				case "telefon":
 					$data[$id]['type'] = 'text';
-					$data[$id]['value'] = $feld->kurz_text;
+					$data[$id]['value'] = $feld->text;
 					break;
 				case "liste":
 					$data[$id]['type'] = 'text';
@@ -50,7 +50,7 @@ function printFelder($felder) {
 					break;
 				case "bild":
 					$data[$id]['type'] = 'image';
-					$data[$id]['value'] = $feld->kurz_text;
+					$data[$id]['value'] = $feld->text;
 					break;
 			}
 		}

@@ -23,14 +23,14 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 			$query    = $db->getQuery(true);
 			$subQuery = $db->getQuery(true);
 
-			$subQuery->select($db->quoteName(array('felder_id', 'kurz_text', 'text',
-				'listen_id', 'datum')));
+			$subQuery->select($db->quoteName(['felder_id', 'text', 'listen_id', 'datum']));
 			$subQuery->from($db->quoteName('#__mitglieder_mitglieder_felder', 'f'));
 			$subQuery->where($db->quoteName('mitglieder_id') .' = '. (int) $id);
 
-			$query->select($db->quoteName(array('f1.name_frontend', 'f1.typ',
-				'kurz_text', 'text', 'felder_id', 'listen_id', 'datum'),
-				array('name', 'typ', 'kurz_text','text', 'feld_id', 'wert', 'datum')));
+			$query->select($db->quoteName(
+				['f1.name_frontend', 'f1.typ', 'text', 'felder_id', 'listen_id', 'datum'],
+				['name', 'typ', 'text', 'feld_id', 'wert', 'datum']
+			));
 			$query->from('('. $subQuery->__toString() .') AS a');
 			$query->from($db->quoteName('#__mitglieder_felder', 'f1'));
 			$query->where($db->quoteName('a.felder_id') .' = '

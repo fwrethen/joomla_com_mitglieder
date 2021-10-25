@@ -154,7 +154,7 @@ class com_MitgliederInstallerScript extends InstallerScript
 			 */
 			$db = JFactory::getDBO();
 			$query = $db->getQuery(true);
-			$query->select($db->quoteName('kurz_text'))
+			$query->select($db->quoteName('text'))
 				->from($db->quoteName('#__mitglieder_mitglieder_felder'))
 				->leftJoin($db->quoteName('#__mitglieder_felder')." ON "
 					.$db->quoteName('felder_id')." = ".$db->quoteName('id'))
