@@ -9,9 +9,9 @@
 		}
 
 		if (form.vorname.value == "") {
-			alert( "<?php echo JText::_( 'Geben Sie den Vornamen des Mitglieds an', true ); ?>" );
+			alert( "<?php echo JText::_('Geben Sie den Vornamen des Mitglieds an', true); ?>" );
 		} else if(form.name.value == "") {
-			alert( "<?php echo JText::_( 'Geben Sie den Nachnamen des Mitglieds an', true ); ?>" );
+			alert( "<?php echo JText::_('Geben Sie den Nachnamen des Mitglieds an', true); ?>" );
 		}else {
 			Joomla.submitform( pressbutton );
 		}
@@ -24,7 +24,7 @@
 		<div class="span9">
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo JText::_( 'Vorname' ); ?>
+					<?php echo JText::_('Vorname'); ?>
 				</div>
 				<div class="controls">
 					<input class="inputbox" type="text" name="vorname" id="vorname" size="20" value="<?php echo $this->player->vorname; ?>" />
@@ -32,7 +32,7 @@
 			</div>
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo JText::_( 'Nachname' ); ?>
+					<?php echo JText::_('Nachname'); ?>
 				</div>
 				<div class="controls">
 					<input class="inputbox" type="text" name="name" id="name" size="20" value="<?php echo $this->player->name; ?>" />
@@ -54,9 +54,9 @@
 						case "liste":
 							// TODO: beautify using renderField or similar Joomla given function
 							echo '<div class="control-group"><div class="control-label">';
-							echo JText::_( $feld->name );
+							echo JText::_($feld->name);
 							echo '</div><div class="controls">';
-							echo JHtml::_('select.genericlist',  $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert).' <br />';
+							echo JHtml::_('select.genericlist', $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert) . ' <br />';
 							echo '</div></div>';
 							break;
 					}
@@ -66,30 +66,30 @@
 
 			<div class="control-group">
 				<div class="control-label">
-					<?php echo JText::_( 'Abteilungen' ); ?>
+					<?php echo JText::_('Abteilungen'); ?>
 				</div>
 				<div class="controls">
 
 		<div id="abteilung_list_content">
 		<?php if (count($this->inAbteilungen) < 1):
-			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
+			echo JHtml::_('select.genericlist', $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
 		?>
 			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br />
 		<?php endif; ?>
 		<?php for ($i = 0; $i < count($this->inAbteilungen); ++$i):
-			echo JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name',$this->inAbteilungen[$i]->abteilungen_id);
+			echo JHtml::_('select.genericlist', $this->abteilungen, 'abteilung[]', ' ', 'id', 'name', $this->inAbteilungen[$i]->abteilungen_id);
 		?>
 			<input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="<?php echo $this->inAbteilungen[$i]->ordering?>" /><br />
 		<?php endfor; ?>
 		</div>
 
 		<script type="text/javascript">
-		<?php	$abteilungenSelect=JHtml::_('select.genericlist',  $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
+		<?php	$abteilungenSelect=JHtml::_('select.genericlist', $this->abteilungen, 'abteilung[]', ' ', 'id', 'name');
 				$abteilungenSelect=str_replace(array("\r\n", "\n", "\r"), '', $abteilungenSelect);
 		?>
 		var abteilungList = '<?php echo $abteilungenSelect?> <input class="inputbox" type="text" name="ordering[]" id="ordering[]" size="40" value="99" /><br />';
 		var maxAbteilung = <?php echo count($this->abteilungen); ?> - 1;
-		var curAbteilung = <?php echo (count($this->inAbteilungen) > 0 ? (count($this->inAbteilungen)) : 0); ?> - 0;
+		var curAbteilung = <?php echo count($this->inAbteilungen) > 0 ? (count($this->inAbteilungen)) : 0; ?> - 0;
 		</script>
 		<input type="button" value="mehr Abteilungen" onclick="if (curAbteilung < maxAbteilung) { document.getElementById('abteilung_list_content').innerHTML += abteilungList; ++curAbteilung; }" />
 

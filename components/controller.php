@@ -5,7 +5,7 @@ use Joomla\CMS\MVC\Controller\BaseController;
 
 class MitgliederController extends BaseController
 {
-	function display($cachable = false, $urlparams = false)
+	public function display($cachable = false, $urlparams = false)
 	{
 		// Set the default view name and format from the Request.
 		$vName = $this->input->get('view', 'abteilung');

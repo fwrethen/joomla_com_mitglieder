@@ -6,15 +6,14 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 class TableMitglied extends JTable
 {
-	var $id						= 0;
-	var $vorname				= '';
-	var $name				= '';
+	public $id						= 0;
+	public $vorname				= '';
+	public $name				= '';
 
-	var $felder					= array();
-	var $listen					= array();
+	public $felder					= array();
+	public $listen					= array();
 
-
-	function __construct($db) {
+	public function __construct($db) {
 		parent::__construct('#__mitglieder_mitglieder', 'id', $db);
 
 		/*
@@ -23,9 +22,8 @@ class TableMitglied extends JTable
 		$query = "SELECT id, name_backend, typ, tooltip " .
 				" FROM #__mitglieder_felder " .
 				" ORDER BY ordering, id ASC ";
-		$db->setQuery( $query );
+		$db->setQuery($query);
 		$felder = $db->loadObjectList();
-
 
 		$this->felder = array();
 		foreach($felder as $feld) {
@@ -43,8 +41,7 @@ class TableMitglied extends JTable
 		}
 	}
 
-
-	function bind( $from, $ignore=array() ) {
+	public function bind($from, $ignore=array()) {
 		$felder = $this->felder;
 		if(!parent::bind($from, $ignore))
 			return false;
@@ -69,7 +66,7 @@ class TableMitglied extends JTable
 	/**
 	 * Läd zusätzlich die Mannschaften und die Aufstellungen
 	 */
-	function load($keys = NULL, $reset = true) {
+	public function load($keys = null, $reset = true) {
 
 		//Spielerdaten Laden
 		if(parent::load($keys) === false)
@@ -81,9 +78,6 @@ class TableMitglied extends JTable
 		//Nachdem parent::load() aufgerufen wurde, ist die ID auf jden fall im Objekt
 		$key = $this->_tbl_key;
 		$id = $this->$key;
-
-
-
 
 		/*
 		 * Zusätzliche Spielerfelder laden
@@ -101,7 +95,7 @@ class TableMitglied extends JTable
 		"where a.felder_id= f1.id AND mitglieder_id = $keys order by f1.ordering, f1.id ASC";
 		*/
 
-		$db->setQuery( $query );
+		$db->setQuery($query);
 		$mitgliedFelder = $db->loadObjectList();
 
 		//$this->felder = array();
@@ -134,17 +128,15 @@ class TableMitglied extends JTable
 			$this->felder[$feld->felder_id]->tooltip = $feld->tooltip;
 		}
 
-
 	}
 
-	function store( $updateNulls=false ) {
+	public function store($updateNulls=false) {
 		parent::store($updateNulls);
 
 		//Datenbankverbindung
 		$db = &$this->_db;
 
 		$spielerID = $this->id;
-
 
 		/*
 		 * Profielfelder eintragen
@@ -159,15 +151,14 @@ class TableMitglied extends JTable
 
 					//Datum in SQL (Englisches) Format umwandeln
 					if($feld->wert) {
-						$date = explode(".",$feld->wert);
+						$date = explode(".", $feld->wert);
 						if(count($date) == 3)//Normales Deutsches Format tt.mm.jjjj
 							$feld->wert = date("Y-m-d", mktime(0, 0, 0, $date[1], $date[0], $date[2]));
-						else if( ($date = strtotime($feld->wert)) )//strtotime() wandelt verschiedene Formate in einen Timestamp um. Erst seit PHP5 wirklich gut.
+						elseif(($date = strtotime($feld->wert)))//strtotime() wandelt verschiedene Formate in einen Timestamp um. Erst seit PHP5 wirklich gut.
 							$feld->wert = date("Y-m-d", $date);
 						else //Falsches Datum wird nicht gespeichert
 							$feld->wert = null;
 					}
-
 
 				}
 				break;
@@ -200,20 +191,21 @@ class TableMitglied extends JTable
 
 				$query = "INSERT INTO #__mitglieder_mitglieder_felder " .
 						" SET felder_id=$felderID, mitglieder_id=$spielerID, " .
-							" $spalte=$wert ".
+							" $spalte=$wert " .
 				"ON DUPLICATE KEY UPDATE $spalte=$wert ";
 				$db->setQuery($query);
 				$db->execute();
 
 			}
 		}
+
 		return true;
 	}
 
-	function delete($oid=null) {
+	public function delete($oid=null) {
 		$key = $this->_tbl_key;
 		if ($oid) {
-			$this->$key = intval( $oid );
+			$this->$key = intval($oid);
 		}
 
 		//Datenbankverbindung
@@ -229,8 +221,8 @@ class TableMitglied extends JTable
 		 * Zusätliche Felder löschen
 		 */
 		$query = "DELETE FROM #__mitglieder_mitglieder_felder " .
-				" WHERE mitglieder_id = ". $this->$key;
-		$db->setQuery( $query );
+				" WHERE mitglieder_id = " . $this->$key;
+		$db->setQuery($query);
 
 		$db->execute();
 

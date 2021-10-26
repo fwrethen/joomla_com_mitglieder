@@ -11,7 +11,7 @@ class MitgliederModelListen extends JModelList
    * @note    Calling getState in this method will result in recursion.
    * @since   2.0
    */
-  protected function populateState($ordering = NULL, $direction = NULL)
+  protected function populateState($ordering = null, $direction = null)
   {
     // Set list limit to no limit.
     $this->setState('list.limit', 0);
@@ -25,7 +25,7 @@ class MitgliederModelListen extends JModelList
    *
    * @since   2.0
    */
-  function getListQuery()
+  public function getListQuery()
   {
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
@@ -33,7 +33,7 @@ class MitgliederModelListen extends JModelList
 	$query->select($db->qn(['f.id', 'name_backend']))
         ->from($db->qn('#__mitglieder_listen', 'l'))
 	    ->rightJoin(
-			$db->qn('#__mitglieder_felder', 'f')
+	        $db->qn('#__mitglieder_felder', 'f')
 			. ' ON ' . $db->qn('l.felder_id') . ' = ' . $db->qn('f.id')
 	    )
 		->where($db->qn('f.typ') . ' = ' . $db->q('liste'))

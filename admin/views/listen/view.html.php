@@ -5,7 +5,7 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewListen extends HtmlView
 {
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		JToolBarHelper::title(JText::_('Mitglieder: Listen'), 'list');
 		//JToolBarHelper::addNew();

@@ -5,8 +5,7 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewAbteilung extends HtmlView
 {
-
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
  		$model	  = $this->getModel();
 		$layout		= $this->getLayout();
@@ -31,8 +30,10 @@ class MitgliederViewAbteilung extends HtmlView
 			// Change image for thumbnail if available
 			foreach($this->abteilung->mitglieder as $mitglied)
 			{
-				$folder = JComponentHelper::getParams('com_media')->get('image_path',
-					'images') . '/' . $params->get('image_path', 'stories/mitglieder');
+				$folder = JComponentHelper::getParams('com_media')->get(
+				    'image_path',
+				    'images'
+				) . '/' . $params->get('image_path', 'stories/mitglieder');
 				$path = JPATH_ROOT . '/' . $folder;
 				$basename = pathinfo($mitglied->thumb, PATHINFO_BASENAME);
 				$thumb = $path . '/thumbs/' . $basename;

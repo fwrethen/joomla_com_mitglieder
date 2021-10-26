@@ -24,7 +24,7 @@ class MitgliederModelFelder extends JModelAdmin
 	 *
 	 * @since   2.0
 	 */
-	function getListQuery()
+	public function getListQuery()
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -119,11 +119,26 @@ class MitgliederModelFelder extends JModelAdmin
 			$show = isset($field['show']) ? 1 : 0;
 
 			if ($id > 0) {
-				$query .= sprintf("UPDATE #__mitglieder_felder SET name_backend='%s', name_frontend='%s', `show`=%s, tooltip='%s', typ='%s', ordering=%s WHERE id=%s;",
-					$field['name_backend'], $field['name_frontend'], $show, $field['tooltip'], $field['typ'], $ordering, $field['id']);
+				$query .= sprintf(
+				    "UPDATE #__mitglieder_felder SET name_backend='%s', name_frontend='%s', `show`=%s, tooltip='%s', typ='%s', ordering=%s WHERE id=%s;",
+				    $field['name_backend'],
+				    $field['name_frontend'],
+				    $show,
+				    $field['tooltip'],
+				    $field['typ'],
+				    $ordering,
+				    $field['id']
+				);
 			} else {
-				$query .= sprintf("INSERT INTO #__mitglieder_felder(name_backend, name_frontend,  `show`, tooltip, typ, ordering) VALUES( '%s', '%s', %s, '%s', '%s', %s);",
-					$field['name_backend'], $field['name_frontend'], $show, $field['tooltip'], $field['typ'], $ordering);
+				$query .= sprintf(
+				    "INSERT INTO #__mitglieder_felder(name_backend, name_frontend,  `show`, tooltip, typ, ordering) VALUES( '%s', '%s', %s, '%s', '%s', %s);",
+				    $field['name_backend'],
+				    $field['name_frontend'],
+				    $show,
+				    $field['tooltip'],
+				    $field['typ'],
+				    $ordering
+				);
 			}
 		}
 

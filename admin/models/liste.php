@@ -19,7 +19,7 @@ class MitgliederModelListe extends JModelAdmin
    *
    * @since   2.0
    */
-  function getItem($pk = null)
+  public function getItem($pk = null)
   {
       $item = parent::getItem($pk);
 
@@ -51,7 +51,7 @@ class MitgliederModelListe extends JModelAdmin
    *
    * @since   2.0
    */
-  function save($data=null)
+  public function save($data=null)
   {
     if (isset($data['values']) && is_array($data['values']))
     {
@@ -94,7 +94,7 @@ class MitgliederModelListe extends JModelAdmin
    *
    * @since   2.0
    */
-  function getForm($data = array(), $loadData = true)
+  public function getForm($data = array(), $loadData = true)
   {
     // Get the form.
     $form = $this->loadForm('com_mitglieder.liste', 'liste', array('control' => 'jform', 'load_data' => $loadData));
@@ -102,6 +102,7 @@ class MitgliederModelListe extends JModelAdmin
     {
       return false;
     }
+
     return $form;
   }
 
@@ -132,6 +133,7 @@ class MitgliederModelListe extends JModelAdmin
     }
 
     $this->preprocessData('com_mitglieder.liste', $data);
+
     return $data;
   }
 }

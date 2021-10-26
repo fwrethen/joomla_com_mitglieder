@@ -5,43 +5,43 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 class MitgliederModelAbteilung extends BaseDatabaseModel
 {
-	function getData($id, $layout = null) {
+	public function getData($id, $layout = null) {
 		$team = $this->getAbteilung($id);
 		$team->mitglieder = $this->getMitglieder($id);
 
 		return $team;
 	}
 
-	function getAbteilung( $id )
+	public function getAbteilung($id)
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*')
 			->from($db->qn('#__mitglieder_abteilungen'))
-			->where($db->qn('id') .' = '. (int) $id);
+			->where($db->qn('id') . ' = ' . (int) $id);
 		$db->setQuery($query);
 		$abteilung = $db->loadObject();
 
 		return $abteilung;
 	}
 
-	function getMitglieder( $aid ) {
+	public function getMitglieder($aid) {
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select($db->qn(array('mitglied.id', 'mitglied.name', 'mitglied.vorname')));
 		$query->from($db->qn('#__mitglieder_mitglieder_abteilungen', 'abteilung'));
 		$query->from($db->qn('#__mitglieder_mitglieder', 'mitglied'));
-		$query->where($db->qn('mitglied.id') .' = ' . $db->qn('abteilung.mitglieder_id'));
-		$query->where($db->qn('abteilungen_id') .' = '. (int) $aid);
-		$query->order($db->qn('ordering') .','. $db->qn('name') .','
-			. $db->qn('vorname') .' ASC');
+		$query->where($db->qn('mitglied.id') . ' = ' . $db->qn('abteilung.mitglieder_id'));
+		$query->where($db->qn('abteilungen_id') . ' = ' . (int) $aid);
+		$query->order($db->qn('ordering') . ',' . $db->qn('name') . ','
+			. $db->qn('vorname') . ' ASC');
 		$db->setQuery($query);
 		$mitglieder = $db->loadObjectList();
 
 		return $mitglieder;
 	}
 
-	function getThumbData($aid, $spieler){
+	public function getThumbData($aid, $spieler){
 		$db = JFactory::getDbo();
 
 		foreach($spieler as $id=>$einSpieler) {
@@ -89,6 +89,7 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 			$spieler[$id]->text = $db->loadResult();
 
 		}
+
 		return $spieler;
 	}
 }

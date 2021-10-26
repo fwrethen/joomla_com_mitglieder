@@ -22,7 +22,7 @@ class TableFelder extends JTable
    *
    * @since   2.0
    */
-  function __construct($db)
+  public function __construct($db)
   {
     parent::__construct('#__mitglieder_felder', 'id', $db);
   }

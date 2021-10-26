@@ -7,7 +7,6 @@ use Joomla\Registry\Registry;
 
 class com_MitgliederInstallerScript extends InstallerScript
 {
-
 	/**
 	 * The component version we are updating from
 	 *
@@ -73,11 +72,11 @@ class com_MitgliederInstallerScript extends InstallerScript
 		return true;
 	}
 
-	function install($parent)
+	public function install($parent)
 	{
 	}
 
-	function uninstall($parent)
+	public function uninstall($parent)
 	{
 		$db = JFactory::getDBO();
 		$params = JComponentHelper::getParams('com_mitglieder');
@@ -118,14 +117,14 @@ class com_MitgliederInstallerScript extends InstallerScript
 				" #__mitglieder_mitglieder, " .
 				" #__mitglieder_mitglieder_felder, " .
 				" #__mitglieder_mitglieder_abteilungen";
-			$db->setQuery( $query );
+			$db->setQuery($query);
 			$db->execute();
 			echo '<p>Datenbankeintr&auml;ge wurden gel&ouml;scht.</p>';
 		}
 		else echo '<p>Datenbankeintr&auml;ge wurden nicht gel&ouml;scht.</p>';
 	}
 
-	function update($parent)
+	public function update($parent)
 	{
 		if (!empty($this->fromVersion) && version_compare($this->fromVersion, '2.0', 'lt'))
 		{
@@ -147,7 +146,7 @@ class com_MitgliederInstallerScript extends InstallerScript
 	 */
 	public function postflight($action, $installer)
 	{
-		if ($action === 'update' && !empty($this->fromVersion) )
+		if ($action === 'update' && !empty($this->fromVersion))
 		{
 			/*
 			 * (Re-)Generate Thumbnails
@@ -156,14 +155,14 @@ class com_MitgliederInstallerScript extends InstallerScript
 			$query = $db->getQuery(true);
 			$query->select($db->qn('text'))
 				->from($db->qn('#__mitglieder_mitglieder_felder'))
-				->leftJoin($db->qn('#__mitglieder_felder')." ON "
-					.$db->qn('felder_id')." = ".$db->qn('id'))
-				->where($db->qn('typ')." = ".$db->q('bild'));
+				->leftJoin($db->qn('#__mitglieder_felder') . " ON "
+					. $db->qn('felder_id') . " = " . $db->qn('id'))
+				->where($db->qn('typ') . " = " . $db->q('bild'));
 			$db->setQuery($query);
 			$images = $db->loadColumn();
 
 			$params = JComponentHelper::getParams('com_mitglieder');
-			$img_width  = $params->get('mitglied_thumb_width',  '180');
+			$img_width  = $params->get('mitglied_thumb_width', '180');
 			$img_height = $params->get('mitglied_thumb_height', '240');
 			$img_path   = $params->get('image_path', 'stories/mitglieder');
 			$img_path	= JPATH_ROOT . '/'

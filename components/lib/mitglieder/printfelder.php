@@ -15,14 +15,14 @@ function printFelder($felder) {
 						if ($age->m < 1)
 							$text = 'unbekannt';
 						elseif ($age->m == 1)
-							$text = $age->m .' Monat';
+							$text = $age->m . ' Monat';
 						else
-							$text = $age->m .' Monate';
+							$text = $age->m . ' Monate';
 					}
 					elseif ($age->y == 1)
-						$text = $age->y .' Jahr';
+						$text = $age->y . ' Jahr';
 					else
-						$text = $age->y .' Jahre';
+						$text = $age->y . ' Jahre';
 
 					$data[$id]['type'] = 'text';
 					$data[$id]['value'] = $text;
@@ -55,7 +55,7 @@ function printFelder($felder) {
 			}
 		}
 
-	return json_encode( $data );
+	return json_encode($data);
 
 }
 

@@ -21,7 +21,7 @@ defined('_JEXEC') or die; ?>
 				<?php echo JText::_('#'); ?>
 			</th>
 			<th width="2%" class="nowrap center">
-				<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(<?php echo count( $this->items ); ?>);" />
+				<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(<?php echo count($this->items); ?>);" />
 			</th>
 			<th width="50%" class="nowrap">
 				<?php echo JText::_('Name'); ?>

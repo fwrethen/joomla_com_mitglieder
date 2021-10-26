@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 
 class MitgliederControllerAbteilungen extends JControllerAdmin
 {
-  function __construct()
+  public function __construct()
   {
     parent::__construct();
   }

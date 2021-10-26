@@ -15,7 +15,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 	 *
 	 * @since   0.9
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		parent::__construct($config);
 	}
@@ -29,13 +29,13 @@ class MitgliederModelAbteilung extends JModelAdmin
 	 *
 	 * @since   0.9
 	 */
-	function delete(&$pks)
+	public function delete(&$pks)
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$row =& $this->getTable();
 
-		if (count( $pks ))
+		if (count($pks))
 		{
 			foreach($pks as $pk) {
 				/*
@@ -52,6 +52,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 				$row->delete($pk);
 			}
 		}
+
 		return true;
 	}
 
@@ -73,6 +74,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 		{
 			return false;
 		}
+
 		return $form;
 	}
 
@@ -92,6 +94,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 			$data = $this->getItem();
 		}
 		$this->preprocessData('com_mitglieder.abteilung', $data);
+
 		return $data;
 	}
 }

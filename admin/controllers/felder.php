@@ -3,37 +3,33 @@ defined('_JEXEC') or die();
 
 class MitgliederControllerFelder extends JControllerAdmin
 {
-
-
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 
 		$this->redirectPath = "index.php?option=com_mitglieder&view=felder";
 	}
 
-	function display($cachable = false, $urlparams = false)
+	public function display($cachable = false, $urlparams = false)
 	{
 		parent::display();
 	}
 
-	function cancel( )
+	public function cancel()
 	{
 		$msg = JText::_('Änderungen verworfen');
-		$this->setRedirect( $this->redirectPath, $msg );
+		$this->setRedirect($this->redirectPath, $msg);
 	}
 
-
-
-	function save()
+	public function save()
 	{
 		$model = $this->getModel('felder');
 		$formData = $this->input->get('jform', null, 'string');
 
 		if ($model->store($formData)) {
-			$msg = JText::_( 'Felder gespeichert!' );
+			$msg = JText::_('Felder gespeichert!');
 		} else {
-			$msg = JText::_( 'Fehler beim speichern der Felder' );
+			$msg = JText::_('Fehler beim speichern der Felder');
 		}
 
 		$cache = JFactory::getCache('com_mitglieder');

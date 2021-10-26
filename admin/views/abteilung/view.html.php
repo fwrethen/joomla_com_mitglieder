@@ -19,7 +19,7 @@ class MitgliederViewAbteilung extends HtmlView
 	 *
 	 * @since   0.9
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		$this->form = $this->get('Form');
 		$this->item = $this->get('Item');
@@ -39,7 +39,7 @@ class MitgliederViewAbteilung extends HtmlView
 	protected function addToolbar()
 	{
 		$isNew = ($this->item->id == 0);
-		$text = $isNew ? JText::_( 'Neu' ) : JText::_( 'Bearbeiten' );
+		$text = $isNew ? JText::_('Neu') : JText::_('Bearbeiten');
 
 		JToolBarHelper::title(JText::_('Abteilung: ' . $text), 'archive');
 		JToolBarHelper::save('abteilung.save');

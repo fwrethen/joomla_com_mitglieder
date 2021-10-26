@@ -18,7 +18,7 @@ class MitgliederViewFelder extends HtmlView
 	 *
 	 * @since   0.9
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		$this->form = $this->get('Form');
 

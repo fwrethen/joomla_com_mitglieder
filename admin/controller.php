@@ -50,6 +50,7 @@ class MitgliederController extends BaseController
 			$error = JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id);
 			$this->setMessage($error, 'error');
 			$this->setRedirect(JRoute::_('index.php?option=com_mitglieder&view=mitglieder', false));
+
 			return false;
 		}
 		elseif ($view == 'abteilung' && $layout == 'edit' && !$this->checkEditId('com_mitglieder.edit.abteilung', $id))
@@ -58,8 +59,10 @@ class MitgliederController extends BaseController
 			$error = JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id);
 			$this->setMessage($error, 'error');
 			$this->setRedirect(JRoute::_('index.php?option=com_mitglieder&view=abteilungen', false));
+
 			return false;
 		}
+
 		return parent::display();
 	}
 }

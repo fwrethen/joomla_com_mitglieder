@@ -15,7 +15,7 @@ class MitgliederModelMitglied extends JModelAdmin
 	 *
 	 * @since   0.9
 	 */
-	function __construct($config = array())
+	public function __construct($config = array())
 	{
 		parent::__construct($config);
 	}
@@ -29,7 +29,7 @@ class MitgliederModelMitglied extends JModelAdmin
    *
    * @since   2.0
    */
-  function getItem($pk = null)
+  public function getItem($pk = null)
 	{
 		$pk = (!empty($pk)) ? $pk : (int) $this->getState($this->getName() . '.id');
 		$table = $this->getTable();
@@ -52,9 +52,9 @@ class MitgliederModelMitglied extends JModelAdmin
 	 *
 	 * @since   0.9
 	 */
-	function delete(&$pks)
+	public function delete(&$pks)
 	{
-		if (count( $pks ) > 0)
+		if (count($pks) > 0)
 		{
 			foreach($pks as $pk) {
 				$row =& $this->getTable();
@@ -77,11 +77,12 @@ class MitgliederModelMitglied extends JModelAdmin
 				 * Spieler löschen
 				 */
 
-				if (!$row->delete( $pk )) {
+				if (!$row->delete($pk)) {
 					return false;
 				}
 			}
 		}
+
 		return true;
 	}
 
@@ -103,7 +104,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		$img_height = $params->get('mitglied_thumb_height', '240');
 		$img_path  = JPATH_ROOT . '/';
 		$img_path .= JComponentHelper::getParams('com_media')
-			->get('image_path', 'images')  . '/';
+			->get('image_path', 'images') . '/';
 		$img_path .= $params->get('image_path', 'stories/mitglieder');
 		foreach($data['typen'] as $id=>$typ)
 		{
@@ -132,9 +133,9 @@ class MitgliederModelMitglied extends JModelAdmin
 	 * @since   2.0
 	 * @throws Exception
 	 */
-	function saveAbteilungen($data)
+	public function saveAbteilungen($data)
 	{
-		$id=(int)$data['id'];
+		$id=(int) $data['id'];
 
 		//Keine Daten Vorhanden.
 		if(!is_array($data)) {
@@ -175,7 +176,7 @@ class MitgliederModelMitglied extends JModelAdmin
 	*
 	* @since   2.0
 	*/
-	function getAbteilungen()
+	public function getAbteilungen()
 	{
 		$id = (int) $this->getState($this->getName() . '.id');
 
@@ -204,7 +205,7 @@ class MitgliederModelMitglied extends JModelAdmin
 	*
 	* @since   2.0
 	*/
-	function getAllAbteilungen()
+	public function getAllAbteilungen()
 	{
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
@@ -220,6 +221,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		$def_obj->name = '-';
 
 		$data = array_merge(array($def_obj), $data);
+
 		return $data;
 	}
 
@@ -244,32 +246,32 @@ class MitgliederModelMitglied extends JModelAdmin
 		foreach($player->felder as $id=>$feld) {
 			switch ($feld->typ) {
 				case 'text':
-					$formmitglied .= '<field name="'.$feld->id.'" type="textarea"
-						label="'.$feld->name.'" description="'.$feld->tooltip.'" />';
+					$formmitglied .= '<field name="' . $feld->id . '" type="textarea"
+						label="' . $feld->name . '" description="' . $feld->tooltip . '" />';
 					break;
 				case 'text_html':
-					$formmitglied .= '<field name="'.$feld->id.'" type="editor"
-						label="'.$feld->name.'" description="'.$feld->tooltip.'" />';
+					$formmitglied .= '<field name="' . $feld->id . '" type="editor"
+						label="' . $feld->name . '" description="' . $feld->tooltip . '" />';
 					break;
 				case 'email':
-					$formmitglied .= '<field name="'.$feld->id.'" type="email"
-						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+					$formmitglied .= '<field name="' . $feld->id . '" type="email"
+						label="' . $feld->name . '" description="' . $feld->tooltip . '"
 						validate="email" />';
 					break;
 				case 'telefon':
-					$formmitglied .= '<field name="'.$feld->id.'" type="tel"
-						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+					$formmitglied .= '<field name="' . $feld->id . '" type="tel"
+						label="' . $feld->name . '" description="' . $feld->tooltip . '"
 						validate="tel" />';
 					break;
 				case 'jahre seit':
-					$formmitglied .= '<field name="'.$feld->id.'" type="calendar"
-						label="'.$feld->name.'" description="'.$feld->tooltip.'"
+					$formmitglied .= '<field name="' . $feld->id . '" type="calendar"
+						label="' . $feld->name . '" description="' . $feld->tooltip . '"
 						format="%Y-%m-%d" />';
 					break;
 				case 'bild':
-					$formmitglied .= '<field name="'.$feld->id.'" type="media"
-						label="'.$feld->name.'" description="'.$feld->tooltip.'"
-						directory="'.$image_path.'" preview="true" />';
+					$formmitglied .= '<field name="' . $feld->id . '" type="media"
+						label="' . $feld->name . '" description="' . $feld->tooltip . '"
+						directory="' . $image_path . '" preview="true" />';
 					break;
 			}
 		}
@@ -280,6 +282,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		{
 			return false;
 		}
+
 		return $form;
 	}
 

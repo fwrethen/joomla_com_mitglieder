@@ -5,9 +5,9 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewAbteilungen extends HtmlView
 {
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
-		JToolBarHelper::title(   JText::_( 'Mitglieder: Abteilungen' ), 'archive' );
+		JToolBarHelper::title(JText::_('Mitglieder: Abteilungen'), 'archive');
 		JToolBarHelper::addNew('abteilung.edit');
 		JToolBarHelper::editList('abteilung.edit');
 		JToolBarHelper::deleteList('', 'abteilungen.delete');

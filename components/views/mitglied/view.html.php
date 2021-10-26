@@ -5,7 +5,7 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewMitglied extends HtmlView
 {
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		$id = JFactory::getApplication()->input->get('id', '-1', 'INT');
 
