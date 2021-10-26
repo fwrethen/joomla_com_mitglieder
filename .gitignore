@@ -1,4 +1,7 @@
 .buildpath
 .idea
 .project
+vendor/
+
+.php-cs-fixer.cache
 *.zip
