@@ -1,0 +1,20 @@
+on: push
+
+name: Continuous Integration
+
+jobs:
+  cs:
+    name: Coding Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: php-cs-fixer
+
+      - name: Run PHP-CS-Fixer
+        run: php-cs-fixer fix . -v --dry-run --using-cache=no
