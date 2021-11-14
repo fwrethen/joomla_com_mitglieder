@@ -15,7 +15,7 @@ build: yarn
 	sed -e "s/<version>.*<\/version>/<version>${VERSION}<\/version>/g" \
         -e "s/<creationDate>.*<\/creationDate>/<creationDate>${DATE}<\/creationDate>/g" \
         mitglieder.xml > build/mitglieder.xml
-	cp -r admin/ components/ LICENSE.txt script.php build/
+	cp -r administrator/ components/ LICENSE.txt script.php build/
 
 package: build
 	mkdir -p dist

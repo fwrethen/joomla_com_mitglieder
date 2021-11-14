@@ -45,7 +45,7 @@
 			<menu link="option=com_mitglieder&amp;view=felder">COM_MITGLIEDER_MENU_FELDER</menu>
 			<menu link="option=com_mitglieder&amp;view=listen">COM_MITGLIEDER_MENU_LISTEN</menu>
 		</submenu>
-		<files folder="admin">
+		<files folder="administrator/components/com_mitglieder">
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<filename>mitglieder.php</filename>
@@ -56,7 +56,6 @@
 			<folder>sql</folder>
 			<folder>tables</folder>
 			<folder>views</folder>
-			<filename>index.html</filename>
 		</files>
 		<languages folder="admin/language">
 			<language tag="de-DE">de-DE.com_mitglieder.ini</language>
