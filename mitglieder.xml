@@ -57,7 +57,7 @@
 			<folder>tables</folder>
 			<folder>views</folder>
 		</files>
-		<languages folder="admin/language">
+		<languages folder="administrator/language">
 			<language tag="de-DE">de-DE.com_mitglieder.ini</language>
 			<language tag="de-DE">de-DE.com_mitglieder.sys.ini</language>
 		</languages>
