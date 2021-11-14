@@ -10,7 +10,7 @@ clean:
 	rm -rf build
 	rm -rf dist
 
-build:
+build: yarn
 	mkdir -p build
 	sed -e "s/<version>.*<\/version>/<version>${VERSION}<\/version>/g" \
         -e "s/<creationDate>.*<\/creationDate>/<creationDate>${DATE}<\/creationDate>/g" \
@@ -20,3 +20,7 @@ build:
 package: build
 	mkdir -p dist
 	cd build && zip -r ../dist/com-mitglieder-v$(VERSION).zip *
+
+yarn:
+	yarnpkg install
+	yarnpkg build
