@@ -29,8 +29,7 @@
 		<folder>css</folder>
 	</media>
 
-	<files folder="components">
-		<filename>index.html</filename>
+	<files folder="components/com_mitglieder">
 		<filename>controller.php</filename>
 		<filename>mitglieder.php</filename>
 		<folder>lib</folder>
