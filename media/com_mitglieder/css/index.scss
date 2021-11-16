@@ -5,7 +5,41 @@
   @import "~bootstrap/scss/utilities";
 
   @import "~bootstrap/scss/card";
+  @import "~bootstrap/scss/containers";
   @import "~bootstrap/scss/grid";
+  @import "~bootstrap/scss/list-group";
+  @import "~bootstrap/scss/tables";
 
+  @include generate-utility(map-get($utilities, "margin-bottom"), "");
   @include generate-utility(map-get($utilities, "rounded-start"), "");
+
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+
+  /* overrides for conflicting Bootstrap styling */
+  dd {
+    margin-bottom: .5rem;
+    margin-left: 0;
+  }
+
+  ul, ol {
+    padding: unset;
+    margin: unset;
+  }
+
+  /* custom styles */
+  a.card {
+    color: inherit;
+  }
+
+  a.card:hover, a.card:focus {
+    text-decoration: unset;
+  }
+
+  .img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }

@@ -1,31 +1,29 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('bootstrap.loadCss');
+JHtml::_('stylesheet', 'com_mitglieder/com_mitglieder.css', ['version' => 'auto', 'relative' => true]);
 ?>
 
+<div class="com_mitglieder">
+    <h1><?php echo $this->abteilung->name; ?></h1>
+    <p><?php echo $this->abteilung->description; ?></p>
 
-<h1><?php echo $this->abteilung->name; ?></h1>
-<p><?php echo $this->abteilung->description; ?></p>
+	<?php if (is_array($this->abteilung->mitglieder)): ?>
+        <?php $n = ceil(count($this->abteilung->mitglieder) / 3); ?>
 
-<?php if(is_array($this->abteilung->mitglieder)):
-	$n = 1;
-?>
+        <div class="row">
+            <ul class="col-sm-4 list-group list-group-flush">
+                <?php foreach($this->abteilung->mitglieder as $index => $mitglied): ?>
 
-<table class="table table-condensed table-striped">
-	<tr>
-		<?php foreach($this->abteilung->mitglieder as $mitglied):
-			$name = $mitglied->name . ", " . $mitglied->vorname;
-		?>
-		<td>
-			<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>">
-				<?php echo $name; ?>
-			</a>
-		</td>
-		<?php if($n % 3 == 0): ?></tr><tr><?php endif; ?>
-			<?php $n++; ?>
-		<?php endforeach; ?>
-	</tr>
-</table>
+                    <li class="list-group-item">
+                        <a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?= $mitglied->id; ?>">
+                            <?= $mitglied->name . ", " . $mitglied->vorname; ?>
+                        </a>
+                    </li>
+                    <?php if(($index + 1) % $n == 0): ?></ul><ul class="col-sm-4 list-group list-group-flush"><?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
 
-<?php endif; ?>
+	<?php endif; ?>
+</div>

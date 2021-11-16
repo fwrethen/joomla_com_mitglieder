@@ -1,61 +1,38 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('bootstrap.loadCss');
+JHtml::_('stylesheet', 'com_mitglieder/com_mitglieder.css', ['version' => 'auto', 'relative' => true]);
 ?>
 
-<h1><?php echo $this->abteilung->name; ?></h1>
-<p><?php echo $this->abteilung->description; ?></p>
+<div class="com_mitglieder">
+    <div class="container-fluid">
+        <h1><?php echo $this->abteilung->name; ?></h1>
+        <p><?php echo $this->abteilung->description; ?></p>
 
-<?php
-	if(is_array($this->abteilung->mitglieder)) {
-	$i = 1;
-?>
+        <?php if (is_array($this->abteilung->mitglieder)): ?>
+            <?php $i = 1; ?>
 
-<div class="row-fluid">
-	<ul class="thumbnails">
+            <div class="row">
 
-<?php
-		foreach($this->abteilung->mitglieder as $mitglied) {
-			$name = $mitglied->vorname . " " . $mitglied->name;
-?>
+                <?php foreach($this->abteilung->mitglieder as $mitglied): ?>
+	                <?php
+	                $name = $mitglied->vorname . " " . $mitglied->name;
+	                $image = $mitglied->thumb ?: $this->thumb_placeholder;
+                    $imageSrc = JURI::root() . ltrim($image, '/');
+	                ?>
 
-		<li class="span<?php echo 12 / $this->thumb_cols ?>">
-			<div class="thumbnail">
-				<a href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?php echo $mitglied->id;?>"
-					style="text-decoration: none;">
+                    <div class="col-6 col-sm-<?= 12 / $this->thumb_cols; ?> mb-4">
+                        <a class="card" href="index.php?option=com_mitglieder&layout=default&view=mitglied&id=<?= $mitglied->id; ?>">
+                            <img src="<?= $imageSrc; ?>" class="img-fluid" alt="<?= $name; ?>">
+                            <div class="card-body">
+                                <h6 class="card-title"><?= $name; ?></h6>
+                                <p><?= strip_tags($mitglied->text); ?></p>
+                            </div>
+                        </a>
+                    </div>
 
-				<?php
-						$image = ($mitglied->thumb) ? $mitglied->thumb : $this->thumb_placeholder;
-						if($image) {
-							if(substr($image, 0, 1) == "/")
-								$image = substr($image, 1);
-
-							echo '<img src="' . JURI::root() . $image . '" alt="' . $name
-								. '" style="width:330px;" />';
-							//TODO: set variable width depending on thumb size setting
-						}
-						?>
-					<div class="caption">
-						<h6><?php echo $name; ?></h6>
-						<?php echo strip_tags($mitglied->text); ?>
-					</div>
-				</a>
-			</div>
-		</li>
-
-	<?php
-			if($i % $this->thumb_cols == 0) {
-	?>
-	</ul>
-	<ul class="thumbnails">
-	<?php
-			}
-			$i++;
-		}
-	?>
-	</ul>
+                <?php endforeach; ?>
+            </div>
+        <?php endif ?>
+    </div>
 </div>
-<?php
-	}
-?>
