@@ -51,7 +51,6 @@
 			<filename>mitglieder.php</filename>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
-			<folder>lib</folder>
 			<folder>models</folder>
 			<folder>sql</folder>
 			<folder>tables</folder>

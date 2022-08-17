@@ -11,6 +11,8 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 
 	public function getMitglied($id) {
 		if(!$this->_data) {
+			require_once JPATH_COMPONENT . '/helpers/printfelder.php';
+
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 
@@ -41,9 +43,11 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 			$db->setQuery($query);
 			$this->_data->felder = $db->loadObjectList();
 
-			/* If field is of type list resolve associated string value */
+			$fields = [];
+
 			foreach ($this->_data->felder as $feld)
 			{
+				// If field is of type 'list', resolve associated string value
 				if ($feld->typ == 'liste')
 				{
 					$query = $db->getQuery(true);
@@ -63,11 +67,14 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 						$feld->wert = '';
 					}
 				}
+
+				$fields[] = printField($feld);
 			}
+
+			$this->_data->fields = $fields;
 		}
 
 		return $this->_data;
 	}
 
 }
-?>
