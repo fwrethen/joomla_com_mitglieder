@@ -32,7 +32,6 @@
 	<files folder="components/com_mitglieder">
 		<filename>controller.php</filename>
 		<filename>mitglieder.php</filename>
-		<folder>lib</folder>
 		<folder>models</folder>
 		<folder>views</folder>
 	</files>

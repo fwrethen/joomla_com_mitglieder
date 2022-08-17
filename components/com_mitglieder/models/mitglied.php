@@ -53,7 +53,7 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 					$query = $db->getQuery(true);
 					$query->select($db->qn('values'))
 						->from($db->qn('#__mitglieder_listen'))
-						->where($db->qn('felder_id') . ' = ' . $db->q($feld->feld_id));
+						->where($db->qn('id') . ' = ' . $db->q($feld->feld_id));
 					$db->setQuery($query);
 					$result = $db->loadObject();
 
@@ -76,5 +76,4 @@ class MitgliederModelMitglied extends BaseDatabaseModel
 
 		return $this->_data;
 	}
-
 }
