@@ -10,6 +10,13 @@ use Joomla\CMS\MVC\View\HtmlView;
  */
 class MitgliederViewListe extends HtmlView
 {
+	/** @var \Joomla\CMS\Form\Form $form */
+	protected $form;
+	/** @var bool|JObject $item */
+	protected $item;
+	/** @var string $sidebar */
+	protected $sidebar;
+
 	/**
 	 * Display the view
 	 *
@@ -24,12 +31,9 @@ class MitgliederViewListe extends HtmlView
 		$this->form = $this->get('Form');
 		$this->item = $this->get('Item');
 
-		$this->liste = $this->item->values;
-		$this->listenid = $this->item->id;
-
 		$this->addToolbar();
 
-		parent::display($tpl);
+		return parent::display($tpl);
 	}
 
 	/**
@@ -41,19 +45,15 @@ class MitgliederViewListe extends HtmlView
 	 */
 	protected function addToolbar()
 	{
-		$isNew = ($this->item->id == 0);
-		$text = $isNew ? JText::_('Neu') : JText::_('Bearbeiten');
+		JToolBarHelper::title(JText::_('Mitglieder: Liste'), 'grid-2');
+		JToolBarHelper::save('liste.save', 'JTOOLBAR_APPLY');
+		JToolBarHelper::cancel('liste.cancel', 'JTOOLBAR_CANCEL');
+		JToolBarHelper::preferences('com_mitglieder');
 
-		JToolBarHelper::title(JText::_('Liste: ' . $text), 'list');
-		JToolBarHelper::save('liste.save');
-
-		if (empty($this->item->id))
-		{
-			JToolbarHelper::cancel('liste.cancel');
-		}
-		else
-		{
-			JToolbarHelper::cancel('liste.cancel', 'JTOOLBAR_CLOSE');
+		if (version_compare(JVERSION, '4', '<')) {
+			require_once JPATH_COMPONENT . '/helpers/mitglieder.php';
+			MitgliederHelper::addSubmenu('liste');
+			$this->sidebar = JHtmlSidebar::render();
 		}
 	}
 }

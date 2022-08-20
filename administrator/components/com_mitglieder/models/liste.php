@@ -21,6 +21,9 @@ class MitgliederModelListe extends JModelAdmin
    */
   public function getItem($pk = null)
   {
+	  // There is only one list, and it has an ID of 1.
+	  $pk = 1;
+
       $item = parent::getItem($pk);
 
       // If the item does not exist yet, set id and insert it to the db.

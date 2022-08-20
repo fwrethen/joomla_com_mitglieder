@@ -26,9 +26,4 @@ class TableListe extends JTable
   {
     parent::__construct('#__mitglieder_listen', 'id', $db);
   }
-
-  public function getKeyName($multiple = false): string
-  {
-	  return 'felder_id';
-  }
 }

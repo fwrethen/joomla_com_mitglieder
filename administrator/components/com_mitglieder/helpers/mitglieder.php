@@ -24,9 +24,9 @@ class MitgliederHelper extends JHelperContent
 		);
 
 		JHtmlSidebar::addEntry(
-		    JText::_('COM_MITGLIEDER_MENU_LISTEN'),
-		    'index.php?option=com_mitglieder&amp;view=listen',
-		    $vName == 'listen'
+		    JText::_('COM_MITGLIEDER_MENU_LISTE'),
+		    'index.php?option=com_mitglieder&amp;view=liste&amp;layout=edit',
+		    $vName == 'liste'
 		);
 	}
 }
