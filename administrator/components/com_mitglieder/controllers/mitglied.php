@@ -49,16 +49,13 @@ class MitgliederControllerMitglied extends JControllerForm
 	  /** @var MitgliederModelMitglied $model */
       $model = $this->getModel();
 
-      /* TODO: Use $this->input->post instead. But then array indices are not kept.
-       *       Atm indices are used to map ids. So we to change the form data structure before. */
-      $data = JRequest::get('post', 2);
-
       $url = 'index.php?option=' . $this->option . '&view=' . $this->view_list
               . $this->getRedirectToListAppend();
       $this->setRedirect(\JRoute::_($url, false));
 
-      if ($model->save($data) && $model->saveAbteilungen($data))
-      {
+	  $data = $this->input->getArray();
+
+      if ($model->save($data) && $model->saveAbteilungen($data)) {
         $this->setMessage(\JText::_('JLIB_APPLICATION_SAVE_SUCCESS'));
 
         return true;
