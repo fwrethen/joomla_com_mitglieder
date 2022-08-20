@@ -32,6 +32,7 @@ class TableMitglied extends JTable
 			$this->felder[$feld->id]->typ = $feld->typ;
 			if ($feld->typ=='liste')
 			{
+				/** @var MitgliederModelListe $liste */
 				$liste = BaseDatabaseModel::getInstance('Liste', 'MitgliederModel');
 				$this->listen[$feld->id] = $liste->getItem($feld->id)->values;
 			}
@@ -41,22 +42,17 @@ class TableMitglied extends JTable
 		}
 	}
 
-	public function bind($from, $ignore=array()) {
+	public function bind($src, $ignore = []) {
 		$felder = $this->felder;
-		if(!parent::bind($from, $ignore))
+		if (!parent::bind($src, $ignore)) {
 			return false;
+		}
 		$this->felder = $felder;
 
-		if(array_key_exists("felder", $from) && is_array($from["felder"])) {
-			foreach($from["felder"] as $id=>$wert) {
-				if(!isset($wert) || $wert == "") {
-					$this->felder[$id]->wert = null;
-					$this->felder[$id]->typ = $from["typen"][$id];
-				} else {
-					$this->felder[$id]->wert = $wert;
-					$this->felder[$id]->typ = $from["typen"][$id];
-				}
-
+		if(array_key_exists("felder", $src) && is_array($src["felder"])) {
+			foreach($src["felder"] as $id => $wert) {
+				$this->felder[$id]->wert = empty($wert) ? null : $wert;
+				$this->felder[$id]->typ = $src["typen"][$id];
 			}
 		}
 
@@ -64,13 +60,22 @@ class TableMitglied extends JTable
 	}
 
 	/**
-	 * Läd zusätzlich die Mannschaften und die Aufstellungen
+	 * @param   mixed    $keys
+	 * @param   boolean  $reset
+	 *
+	 * @return  boolean
+	 *
+	 * @since   0.9
+	 * @throws  \InvalidArgumentException
+	 * @throws  \RuntimeException
+	 * @throws  \UnexpectedValueException
 	 */
 	public function load($keys = null, $reset = true) {
 
 		//Spielerdaten Laden
-		if(parent::load($keys) === false)
+		if (parent::load($keys) === false) {
 			return false;
+		}
 
 		//Datenbankverbindung
 		$db = &$this->_db;
@@ -128,6 +133,7 @@ class TableMitglied extends JTable
 			$this->felder[$feld->felder_id]->tooltip = $feld->tooltip;
 		}
 
+		return true;
 	}
 
 	public function store($updateNulls=false) {
@@ -178,34 +184,30 @@ class TableMitglied extends JTable
 			/*
 			 * Leere Felder werden als null eingefügt
 			 */
-			if($feld->wert == "" || $feld->wert == null){
-				$wert = "null";
+			if (empty($feld->wert)) {
 				$query = "DELETE FROM #__mitglieder_mitglieder_felder " .
 						" WHERE felder_id = $felderID " .
 							" AND mitglieder_id = $spielerID ";
-				$db->setQuery($query);
-				$db->execute();
 			}
 			else {
-				$wert = "'" . $feld->wert . "'";
+				$wert = $db->q($feld->wert);
 
 				$query = "INSERT INTO #__mitglieder_mitglieder_felder " .
 						" SET felder_id=$felderID, mitglieder_id=$spielerID, " .
 							" $spalte=$wert " .
 				"ON DUPLICATE KEY UPDATE $spalte=$wert ";
-				$db->setQuery($query);
-				$db->execute();
-
 			}
+			$db->setQuery($query);
+			$db->execute();
 		}
 
 		return true;
 	}
 
-	public function delete($oid=null) {
+	public function delete($pk = null) {
 		$key = $this->_tbl_key;
-		if ($oid) {
-			$this->$key = intval($oid);
+		if ($pk) {
+			$this->$key = intval($pk);
 		}
 
 		//Datenbankverbindung
@@ -214,7 +216,7 @@ class TableMitglied extends JTable
 		/*
 		 * Spielerdaten löschen
 		 */
-		if(parent::delete($oid) === false)
+		if (parent::delete($pk) === false)
 			return false;
 
 		/*
@@ -236,4 +238,3 @@ class TableMitglied extends JTable
 		return $db->execute();
 	}
 }
-?>

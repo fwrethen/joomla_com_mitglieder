@@ -5,6 +5,16 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewAbteilung extends HtmlView
 {
+	protected $abteilung;
+	protected $thumb_placeholder;
+	protected $thumb_cols;
+
+	/**
+	 * @param string $tpl
+	 * @return mixed
+	 * @throws Exception
+	 * @since 0.9
+	 */
 	public function display($tpl = null)
 	{
  		$model	  = $this->getModel();
@@ -46,6 +56,6 @@ class MitgliederViewAbteilung extends HtmlView
 			}
 		}
 
-		parent::display($tpl);
+		return parent::display($tpl);
 	}
 }

@@ -27,7 +27,7 @@
 					<?php echo JText::_('Vorname'); ?>
 				</div>
 				<div class="controls">
-					<input class="inputbox" type="text" name="vorname" id="vorname" size="20" value="<?php echo $this->player->vorname; ?>" />
+					<input class="inputbox" type="text" name="vorname" id="vorname" size="20" value="<?php echo $this->item->vorname; ?>" />
 				</div>
 			</div>
 			<div class="control-group">
@@ -35,11 +35,11 @@
 					<?php echo JText::_('Nachname'); ?>
 				</div>
 				<div class="controls">
-					<input class="inputbox" type="text" name="name" id="name" size="20" value="<?php echo $this->player->name; ?>" />
+					<input class="inputbox" type="text" name="name" id="name" size="20" value="<?php echo $this->item->name; ?>" />
 				</div>
 			</div>
 			<?php
-				foreach($this->player->felder as $id=>$feld):
+				foreach($this->item->felder as $id=>$feld):
 					switch($feld->typ) {
 						case "text":
 							echo $this->form->renderField($feld->id, null, strip_tags($feld->wert));
@@ -56,7 +56,7 @@
 							echo '<div class="control-group"><div class="control-label">';
 							echo JText::_($feld->name);
 							echo '</div><div class="controls">';
-							echo JHtml::_('select.genericlist', $this->player->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert) . ' <br />';
+							echo JHtml::_('select.genericlist', $this->item->listen[$id], "felder[$id]", ' ', 'id', 'wert', $feld->wert) . ' <br />';
 							echo '</div></div>';
 							break;
 					}
@@ -99,7 +99,7 @@
 	</div>
 </div>
 
-<input type="hidden" name="id" value="<?php echo $this->player->id; ?>" />
+<input type="hidden" name="id" value="<?php echo $this->item->id; ?>" />
 <input type="hidden" name="task" value="" />
 <?php echo JHtml::_('form.token'); ?>
 </form>

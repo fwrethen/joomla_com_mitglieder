@@ -5,12 +5,18 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewListen extends HtmlView
 {
+	protected $items;
+	protected $sidebar;
+
+	/**
+	 * @param string $tpl
+	 * @return mixed
+	 * @since 0.9
+	 */
 	public function display($tpl = null)
 	{
 		JToolBarHelper::title(JText::_('Mitglieder: Listen'), 'list');
-		//JToolBarHelper::addNew();
 		JToolBarHelper::editList('liste.edit');
-		//JToolBarHelper::deleteList();
 		JToolBarHelper::preferences('com_mitglieder');
 
 		if (version_compare(JVERSION, '4', '<')) {
@@ -21,6 +27,6 @@ class MitgliederViewListen extends HtmlView
 
 		$this->items = $this->get('Items');
 
-		parent::display($tpl);
+		return parent::display($tpl);
 	}
 }

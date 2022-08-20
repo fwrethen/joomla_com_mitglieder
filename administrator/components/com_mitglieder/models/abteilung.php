@@ -9,18 +9,6 @@ defined('_JEXEC') or die();
 class MitgliederModelAbteilung extends JModelAdmin
 {
 	/**
-	 * Constructor.
-	 *
-	 * @param   array  $config  An optional associative array of configuration settings.
-	 *
-	 * @since   0.9
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-	}
-
-	/**
 	 * Method to delete one or more records.
 	 *
 	 * @param   array  &$pks  An array of record primary keys.
@@ -33,7 +21,7 @@ class MitgliederModelAbteilung extends JModelAdmin
 	{
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$row =& $this->getTable();
+		$row = $this->getTable();
 
 		if (count($pks))
 		{

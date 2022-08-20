@@ -3,12 +3,7 @@ defined('_JEXEC') or die();
 
 class MitgliederControllerFelder extends JControllerAdmin
 {
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->redirectPath = "index.php?option=com_mitglieder&view=felder";
-	}
+	protected $redirectPath = 'index.php?option=com_mitglieder&view=felder';
 
 	public function display($cachable = false, $urlparams = false)
 	{

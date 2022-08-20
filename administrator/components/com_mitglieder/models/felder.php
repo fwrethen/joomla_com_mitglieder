@@ -90,8 +90,9 @@ class MitgliederModelFelder extends JModelAdmin
 	 *
 	 * @since   2.0
 	 */
-	public function getTypes() {
-		$typen = [
+	public function getTypes()
+	{
+		return [
 			'text' => 'Text',
 			'text_html' => 'HTML',
 			'email' => 'E-Mail',
@@ -101,10 +102,15 @@ class MitgliederModelFelder extends JModelAdmin
 			'liste' => 'Liste',
 			'bild' => 'Bild',
 		];
-
-		return $typen;
 	}
 
+	/**
+	 * @param array $data
+	 *
+	 * @return bool
+	 *
+	 * @since 0.9
+	 */
 	public function store($data = null)
 	{
 		$query = '';

@@ -8,19 +8,7 @@ defined('_JEXEC') or die();
  */
 class MitgliederModelMitglied extends JModelAdmin
 {
-	/**
-	 * Constructor.
-	 *
-	 * @param   array  $config  An optional associative array of configuration settings.
-	 *
-	 * @since   0.9
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-	}
-
-	/**
+  /**
    * Method to get a single record.
    *
    * @param   integer  $pk  The id of the primary key.
@@ -57,7 +45,7 @@ class MitgliederModelMitglied extends JModelAdmin
 		if (count($pks) > 0)
 		{
 			foreach($pks as $pk) {
-				$row =& $this->getTable();
+				$row = $this->getTable();
 				/*
 				 * Felder löschen
 				 */
@@ -115,12 +103,7 @@ class MitgliederModelMitglied extends JModelAdmin
 			}
 		}
 
-		if (parent::save($data))
-		{
-			return true;
-		}
-
-		return false;
+		return parent::save($data);
 	}
 
 	/**
@@ -287,4 +270,3 @@ class MitgliederModelMitglied extends JModelAdmin
 	}
 
 }
-?>

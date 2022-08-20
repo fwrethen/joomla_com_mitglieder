@@ -3,12 +3,16 @@ defined('_JEXEC') or die();
 
 use Joomla\CMS\MVC\View\HtmlView;
 
-/**
- * @property \Joomla\CMS\Form\Form $form
- */
-
 class MitgliederViewFelder extends HtmlView
 {
+	/**
+	 * @var \Joomla\CMS\Form\Form
+	 * @since 2.0
+	 */
+	protected $form;
+
+	protected $sidebar;
+
 	/**
 	 * Display the view
 	 *

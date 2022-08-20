@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS `#__mitglieder_abteilungen` (
   PRIMARY KEY  (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS #__mitglieder_felder (
-	id int(11) not null auto_increment PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `#__mitglieder_felder` (
+	`id` int(11) not null auto_increment PRIMARY KEY,
 	`name_backend` varchar(100) NOT NULL,
 	`name_frontend` varchar(100) NOT NULL,
   	`typ` VARCHAR(100) NOT NULL DEFAULT 'text',

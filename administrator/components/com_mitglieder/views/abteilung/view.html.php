@@ -10,6 +10,9 @@ use Joomla\CMS\MVC\View\HtmlView;
  */
 class MitgliederViewAbteilung extends HtmlView
 {
+	protected $form;
+	protected $item;
+
 	/**
 	 * Display the view
 	 *
@@ -26,7 +29,7 @@ class MitgliederViewAbteilung extends HtmlView
 
 		$this->addToolbar();
 
-		parent::display($tpl);
+		return parent::display($tpl);
 	}
 
 	/**

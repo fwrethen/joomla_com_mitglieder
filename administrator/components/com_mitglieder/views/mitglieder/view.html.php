@@ -5,6 +5,14 @@ use Joomla\CMS\MVC\View\HtmlView;
 
 class MitgliederViewMitglieder extends HtmlView
 {
+	protected $items;
+	protected $sidebar;
+
+	/**
+	 * @param string $tpl
+	 * @return mixed
+	 * @since 0.9
+	 */
 	public function display($tpl = null)
 	{
 		JToolBarHelper::title(JText::_('Mitglieder: Mitglieder'), 'users');
@@ -21,6 +29,6 @@ class MitgliederViewMitglieder extends HtmlView
 
 		$this->items = $this->get('Items');
 
-		parent::display($tpl);
+		return parent::display($tpl);
 	}
 }

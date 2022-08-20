@@ -46,6 +46,7 @@ class MitgliederControllerMitglied extends JControllerForm
       // Check for request forgeries.
       $this->checkToken();
 
+	  /** @var MitgliederModelMitglied $model */
       $model = $this->getModel();
 
       /* TODO: Use $this->input->post instead. But then array indices are not kept.

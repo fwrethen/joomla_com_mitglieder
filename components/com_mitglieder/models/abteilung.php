@@ -93,4 +93,3 @@ class MitgliederModelAbteilung extends BaseDatabaseModel
 		return $spieler;
 	}
 }
-?>

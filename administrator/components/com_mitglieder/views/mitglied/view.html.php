@@ -10,6 +10,11 @@ use Joomla\CMS\MVC\View\HtmlView;
  */
 class MitgliederViewMitglied extends HtmlView
 {
+	protected $item;
+	protected $form;
+	protected $inAbteilungen;
+	protected $abteilungen;
+
 	/**
 	 * Display the view
 	 *
@@ -26,11 +31,9 @@ class MitgliederViewMitglied extends HtmlView
 		$this->inAbteilungen = $this->get('Abteilungen');
 		$this->abteilungen = $this->get('AllAbteilungen');
 
-		$this->player = &$this->item;
-
 		$this->addToolbar();
 
-		parent::display($tpl);
+		return parent::display($tpl);
 	}
 
 	/**
