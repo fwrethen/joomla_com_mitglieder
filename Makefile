@@ -22,5 +22,5 @@ package: build
 	cd build && zip -r ../dist/com-mitglieder-v$(VERSION).zip *
 
 yarn:
-	yarnpkg install
-	yarnpkg build
+	yarn install
+	yarn build
