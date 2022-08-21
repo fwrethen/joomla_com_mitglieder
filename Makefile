@@ -21,6 +21,20 @@ package: build
 	mkdir -p dist
 	cd build && zip -r ../dist/com-mitglieder-v$(VERSION).zip *
 
+release-prep:
+ifneq (,$(findstring -dev, $(VERSION)))
+	@echo "You need to specify a release version with 'VERSION=a.b.c make release-prep'"
+	@exit 1
+endif
+	sed -i -e "s/<version>.*<\/version>/<version>${VERSION}<\/version>/g" \
+        -e "s/<creationDate>.*<\/creationDate>/<creationDate>${DATE}<\/creationDate>/g" \
+        mitglieder.xml
+	git add mitglieder.xml
+
+release-commit: release-prep
+	git commit -m "chore: release ${VERSION}"
+	@echo "Created release commit"
+
 yarn:
 	yarn install
 	yarn build
