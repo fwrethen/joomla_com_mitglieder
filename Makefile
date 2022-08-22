@@ -19,7 +19,7 @@ build: yarn
 
 package: build
 	mkdir -p dist
-	cd build && zip -r ../dist/com-mitglieder-v$(VERSION).zip *
+	cd build && zip -r ../dist/com-mitglieder-$(VERSION).zip *
 
 release-prep:
 ifneq (,$(findstring -dev, $(VERSION)))
