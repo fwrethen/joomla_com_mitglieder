@@ -10,7 +10,7 @@ clean:
 	rm -rf build
 	rm -rf dist
 
-build: yarn
+build: pnpm
 	mkdir -p build
 	sed -e "s/<version>.*<\/version>/<version>${VERSION}<\/version>/g" \
         -e "s/<creationDate>.*<\/creationDate>/<creationDate>${DATE}<\/creationDate>/g" \
@@ -35,6 +35,6 @@ release-commit: release-prep
 	git commit -m "chore: release ${VERSION}"
 	@echo "Created release commit"
 
-yarn:
-	yarn install
-	yarn build
+pnpm:
+	pnpm install
+	pnpm build

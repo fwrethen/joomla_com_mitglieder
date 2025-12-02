@@ -30,6 +30,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '20'
+      - run: corepack enable
+      - run: corepack prepare pnpm@latest --activate
 
       - name: Build & Package project
         run: VERSION=${{ inputs.version }} make package
